@@ -37,10 +37,12 @@
         "strict_required_status_checks_policy": true,
         "required_status_checks": [
           {
-            "context": "repository-check"
+            "context": "repository-check",
+            "integration_id": 15368
           },
           {
-            "context": "review-policy"
+            "context": "review-policy",
+            "integration_id": 15368
           }
         ]
       }
