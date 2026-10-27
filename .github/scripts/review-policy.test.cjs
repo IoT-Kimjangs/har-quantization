@@ -47,7 +47,10 @@ async function reportStatus(reviews, draft = false) {
       createCommitStatus: async status => statuses.push(status)
     }
   }, paginate: async () => reviews };
-  await runPolicy({ github, context: { repo: { owner: 'org', repo: 'repo' }, payload: { pull_request: pr } }, core: { info: () => {} } });
+  // GitHub Actions exposes repo as an inherited getter, not an own property.
+  const actionContext = Object.create({ get repo() { return { owner: 'org', repo: 'repo' }; } });
+  actionContext.payload = { pull_request: pr };
+  await runPolicy({ github, context: actionContext, core: { info: () => {} } });
   assert.equal(statuses.length, 1);
   assert.equal(statuses[0].sha, 'current-head');
   assert.equal(statuses[0].context, 'review-approval');
