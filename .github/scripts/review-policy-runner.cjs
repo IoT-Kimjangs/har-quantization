@@ -8,7 +8,7 @@ module.exports = async ({ github, context, core }) => {
   for (const pr of prs) {
     if (pr.state !== 'open') continue;
     const pending = [];
-    await check({ github, context: { ...context, payload: { ...context.payload, pull_request: pr } }, core: {
+    await check({ github, context: { repo: context.repo, payload: { ...context.payload, pull_request: pr } }, core: {
       info: message => core.info(message),
       setFailed: message => { pending.push(message); core.info(message); }
     } });
