@@ -1,0 +1,20 @@
+{
+  "run_id": "",
+  "git_commit": "",
+  "os": "",
+  "cpu": "",
+  "ram_gb": null,
+  "python": "",
+  "tensorflow": "",
+  "keras": "",
+  "litert": "",
+  "threads": null,
+  "delegate": "",
+  "power_mode": "",
+  "dataset_source": "",
+  "split_method": "",
+  "model_sha256": "",
+  "input_type": "",
+  "timing_includes_quantization": null,
+  "command": ""
+}

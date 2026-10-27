@@ -1,0 +1,10 @@
+{
+  "datasets": ["wisdm", "pamap2"],
+  "variants": ["keras_predict", "keras_direct", "tflite_fp32", "tflite_fp16", "tflite_int8_dynamic", "tflite_int8_full"],
+  "platforms": ["macos_arm64", "windows_x86_64"],
+  "threads": [1, "default"],
+  "batch_size": 1,
+  "warmup_iterations": 50,
+  "measurement_iterations": 1000,
+  "seed": 42
+}

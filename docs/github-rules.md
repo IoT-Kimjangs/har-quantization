@@ -1,0 +1,50 @@
+# GitHub 운영 설정
+
+이 저장소의 `main`은 검토를 마친 변경만 받습니다. 문서·분석·실험 코드 모두 같은 PR 규칙을 적용합니다.
+
+## 저장소 설정
+
+- Squash merge만 허용
+- 머지 후 원격 작업 브랜치 자동 삭제
+- 기본 브랜치 변경 시 작업 브랜치 업데이트 제안
+- Squash 커밋은 PR 제목과 본문을 기준으로 실제 변경 내용을 정리
+
+API 설정값은 `.github/repository-settings.json`에 기록합니다. 이 파일을 커밋하는 것만으로 GitHub 설정이 바뀌지는 않습니다.
+
+## main ruleset
+
+- 대상: `refs/heads/main`, 활성화
+- 관리자·앱을 포함해 우회 허용 목록 없음
+- 직접 푸시 대신 PR 필수, 작성자 외 최소 1명 승인
+- 추가 커밋이 생기면 이전 승인 무효
+- 마지막 푸시한 사람과 다른 사람의 승인 필수
+- 모든 리뷰 대화 해결 필수
+- `repository-check`, `review-policy` 통과 필수
+- 최신 main과 동기화 후 검사
+- main 삭제·강제 푸시 금지, 선형 커밋 이력 유지
+
+명세는 `.github/ruleset.json`입니다. 새 저장소의 최초 파일 등록은 main 생성에 필요합니다. 최초 등록 후부터 위 보호 규칙을 적용하며, 이후 설정 변경도 PR로 검토합니다.
+
+## 지정 리뷰어
+
+`.github/reviewers.json`에 작성자별 GitHub 아이디를 소문자로 등록합니다. `authors`에 작성자가 있으면 해당 배열의 리뷰어 전원, 없으면 `default_reviewers` 전원이 승인해야 합니다. 작성자 자신은 배열에 넣지 않습니다. 빈 배열은 승인을 면제하지 않고 검사를 실패시킵니다.
+
+설정은 PR 대상 브랜치의 파일을 읽습니다. 리뷰어는 쓰기 이상의 권한이 있어야 하며 최신 PR 커밋에 검토 내용을 적은 Approve 리뷰를 제출해야 합니다. 새 커밋, 승인 취소, 수정 요청, 비어 있는 리뷰 내용은 통과하지 않습니다. 일반 댓글은 Approve를 대신하지 않습니다.
+
+GitHub 기본 승인 규칙은 승인 수와 코드 소유자 검토를 확인하지만 리뷰 본문을 필수로 만들지는 않습니다. 그래서 별도 `review-policy` 검사를 함께 사용합니다. 검사 재실행은 새 커밋 또는 리뷰 제출·수정·취소로 이루어집니다. 정책 워크플로는 PR 코드를 실행하지 않고 대상 브랜치의 검사 코드만 읽습니다.
+
+리뷰어 계정이 확정되지 않은 초기 파일은 빈 배열을 유지합니다. 운영 시작 전 계정을 등록해야 하며 임의의 계정을 팀원으로 추정하지 않습니다. GitHub의 Reviewers 선택도 함께 해주세요.
+
+## 적용 및 확인
+
+관리 권한이 있는 계정으로 다음 명령을 실행하면 설정 명세를 적용할 수 있습니다. ruleset은 같은 이름이 있으면 갱신합니다.
+
+```bash
+bash scripts/apply-github-settings.sh
+```
+
+Settings → General에서 squash와 자동 삭제를, Settings → Rulesets에서 활성 ruleset·main 패턴·우회 목록을 확인합니다. PR을 만들고 리뷰 전 머지 차단, 지정 리뷰어의 내용 있는 승인 후 검사 성공, 새 커밋 후 재차 차단을 확인합니다.
+
+이 설정은 GitHub API 또는 UI에 저장돼야 강제됩니다. JSON 파일과 협업 문서만으로는 보호되지 않습니다. GitHub 관리자 권한으로 규칙 자체를 수정할 수 있는 점과 일반 머지 우회는 구분합니다.
+
+참고: [GitHub ruleset 규칙](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets)

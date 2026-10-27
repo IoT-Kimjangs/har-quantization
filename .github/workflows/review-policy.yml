@@ -1,0 +1,28 @@
+name: PR review policy
+
+on:
+  pull_request_target:
+    types: [opened, reopened, synchronize, ready_for_review, review_requested, review_request_removed]
+  pull_request_review:
+    types: [submitted, edited, dismissed]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  review-policy:
+    name: review-policy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Read trusted base branch policy
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          persist-credentials: false
+      - name: Check designated reviewers
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const check = require(`${process.env.GITHUB_WORKSPACE}/.github/scripts/review-policy.cjs`);
+            await check({ github, context, core });
