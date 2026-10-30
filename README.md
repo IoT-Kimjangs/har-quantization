@@ -46,6 +46,12 @@ git switch -c docs/environment-notes
 - `data/`, `models/`: 개인 로컬 데이터와 모델 보관 위치, 대용량 파일은 Git 제외
 - `.github/`: PR·이슈 양식, 리뷰 검사, 저장소 설정 명세
 
+## 논문 정리
+
+- [두 논문이 과제에 어떻게 이어지는지와 읽는 순서](docs/papers/README.md)
+- [TinyML HAR 서베이 쉬운 정리](docs/papers/tinyml-har-survey.md)
+- [양자화 패치 Transformer 구조·결과·한계 정리](docs/papers/quantized-patch-transformer.md)
+
 ## 참고 논문과 코드
 
 수행계획서에서 선정한 자료입니다. 출판 정보와 논문 수치는 발표·보고서 인용 전 원문에서 다시 확인합니다.
