@@ -1,0 +1,31 @@
+{
+  "dataset": "WISDM Activity Prediction v1.1",
+  "source_page": "https://www.cis.fordham.edu/wisdm/dataset.php",
+  "download_url": "https://www.cis.fordham.edu/wisdm/includes/datasets/latest/WISDM_ar_latest.tar.gz",
+  "local_directory": "data/raw/wisdm",
+  "archive_name": "WISDM_ar_latest.tar.gz",
+  "archive_sha256": "e573791269aab4a629721cf04b6031b7cbf8e14261cd2bc86e65887a2bc592d7",
+  "files": {
+    "WISDM_ar_v1.1/readme.txt": "3f36b96a7b9ded114c8017654ef46f0d63afb003e4474693ee31e12ed1e6ae51",
+    "WISDM_ar_v1.1/WISDM_ar_v1.1_raw.txt": "9aba4b1eaece56ab6d9187b16fc010c176e464750a4ec44c9d833514ecc1fa2e",
+    "WISDM_ar_v1.1/WISDM_ar_v1.1_raw_about.txt": "818a8606b3575f3646d761adcec8a007e23952d75cffe07f0af8b604f702a256",
+    "WISDM_ar_v1.1/WISDM_ar_v1.1_transformed.arff": "b083abfe759dea1b8f5eae01f2bef135bbecb25246c8d1eb52afdbfadd3e883a",
+    "WISDM_ar_v1.1/WISDM_ar_v1.1_trans_about.txt": "c1893a1f05cf81cd5a88c30f608e852bb02fdf2cd5f02f0608641d527ab187be"
+  },
+  "raw_file": "WISDM_ar_v1.1/WISDM_ar_v1.1_raw.txt",
+  "feature_order": [
+    "x",
+    "y",
+    "z"
+  ],
+  "label_order": [
+    "Downstairs",
+    "Jogging",
+    "Sitting",
+    "Standing",
+    "Upstairs",
+    "Walking"
+  ],
+  "nominal_sampling_hz": 20,
+  "published_record_count": 1098207
+}
