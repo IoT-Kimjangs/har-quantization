@@ -1,4 +1,4 @@
-# Initial CPU environment candidate for Python 3.12.
+# CPU environment for Python 3.12: validated on macOS ARM64; Windows not yet validated.
 # Validate on macOS ARM64 and Windows x86-64 before calling this a shared lock.
 tensorflow==2.21.0
 # Match the version recorded in the author's saved model metadata.

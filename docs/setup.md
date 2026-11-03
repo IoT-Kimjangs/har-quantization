@@ -4,7 +4,7 @@ Mac ARM64와 Windows x86-64에서 CPU 실행 조건을 맞추기 위한 초기 �
 
 ## 현재 상태
 
-2026-11-03 Mac에서 ARM64 Python 3.12.14 기반 `.venv`를 생성했습니다. 현재 작업 실행 환경의 PyPI DNS 접속 제한으로 패키지 설치는 완료하지 못했습니다. 따라서 아래 버전 조합은 **환경 후보**이며 Mac 실행 성공이나 Windows 검증 완료를 뜻하지 않습니다.
+2026-11-03 Mac ARM64에서 Python 3.12.14 기반 `.venv` 설치와 CPU 실행 점검을 완료했습니다. TensorFlow 2.21.0, Keras 3.13.2, LiteRT 2.3.0을 사용해 작은 모델의 Keras 출력과 TFLite FP32 변환 후 LiteRT 추론 출력이 일치함을 확인했습니다. `pip check`도 통과했습니다. **Windows 설치와 실행은 아직 미검증**이며 두 플랫폼 공통 환경은 확정 전입니다.
 
 | 구성 | 버전 후보 | 선택 근거 |
 | --- | --- | --- |
@@ -15,11 +15,13 @@ Mac ARM64와 Windows x86-64에서 CPU 실행 조건을 맞추기 위한 초기 �
 
 확인한 저자 저장소 커밋은 `90eb53deec3ff166fa0f1e08211d8d9d1770411d`입니다. 저자 노트북에서 TensorFlow/Keras, NumPy, pandas, scikit-learn, matplotlib, LiteRT 사용을 확인했습니다. psutil과 openpyxl은 후속 메모리 측정과 결과 파일 처리에 사용합니다.
 
-`requirements.txt`는 핵심 세 패키지를 고정하고 보조 패키지는 호환 범위를 지정합니다. 전체 의존성을 고정한 lock 파일이 아닙니다. 두 OS의 실제 실행을 확인한 뒤 버전을 확정합니다.
+`requirements.txt`는 핵심 세 패키지를 고정하고 보조 패키지는 호환 범위를 지정합니다. 전체 의존성을 고정한 lock 파일이 아닙니다. 두 OS의 실제 실행을 확인한 뒤 공통 버전을 확정합니다.
+
+Mac에서 검증한 패키지 55개의 설치 버전은 [Mac 패키지 목록](../requirements/macos-arm64-py312.txt), 주요 버전과 성공 상태는 [환경 점검 기록](../results/environment/macos-arm64-2026-11-03.json)에 남겼습니다. 패키지 목록은 해당 Mac 환경의 `pip freeze` 기록이며 Windows용 잠금 파일로 간주하지 않습니다. 저자 HAR 모델 로드나 실제 데이터 정확도 검증은 다음 단계입니다.
 
 ## Mac에서 설치
 
-현재 이 폴더에는 `.venv`가 생성되어 있으므로 다음 명령으로 설치를 이어갈 수 있습니다.
+현재 이 Mac에는 `.venv` 설치와 점검이 완료되어 있습니다. 평소 작업을 시작할 때는 `source .venv/bin/activate`로 활성화합니다. 새 Mac에서 설치하거나 기존 환경을 다시 점검하려면 아래 명령을 사용합니다.
 
 ```bash
 cd /Users/jinjeong/IoT-Kimjangs
