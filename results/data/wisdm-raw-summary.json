@@ -1,0 +1,31 @@
+{
+  "dataset": "WISDM Activity Prediction v1.1",
+  "source_page": "https://www.cis.fordham.edu/wisdm/dataset.php",
+  "raw_file": "data/raw/wisdm/WISDM_ar_v1.1/WISDM_ar_v1.1_raw.txt",
+  "raw_sha256": "9aba4b1eaece56ab6d9187b16fc010c176e464750a4ec44c9d833514ecc1fa2e",
+  "counts": {
+    "physical_lines": 1098210,
+    "blank_lines": 6,
+    "wrong_field_count": 11738,
+    "invalid_numeric": 1,
+    "nonfinite_numeric": 0,
+    "nonpositive_timestamp": 12842,
+    "unknown_activity": 0,
+    "valid_lines": 1073623
+  },
+  "valid_user_count": 36,
+  "valid_activity_counts": {
+    "Downstairs": 100192,
+    "Jogging": 324600,
+    "Sitting": 59939,
+    "Standing": 48393,
+    "Upstairs": 122598,
+    "Walking": 417901
+  },
+  "published_record_count": 1098207,
+  "parsing_rule": "one physical line per record; trailing semicolon removed; six fields; finite numeric timestamp/x/y/z; positive timestamp; known activity",
+  "raw_modified": false,
+  "split_created": false,
+  "scaler_fitted": false,
+  "prediction_executed": false
+}
