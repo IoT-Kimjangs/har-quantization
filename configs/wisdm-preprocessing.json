@@ -1,0 +1,22 @@
+{
+  "source_repository": "https://github.com/AASIFRASHIDKHANDAY/PATCH-BASED-TRANSFORMER-WITH-QUANTIZATION",
+  "source_commit": "90eb53deec3ff166fa0f1e08211d8d9d1770411d",
+  "source_notebook": "code/Baseline Transformer/WISDMTRANSFORMER_BASELINE.ipynb",
+  "notebook_sha256": "153bbb62a7f7c8825db3e8272bd49586916280e6865ba27b31ee718d80b4a065",
+  "window_length": 80,
+  "window_step": 40,
+  "random_state": 42,
+  "test_size": 0.2,
+  "feature_order": [
+    "x",
+    "y",
+    "z"
+  ],
+  "user_dtype": "string",
+  "split_unit": "window",
+  "stratify": "window majority label",
+  "scaler_fit_scope": "all timesteps in outer training windows, including later validation subset",
+  "author_scaler_artifact_available": false,
+  "matches_saved_model_training_statistics": "unverified",
+  "output_directory": "data/processed/wisdm-author-code"
+}
