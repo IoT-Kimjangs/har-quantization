@@ -1,0 +1,95 @@
+{
+  "provenance": "recalculated_from_public_code",
+  "matches_saved_model_training_statistics": "unverified",
+  "source_commit": "90eb53deec3ff166fa0f1e08211d8d9d1770411d",
+  "notebook_sha256": "153bbb62a7f7c8825db3e8272bd49586916280e6865ba27b31ee718d80b4a065",
+  "raw_sha256": "9aba4b1eaece56ab6d9187b16fc010c176e464750a4ec44c9d833514ecc1fa2e",
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.5.4",
+    "pandas": "2.3.3",
+    "scikit_learn": "1.9.1"
+  },
+  "clean_rows": 1073623,
+  "window_shape": [
+    26786,
+    80,
+    3
+  ],
+  "train_shape": [
+    21428,
+    80,
+    3
+  ],
+  "test_shape": [
+    5358,
+    80,
+    3
+  ],
+  "array_dtype": "float32",
+  "train_label_counts": {
+    "Downstairs": 1998,
+    "Jogging": 6488,
+    "Sitting": 1193,
+    "Standing": 959,
+    "Upstairs": 2446,
+    "Walking": 8344
+  },
+  "test_label_counts": {
+    "Downstairs": 500,
+    "Jogging": 1622,
+    "Sitting": 298,
+    "Standing": 240,
+    "Upstairs": 612,
+    "Walking": 2086
+  },
+  "mixed_activity_window_count": 713,
+  "shared_train_test_user_count": 36,
+  "overlapping_train_test_adjacent_window_pairs": 8563,
+  "scaler": {
+    "feature_order": [
+      "x",
+      "y",
+      "z"
+    ],
+    "mean": [
+      0.6810814173927824,
+      7.312940016921004,
+      0.40982793286889424
+    ],
+    "variance": [
+      47.79058596866215,
+      45.36582425093055,
+      22.93649080725367
+    ],
+    "scale": [
+      6.9130735544084985,
+      6.735415670241188,
+      4.789205655142998
+    ],
+    "n_samples_seen": 1714240,
+    "with_mean": true,
+    "with_std": true,
+    "provenance": "recalculated_from_public_code",
+    "matches_saved_model_training_statistics": "unverified"
+  },
+  "artifact_sha256": {
+    "X_train_s.npy": "f718da2ff470d9c3987f038c85d2ed7f9862ceeebfca299e09fa6bdfb19e8b7e",
+    "X_test_s.npy": "10f4a6111ad2a4a1a267c9290e36aede76b552b9fb2bbfd788aabc00d7dae8f2",
+    "y_train.npy": "ef2854327f8668164beaa5f8a29811875ad5c1a61cfff7e46d27769f4642e8ef",
+    "y_test.npy": "6ad104258cb8c1aa8c7d2f5c63fffa257630cd4cdb56cbdd09dca4b32fb08fdc",
+    "train_window_ids.npy": "56fbbadfcb5642f516d24e14fae42fc091225adfe2b2469f5a0a5e42eb4bb99a",
+    "test_window_ids.npy": "a276e84dce06432d02e59ba34369982fe959b43ca33b299469747c33a85d7ed4",
+    "window_users.npy": "4bf1f733abfaeb2b38565841a439d6dc2753f1da7c68f04ef4dbd6f8fa8b78de",
+    "window_starts.npy": "c19428a49e18166daa4d861b5237917b34d42feb8e15750a797116642bdd3af2",
+    "scaler.json": "f904e1d55e4d46c53cfc6caa486eca0f4fcfc4876cf0029f9c976508cf5b1b0d"
+  },
+  "verification": {
+    "train_only_moments": "passed",
+    "manual_test_transform": "passed",
+    "disjoint_window_ids_and_full_coverage": "passed",
+    "finite_outputs": "passed"
+  },
+  "model_loaded": false,
+  "prediction_executed": false
+}
