@@ -1,0 +1,41 @@
+name: Windows environment
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - requirements.txt
+      - scripts/setup_windows.ps1
+      - scripts/check_environment.py
+      - .github/workflows/windows-environment.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  windows-cpu:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          architecture: x64
+          cache: pip
+      - name: Install and check Windows CPU environment
+        shell: powershell
+        run: ./scripts/setup_windows.ps1 -VenvPath .venv
+      - name: Save Windows environment report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-cpu-python312
+          path: |
+            .venv/environment.json
+            .venv/requirements-windows.txt
+          include-hidden-files: true
+          if-no-files-found: ignore

@@ -48,19 +48,63 @@ PYTHON_BIN=/path/to/python3.12 bash scripts/setup_macos.sh
 
 이 점검은 환경 확인용이며 논문 HAR 모델 로드나 실제 데이터셋 정확도 재현을 대신하지 않습니다.
 
-## Windows에서 같은 환경 후보 설치
+## Windows에서 실행하기
 
-64비트 Python 3.12를 준비한 뒤 저장소 루트에서 실행합니다.
+Windows에서는 Mac의 `.venv`나 `requirements/macos-arm64-py312.txt`를 복사해 실행하지 않습니다. **공통 실험 기준은 64비트 Python 3.12와 requirements.txt**입니다. Windows에 Python 3.11이 설치돼 있어도 지우지 않고 3.12를 추가해 별도 가상환경을 만들 수 있습니다.
+
+### 1. Python 버전 확인
+
+PowerShell에서 확인합니다.
 
 ```powershell
-py -3.12 -m venv .venv
-.venv\Scripts\python.exe -m pip install --index-url https://pypi.org/simple -r requirements.txt
-.venv\Scripts\python.exe -m pip check
-.venv\Scripts\python.exe scripts/check_environment.py --output .venv/environment.json
-.venv\Scripts\python.exe -m pip freeze > .venv/requirements-windows.txt
+py -0p
+py -3.12 --version
 ```
 
-가상환경 활성화 권한에 상관없이 실행하도록 Python 경로를 직접 지정했습니다. Windows 설치와 실제 실행은 아직 검증하지 않았습니다. 실패하면 명령과 오류, Python 버전·아키텍처를 공유하고 양쪽 환경을 함께 조정합니다.
+3.12가 없으면 [Python 공식 Windows 다운로드](https://www.python.org/downloads/windows/)에서 64비트 Python 3.12를 설치하고 Python launcher를 포함합니다. 설치 후 새 PowerShell에서 위 명령을 다시 실행합니다. OS·CPU가 같아도 Python 3.11 환경은 이번 3.12 환경의 재현 확인으로 취급하지 않습니다.
+
+### 2. PR #4 브랜치 받기
+
+아직 PR이 main에 머지되기 전이라면 main만 받아서는 설치 스크립트가 없습니다. 저장소 루트에서 실행합니다. 기존 작업이 있으면 먼저 보관합니다.
+
+```powershell
+git fetch origin
+git switch chore/macos-environment
+git pull --ff-only origin chore/macos-environment
+```
+
+### 3. Windows 전용 설치 명령 실행
+
+기존 `.venv`가 Python 3.11일 수 있으므로, 아래 예시는 별도 폴더를 사용합니다. 기존 환경을 삭제하지 않습니다.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/setup_windows.ps1 -VenvPath .venv-py312
+```
+
+실행 정책 옵션은 이 PowerShell 프로세스에만 적용됩니다. 가상환경 활성화 명령은 필요하지 않습니다. 스크립트가 64비트 Python 3.12 여부를 확인하고, requirements.txt 설치 → pip check → 작은 모델의 Keras 실행·TFLite 변환·LiteRT CPU 추론 비교를 진행합니다.
+
+스크립트 없이 수동으로 확인하려면 다음과 같습니다.
+
+```powershell
+py -3.12 -m venv .venv-py312
+.venv-py312\Scripts\python.exe -m pip install --index-url https://pypi.org/simple -r requirements.txt
+.venv-py312\Scripts\python.exe -m pip check
+.venv-py312\Scripts\python.exe scripts/check_environment.py --output .venv-py312/environment.json
+```
+
+### 4. 결과 확인
+
+- `.venv-py312/environment.json`의 `status: passed`와 종료 코드 0을 확인합니다.
+- 스크립트로 설치하면 `.venv-py312/requirements-windows.txt`에도 설치 버전이 저장됩니다.
+- 실패하면 오류 메시지와 위 JSON이 있으면 함께 확인합니다. `py -0p` 결과에서 개인 경로는 가리고 공유합니다.
+- 버전 확인에서 멈췄다면 기존 3.11 환경에 억지로 설치하지 말고 Python 3.12 설치 여부와 선택한 가상환경을 확인합니다.
+- `DLL load failed` 같은 런타임 오류가 있으면 [TensorFlow 공식 Windows 설치 안내](https://www.tensorflow.org/install/pip#windows-native)의 Visual C++ 런타임 요구 사항도 확인합니다. 이 오류가 실제 발생했다고 가정하고 패키지 버전을 임의 변경하지 않습니다.
+
+## Windows 자동 검증 범위
+
+`Windows environment` 워크플로는 GitHub의 Windows x86-64/Python 3.12 환경에서 실제 Windows 설치 스크립트를 실행합니다. 로그와 `windows-cpu-python312` 아티팩트로 점검 결과를 확인할 수 있습니다. 설치 관련 변경이 있는 PR에 실행되며 필수 머지 조건은 아닙니다.
+
+이 검사는 GitHub Windows 실행 환경의 결과입니다. 팀원 PC에서 같은 명령을 실행한 결과와 구분합니다. Mac ARM64와 Windows x86-64는 하드웨어가 다르므로 패키지·실행 절차와 출력 비교를 맞추는 것이며, OS나 절대 실행 속도가 같아야 한다는 의미는 아닙니다.
 
 ## 다시 점검하기
 
