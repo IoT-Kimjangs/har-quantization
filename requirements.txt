@@ -1,0 +1,12 @@
+# Initial CPU environment candidate for Python 3.12.
+# Validate on macOS ARM64 and Windows x86-64 before calling this a shared lock.
+tensorflow==2.21.0
+# Match the version recorded in the author's saved model metadata.
+keras==3.13.2
+ai-edge-litert==2.3.0
+numpy>=1.26,<3
+pandas>=2.2,<3
+scikit-learn>=1.5,<2
+matplotlib>=3.9,<4
+psutil>=6,<8
+openpyxl>=3.1,<4
