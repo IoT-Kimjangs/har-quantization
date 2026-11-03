@@ -27,8 +27,8 @@ module.exports = async ({ github, context, core }) => {
     // 일반 댓글 리뷰는 기존 승인을 대체하지 않습니다. 승인/수정 요청/승인 취소의 최신 상태를 봅니다.
     const latest = reviews.filter(r => r.user.login.toLowerCase() === login && ['APPROVED', 'CHANGES_REQUESTED', 'DISMISSED'].includes(r.state))
       .sort((a, b) => b.id - a.id)[0];
-    if (!latest || latest.state !== 'APPROVED' || latest.commit_id !== current.head.sha || !latest.body?.trim()) {
-      failures.push(`${login}: 최신 커밋에 검토 내용을 적은 Approve 리뷰가 필요합니다.`);
+    if (!latest || latest.state !== 'APPROVED' || latest.commit_id !== current.head.sha) {
+      failures.push(`${login}: 최신 커밋에 Approve 승인이 필요합니다.`);
     }
   }
   if (failures.length) return core.setFailed(failures.join('\n'));

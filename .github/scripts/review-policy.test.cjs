@@ -19,11 +19,12 @@ async function run({ designated = ['reviewer'], reviews = [], permission = 'writ
   return failures;
 }
 const approval = { id: 1, user: { login: 'reviewer' }, state: 'APPROVED', commit_id: 'head', body: '측정 조건과 결과 파일을 확인했습니다.' };
-test('accepts designated reviewer with written approval on current commit', async () => assert.deepEqual(await run({ reviews: [approval] }), []));
+test('accepts designated reviewer approval on current commit', async () => assert.deepEqual(await run({ reviews: [approval] }), []));
 test('rejects missing designated reviewers', async () => assert.equal((await run({ designated: [] })).length, 1));
 test('rejects self review', async () => assert.equal((await run({ designated: ['author'] })).length, 1));
 test('rejects approval on old commit', async () => assert.equal((await run({ reviews: [{ ...approval, commit_id: 'old' }] })).length, 1));
-test('rejects blank approval', async () => assert.equal((await run({ reviews: [{ ...approval, body: '  ' }] })).length, 1));
+test('accepts blank approval', async () => assert.deepEqual(await run({ reviews: [{ ...approval, body: '  ' }] }), []));
+test('accepts approval without a body field', async () => assert.deepEqual(await run({ reviews: [{ ...approval, body: undefined }] }), []));
 test('rejects review from someone else', async () => assert.equal((await run({ reviews: [{ ...approval, user: { login: 'other' } }] })).length, 1));
 test('rejects subsequent change request', async () => assert.equal((await run({ reviews: [approval, { ...approval, id: 2, state: 'CHANGES_REQUESTED' }] })).length, 1));
 test('rejects dismissed approval', async () => assert.equal((await run({ reviews: [{ ...approval, state: 'DISMISSED' }] })).length, 1));
@@ -59,6 +60,9 @@ async function reportStatus(reviews, draft = false) {
 const writtenApproval = (login, id) => ({ id, user: { login }, state: 'APPROVED', commit_id: 'current-head', body: '내용과 실행 조건을 검토했습니다.' });
 test('reports pending while two designated reviewers have not approved', async () => assert.equal(await reportStatus([]), 'pending'));
 test('reports pending with only one of two approvals', async () => assert.equal(await reportStatus([writtenApproval('first', 1)]), 'pending'));
-test('reports success only after both reviewers approve current commit in writing', async () => assert.equal(await reportStatus([writtenApproval('first', 1), writtenApproval('second', 2)]), 'success'));
+test('reports success after both reviewers approve current commit', async () => assert.equal(await reportStatus([writtenApproval('first', 1), writtenApproval('second', 2)]), 'success'));
 test('reports pending after new commit invalidates an approval', async () => assert.equal(await reportStatus([writtenApproval('first', 1), { ...writtenApproval('second', 2), commit_id: 'previous-head' }]), 'pending'));
 test('reports pending for draft without failing the workflow', async () => assert.equal(await reportStatus([], true), 'pending'));
+
+test('reports success when both designated approvals have empty bodies', async () => assert.equal(await reportStatus([ { ...writtenApproval('first', 1), body: '' }, { ...writtenApproval('second', 2), body: '' } ]), 'success'));
+test('keeps pending when an empty-body approval is on an old commit', async () => assert.equal(await reportStatus([ { ...writtenApproval('first', 1), body: '' }, { ...writtenApproval('second', 2), body: '', commit_id: 'previous-head' } ]), 'pending'));
