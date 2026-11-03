@@ -16,6 +16,11 @@ class AddPositionEmbedding(layers.Layer):
         # The attribute name matches the saved model's nested embedding layer.
         self.pos_emb = layers.Embedding(input_dim=max_len, output_dim=d_model)
 
+    def build(self, input_shape):
+        if not self.pos_emb.built:
+            self.pos_emb.build((input_shape[1],))
+        super().build(input_shape)
+
     def call(self, inputs):
         positions = ops.arange(ops.shape(inputs)[1], dtype="int32")
         return inputs + ops.expand_dims(self.pos_emb(positions), axis=0)
