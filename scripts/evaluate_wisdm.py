@@ -110,7 +110,7 @@ def main():
     }
     output.mkdir(parents=True, exist_ok=True)
     with (output / 'predictions.csv').open('w', newline='', encoding='utf-8') as stream:
-        writer = csv.writer(stream)
+        writer = csv.writer(stream, lineterminator='\n')
         writer.writerow(['test_index', 'window_id', 'true_label', 'predicted_label'])
         writer.writerows((i, int(window_ids[i]), int(truth[i]), int(predicted[i])) for i in range(len(truth)))
     report['predictions_sha256'] = digest(output / 'predictions.csv')
