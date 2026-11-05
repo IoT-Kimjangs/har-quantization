@@ -23,6 +23,8 @@
 
 ## 시작하기
 
+WISDM 전체 평가에서 [정확도·Macro-F1이 논문 표시 정밀도까지 일치](docs/wisdm-evaluation.md)했습니다.
+
 논문과 코드가 맞는지는 [쉬운 대조표와 리뷰 체크리스트](docs/paper-code-check.md)에서 확인합니다.
 
 WISDM 분할·표준화는 [공개 코드 기준 재계산](docs/wisdm-preprocessing.md)에 정리했습니다.
