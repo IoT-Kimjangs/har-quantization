@@ -2,6 +2,11 @@
 
 초소형 IoT 센서 기반 행동 인식 모델의 양자화 효율을 분석하는 사물인터넷 Project 2 저장소입니다. 모델 파일이 작아진 만큼 실제 추론도 빨라지는지 확인하고, 런타임 변경 효과와 양자화 효과를 나눠 측정합니다.
 
+## 처음 읽는 팀원에게
+
+- [우리 프로젝트 쉽게 이해하기](docs/project-explained.md): 무엇을 하는지, 왜 측정하는지, 각자 맡을 일을 쉬운 말로 정리했습니다.
+- [Project 2 수행계획서 Word 사본](docs/project-proposal.docx): 제출 계획과 역할 분담을 확인할 수 있습니다. 공개용 사본에서는 학번을 제외했습니다.
+
 ## 연구 질문
 
 - Keras에서 TFLite로 바꿨을 때와 TFLite FP32를 양자화했을 때의 개선 폭은 각각 얼마인가?
@@ -25,6 +30,8 @@
 
 WISDM 저장 모델은 [단계별 모델 확인](docs/wisdm-model.md)에 따라 준비하고 입출력 형태를 직접 확인합니다.
 
+WISDM 원본 데이터는 [데이터 준비와 검사 결과](docs/wisdm-data.md)를 참고합니다.
+
 현재 단계는 협업 환경과 실험 기록 체계를 마련하는 단계입니다. 모델 변환·평가 코드는 후속 PR에서 추가합니다.
 
 1. [협업 규칙](CONTRIBUTING.md)을 읽습니다.
@@ -47,6 +54,12 @@ git switch -c docs/environment-notes
 - `results/`: 검토 가능한 측정 결과와 실행 환경 기록
 - `data/`, `models/`: 개인 로컬 데이터와 모델 보관 위치, 대용량 파일은 Git 제외
 - `.github/`: PR·이슈 양식, 리뷰 검사, 저장소 설정 명세
+
+## 논문 정리
+
+- [두 논문이 과제에 어떻게 이어지는지와 읽는 순서](docs/papers/README.md)
+- [TinyML HAR 서베이 쉬운 정리](docs/papers/tinyml-har-survey.md)
+- [양자화 패치 Transformer 구조·결과·한계 정리](docs/papers/quantized-patch-transformer.md)
 
 ## 참고 논문과 코드
 
