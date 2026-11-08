@@ -1,0 +1,28 @@
+{
+  "python": "3.12.14",
+  "os": "Darwin",
+  "os_release": "25.6.0",
+  "macos_version": "26.6.2",
+  "architecture": "arm64",
+  "packages": {
+    "tensorflow": "2.21.0",
+    "keras": "3.13.2",
+    "ai-edge-litert": "2.3.0",
+    "numpy": "2.5.4",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.9.1",
+    "matplotlib": "3.11.2",
+    "psutil": "7.2.2",
+    "openpyxl": "3.1.5"
+  },
+  "status": "passed",
+  "smoke_check": "keras_to_tflite_fp32_and_litert_cpu",
+  "errors": [],
+  "output_shape": [
+    1,
+    2
+  ],
+  "verified_on": "2026-11-03",
+  "pip_check": "passed",
+  "scope": "Small Dense model environment check only; author HAR model and datasets not evaluated."
+}
