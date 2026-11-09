@@ -23,6 +23,8 @@
 
 ## 시작하기
 
+[WISDM Mac 속도·메모리 비교](docs/wisdm-macos-benchmark.md)에 12개 조건의 실측 결과와 원시 기록을 정리했습니다.
+
 [WISDM 양자화 비교](docs/wisdm-quantization.md)에 FP16·동적 INT8·INT8 입출력 모델의 크기·분류 성능과 연산 진단을 정리했습니다.
 
 [TFLite FP32 변환·전체 평가](docs/wisdm-tflite-fp32.md)에서 Keras와 예측 행동 100% 일치를 확인했습니다.
