@@ -23,6 +23,8 @@
 
 ## 시작하기
 
+[TFLite FP32 변환·전체 평가](docs/wisdm-tflite-fp32.md)에서 Keras와 예측 행동 100% 일치를 확인했습니다.
+
 WISDM 전체 평가에서 [정확도·Macro-F1이 논문 표시 정밀도까지 일치](docs/wisdm-evaluation.md)했습니다.
 
 논문과 코드가 맞는지는 [쉬운 대조표와 리뷰 체크리스트](docs/paper-code-check.md)에서 확인합니다.
