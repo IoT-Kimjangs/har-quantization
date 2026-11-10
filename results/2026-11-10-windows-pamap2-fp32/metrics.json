@@ -534,7 +534,7 @@
   ],
   "matches_saved_model_training_statistics": "unverified",
   "limitations": [
-    "Scaler and split training artifacts are unavailable; scaler was refit on this run training windows.",
+    "The saved model weights are available, but the original training-time StandardScaler mean/scale and exact split indices are not. Scaling was fit on this run's training windows, so the original input preprocessing cannot be confirmed.",
     "Author preprocessing concatenates Optional and Protocol files before windowing; windows can cross subject/file boundaries.",
     "Random window-level split is not subject-independent and overlapping samples can cross partitions.",
     "No training was performed; accuracy is for a stored model evaluated on this reproduced split."

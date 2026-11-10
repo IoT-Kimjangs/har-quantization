@@ -150,7 +150,7 @@
   ],
   "matches_saved_model_training_statistics": "unverified",
   "limitations": [
-    "Scaler and split recalculated from public code; original training artifacts unavailable.",
+    "The saved model weights are available, but the original training-time StandardScaler mean/scale and exact split indices are not. Scaling was fit on this run's training windows, so the original input preprocessing cannot be confirmed.",
     "Window-wise split: subjects and overlapping source samples appear in both partitions."
   ],
   "metric_cross_check": "passed",

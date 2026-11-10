@@ -66,7 +66,7 @@
     "scripts/evaluate_pamap2.py"
   ],
   "limitations": [
-    "Original training scaler artifacts were unavailable; matching the saved models' training statistics is unverified.",
+    "Saved model weights are available, but original training-time StandardScaler mean/scale files and exact split indices are not; scaling was refit on this run's training windows.",
     "Both reproductions use window-level random splits, not participant-independent splits.",
     "PAMAP2 author preprocessing concatenates Protocol and Optional files before windowing; windows can cross file boundaries.",
     "Background applications, CPU frequency and thermal state were not controlled."
