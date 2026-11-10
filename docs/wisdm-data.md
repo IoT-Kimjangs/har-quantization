@@ -108,4 +108,4 @@ Windows에서 원본 다운로드·해시 검증·형식 검사를 마치고, �
 .venv\Scripts\python.exe scripts\evaluate_wisdm.py --output results\2026-11-10-windows-wisdm-fp32
 ```
 
-평가 결과는 [Windows FP32 metrics](../results/2026-11-10-windows-wisdm-fp32/metrics.json)에 있습니다. TFLite 변환·양자화와 성능 측정은 별도 변경으로 제출합니다.
+평가 결과는 [Windows FP32 metrics](../results/2026-11-10-windows-wisdm-fp32/metrics.json)에 있습니다. TFLite 변환·양자화와 성능 측정은 별도 변경으로 제출합니다. See [the Windows TFLite quantization report](windows-tflite-quantization.md) for conversion results; latency and memory measurements follow separately.

@@ -88,3 +88,5 @@ git switch -c docs/environment-notes
 | 2026-11-10 | Windows에서 WISDM·PAMAP2 저장 모델 평가, TFLite 변환·양자화, 24개 추론 벤치마크 결과 생성 |
 
 기존 계획서의 사전 검증 수치는 본 저장소에서 재현한 결과로 취급하지 않습니다. 재현 결과는 실행 조건과 원시 기록을 포함한 PR로 추가합니다.
+
+TFLite conversion and quantization results are documented in [the Windows report](docs/windows-tflite-quantization.md). Latency and memory measurements follow in a separate change.

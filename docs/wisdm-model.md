@@ -117,4 +117,4 @@ cd /Users/jinjeong/IoT-Kimjangs
 
 ## 3. 다음 단계
 
-Windows에서 WISDM과 [PAMAP2](pamap2-data.md) 저장 모델의 평가까지 완료했습니다. 원 학습 scaler 확보 여부와 윈도우 단위 분할 한계를 포함해 결과를 해석해야 합니다. 모델 재학습, TFLite 변환·양자화, 성능 비교는 후속 변경으로 나눠 제출합니다.
+Windows에서 WISDM과 [PAMAP2](pamap2-data.md) 저장 모델의 평가까지 완료했습니다. 원 학습 scaler 확보 여부와 윈도우 단위 분할 한계를 포함해 결과를 해석해야 합니다. 모델 재학습, TFLite 변환·양자화, 성능 비교는 후속 변경으로 나눠 제출합니다. See [the Windows TFLite quantization report](windows-tflite-quantization.md) for conversion results; latency and memory measurements follow separately.
