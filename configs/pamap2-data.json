@@ -1,0 +1,20 @@
+{
+  "dataset": "PAMAP2 Physical Activity Monitoring",
+  "source": "UCI Machine Learning Repository, dataset 231",
+  "url": "https://archive.ics.uci.edu/static/public/231/pamap2%2Bphysical%2Bactivity%2Bmonitoring.zip",
+  "doi": "10.24432/C5NW2H",
+  "archive_bytes": 688226940,
+  "archive_sha256": "76b3580bd5a804121f507717cb498c66a312ef5c774f4a78ac470e6558add352",
+  "window_length": 200,
+  "stride": 100,
+  "seed": 42,
+  "test_size": 0.2,
+  "channels": [
+    "hr", "hand_acc_x", "hand_acc_y", "hand_acc_z", "hand_gyro_x", "hand_gyro_y", "hand_gyro_z",
+    "chest_acc_x", "chest_acc_y", "chest_acc_z", "chest_gyro_x", "chest_gyro_y", "chest_gyro_z",
+    "ankle_acc_x", "ankle_acc_y", "ankle_acc_z", "ankle_gyro_x", "ankle_gyro_y", "ankle_gyro_z"
+  ],
+  "feature_column_indices": [2, 4, 5, 6, 10, 11, 12, 21, 22, 23, 27, 28, 29, 38, 39, 40, 44, 45, 46],
+  "included_directories": ["Optional", "Protocol"],
+  "reproduction_note": "Matches the author's PAMAP2 baseline notebook: recursive sorted .dat listing, concatenation before cleaning/windowing, majority label, random stratified window split."
+}

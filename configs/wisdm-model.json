@@ -11,5 +11,15 @@
     "max_len": 2048,
     "d_model": 64,
     "source_notebook": "code/Baseline Transformer/WISDMTRANSFORMER_BASELINE.ipynb"
-  }
+  },
+  "parameter_count": 200006,
+  "input_shape": [
+    null,
+    80,
+    3
+  ],
+  "output_shape": [
+    null,
+    6
+  ]
 }

@@ -1,0 +1,160 @@
+{
+  "dataset": "WISDM Activity Prediction v1.1",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "architecture": "AMD64",
+  "python": "3.12.10",
+  "packages": {
+    "tensorflow": "2.21.0",
+    "keras": "3.13.2",
+    "numpy": "2.5.4",
+    "scikit-learn": "1.9.1"
+  },
+  "model_sha256": "c4b50d393409c73e1d259d7f21485e7a9c0e9f9d6f2c43cdd6f4cefb06d654a6",
+  "raw_sha256": "9aba4b1eaece56ab6d9187b16fc010c176e464750a4ec44c9d833514ecc1fa2e",
+  "preprocessing_summary_sha256": "23898804639adfeeb2189f841ae72840ba872f1f95fdd194d0c90f8d5e611d63",
+  "evaluation_artifact_sha256": {
+    "X_test_s.npy": "10f4a6111ad2a4a1a267c9290e36aede76b552b9fb2bbfd788aabc00d7dae8f2",
+    "y_test.npy": "6ad104258cb8c1aa8c7d2f5c63fffa257630cd4cdb56cbdd09dca4b32fb08fdc",
+    "test_window_ids.npy": "a276e84dce06432d02e59ba34369982fe959b43ca33b299469747c33a85d7ed4",
+    "scaler.json": "f904e1d55e4d46c53cfc6caa486eca0f4fcfc4876cf0029f9c976508cf5b1b0d"
+  },
+  "method": "model(x, training=False)",
+  "batch_size": 256,
+  "device": "CPU",
+  "label_order": [
+    "Downstairs",
+    "Jogging",
+    "Sitting",
+    "Standing",
+    "Upstairs",
+    "Walking"
+  ],
+  "evaluated_windows": 5358,
+  "correct_windows": 5185,
+  "incorrect_windows": 173,
+  "accuracy": 0.9677118327734229,
+  "macro_f1": 0.954581609037699,
+  "accuracy_percent": 96.77118327734229,
+  "macro_f1_percent": 95.4581609037699,
+  "paper_reference": {
+    "accuracy_percent": 96.771,
+    "macro_f1_percent": 95.458,
+    "doi": "10.1038/s41598-026-62744-4",
+    "pdf_page": 11,
+    "table": 2
+  },
+  "difference_percentage_points": {
+    "accuracy": 0.00018327734228762438,
+    "macro_f1": 0.00016090376989552624
+  },
+  "classification_report": {
+    "Downstairs": {
+      "precision": 0.9281045751633987,
+      "recall": 0.852,
+      "f1-score": 0.8884254431699687,
+      "support": 500.0
+    },
+    "Jogging": {
+      "precision": 0.991304347826087,
+      "recall": 0.9839704069050554,
+      "f1-score": 0.9876237623762376,
+      "support": 1622.0
+    },
+    "Sitting": {
+      "precision": 0.9765100671140939,
+      "recall": 0.9765100671140939,
+      "f1-score": 0.9765100671140939,
+      "support": 298.0
+    },
+    "Standing": {
+      "precision": 0.9916317991631799,
+      "recall": 0.9875,
+      "f1-score": 0.9895615866388309,
+      "support": 240.0
+    },
+    "Upstairs": {
+      "precision": 0.8732612055641422,
+      "recall": 0.923202614379085,
+      "f1-score": 0.897537728355838,
+      "support": 612.0
+    },
+    "Walking": {
+      "precision": 0.9833729216152018,
+      "recall": 0.9923298178331735,
+      "f1-score": 0.9878310665712241,
+      "support": 2086.0
+    },
+    "accuracy": 0.9677118327734229,
+    "macro avg": {
+      "precision": 0.9573641527410173,
+      "recall": 0.9525854843719014,
+      "f1-score": 0.954581609037699,
+      "support": 5358.0
+    },
+    "weighted avg": {
+      "precision": 0.9680274997852448,
+      "recall": 0.9677118327734229,
+      "f1-score": 0.9676263418391019,
+      "support": 5358.0
+    }
+  },
+  "confusion_matrix": [
+    [
+      426,
+      2,
+      0,
+      0,
+      56,
+      16
+    ],
+    [
+      6,
+      1596,
+      0,
+      0,
+      12,
+      8
+    ],
+    [
+      4,
+      0,
+      291,
+      1,
+      2,
+      0
+    ],
+    [
+      0,
+      0,
+      1,
+      237,
+      1,
+      1
+    ],
+    [
+      22,
+      10,
+      4,
+      1,
+      565,
+      10
+    ],
+    [
+      1,
+      2,
+      2,
+      0,
+      11,
+      2070
+    ]
+  ],
+  "matches_saved_model_training_statistics": "unverified",
+  "limitations": [
+    "Scaler and split recalculated from public code; original training artifacts unavailable.",
+    "Window-wise split: subjects and overlapping source samples appear in both partitions."
+  ],
+  "metric_cross_check": "passed",
+  "training_executed": false,
+  "predictions_sha256": "756396e07af18f68ea4eac205a246d7dc817ef2ba95ab1a1ba347533ea9bc32f",
+  "model_parameter_count": 200006
+}

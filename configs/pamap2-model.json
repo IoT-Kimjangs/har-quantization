@@ -1,0 +1,20 @@
+{
+  "dataset": "PAMAP2",
+  "local_path": "models/pamap2_transformer_best_fp32.keras",
+  "source_repository": "https://github.com/AASIFRASHIDKHANDAY/PATCH-BASED-TRANSFORMER-WITH-QUANTIZATION",
+  "source_commit": "90eb53deec3ff166fa0f1e08211d8d9d1770411d",
+  "source_path": "models/pamap2_transformer_best_fp32.keras",
+  "bytes": 3155086,
+  "sha256": "bf623195e5b288bbf42c3e83cb4da7d9291401264b7c682cd5a775bfedfd943d",
+  "input_shape": [
+    null,
+    200,
+    19
+  ],
+  "output_shape": [
+    null,
+    18
+  ],
+  "training_executed": false,
+  "parameter_count": 244434
+}
