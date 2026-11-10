@@ -6,6 +6,12 @@
   "source_blob_count": 118,
   "retraining": false,
   "inference_executed": false,
+  "figure_rows": {
+    "size_latency": 32,
+    "memory_effects": 24
+  },
+  "figure_pngs": 5,
+  "vector_figures": 3,
   "checks": [
     "full-evaluation CSV hashes, accuracy, Macro-F1 and confusion matrices",
     "48 raw latency CSV hashes, positive times, iterations, warmup and batch size",

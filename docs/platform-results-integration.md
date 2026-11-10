@@ -9,7 +9,7 @@
 - 지금: 정확도·Macro-F1·크기·중앙 지연시간·p95·프로세스 피크 메모리를 통합하고 Keras 호출·런타임 변경·양자화 효과를 나눠 해석합니다.
 - 선행 PR: [#7 WISDM Mac](https://github.com/IoT-Kimjangs/har-quantization/pull/7), [#14 PAMAP2 Mac](https://github.com/IoT-Kimjangs/har-quantization/pull/14), [#17 Windows](https://github.com/IoT-Kimjangs/har-quantization/pull/17). 2026-11-11(KST) 재검토 기준 세 PR 모두 main에 머지됐습니다. 고정 출처와 main의 원시 실험 파일이 같은지 대조했습니다.
 - 선행 PR의 main 반영과 충돌 정리를 완료해 통합 PR은 리뷰 가능한 상태로 전환합니다. 결과 문서는 발표·보고서용 초안이며 최종 제출 전 검토가 필요합니다. 이후 원시 결과가 변경되면 고정 출처와 달라지는지 다시 확인합니다.
-- Windows의 별도 비교 PR #18·#19는 통합 비교를 이 작업에서 진행하기로 해 닫았습니다. 그 문서나 수동 전사 숫자는 입력으로 사용하지 않았습니다. #17의 잘못된 새 비교표도 읽지 않고 실험 JSON/CSV만 사용합니다.
+- Windows의 별도 비교 PR #18·#19는 통합 비교를 이 작업에서 진행하기로 해 닫았습니다. 그 문서나 수동 전사 숫자는 입력으로 사용하지 않았습니다. #17의 비교표 역시 집계 입력으로 쓰지 않고 실험 JSON/CSV만 사용합니다.
 - GitHub main 반영 규칙은 그대로입니다. 이 PR의 리뷰 요청은 장은성에게만 보냅니다.
 
 ## 출처 고정
@@ -62,3 +62,15 @@ Windows에서는 같은 스크립트를 다음처럼 실행할 수 있습니다.
 - PAMAP2 타이밍은 Mac 494개 전체 순환, Windows 복원추출 고유 420개로 서로 다릅니다. 전체 평가 입력 해시가 같다는 사실과 타이밍 입력 순서/빈도가 같다는 주장은 구분합니다.
 - macOS native peak RSS와 Windows peak working set은 서로 다른 OS 계측입니다. 원시 단위는 byte이며 표에만 MiB로 변환했습니다. OS 간 메모리 절감률은 계산하지 않습니다.
 - 원 학습 scaler·분할 미확인, 피험자·센서 시점 중첩, PAMAP2 파일 경계와 논문 수치 미재현 한계는 유지합니다. INT8 입출력도 일부 FP32 연산이 남아 있습니다.
+
+## 추가 시각 자료
+
+기존 지연시간/p95와 양자화 개선율 그림 외에 다음 세 그림을 같은 재생성 명령으로 만듭니다. 발표자료에서 확대해 쓸 수 있도록 PNG와 SVG를 함께 제공합니다. 그림 안의 영문 표기는 플랫폼별 글꼴 차이로 글자가 깨지는 것을 피하기 위한 것이며, 읽는 방법과 한계는 보고서에 한국어로 적었습니다.
+
+| 그림 | 읽는 방법 | 데이터/범위 |
+| --- | --- | --- |
+| [크기–추론시간](../results/platform-integration-draft/size-latency.png) | 오른쪽일수록 큰 파일, 위일수록 느린 추론. 색은 변형, 원은 Mac·사각형은 Windows | TFLite 4변형 × 2데이터 × 2플랫폼 × 2스레드 = [32점](../results/platform-integration-draft/size-latency.csv). Keras 런타임 변경 효과는 기존 그림으로 분리 |
+| [메모리 변화율](../results/platform-integration-draft/memory-effects.png) | 같은 플랫폼·스레드의 FP32 기준. 양수는 감소, 음수는 증가. 라벨에 대상 피크 MiB도 표시 | 3양자화 변형의 [24개 비교](../results/platform-integration-draft/memory-effects.csv). OS끼리의 메모리 비율이 아님 |
+| [실험 흐름도](../results/platform-integration-draft/experiment-workflow.png) | 모델/공식 데이터 → 분할·표준화·보정 → 전체 평가/타이밍 → 기록 통합 | 전체 평가와 벤치마크 입력을 구분하고 원 학습 통계 미확인 한계를 명시 |
+
+SVG 파일은 같은 이름의 `.svg`로 저장됩니다. 모델 크기가 같아 점이 같은 위치에 겹칠 수 있으며, 점마다 별도의 반복 실험을 수행했다는 의미는 아닙니다. 산점도에서 회귀선이나 일반적인 상관관계를 주장하지 않습니다. 프로세스 메모리 차이는 한 번의 실행에서 관측한 작은 변화이므로 유의미한 RAM 절감이 입증됐다고 해석하지 않습니다.

@@ -265,10 +265,169 @@ def plots(out, rows, changes):
     fig.suptitle('Latency reduction vs TFLite FP32: positive = faster, negative = slower')
     fig.savefig(out / 'quantization-effects.png', dpi=160, bbox_inches='tight')
     plt.close(fig)
+    additional_figures(out, rows, changes)
+
+
+def additional_figures(out, rows, changes):
+    """Export the plotted values as CSV; keep platform/thread baselines separate."""
+    import matplotlib.pyplot as plt
+    from matplotlib.lines import Line2D
+    from matplotlib.patches import FancyBboxPatch
+    from matplotlib.ticker import MaxNLocator
+
+    lookup = {(r['dataset'], r['platform'], r['thread_mode'], r['variant']): r for r in rows}
+    quant = VARIANTS[2:]
+    names = ('FP32', 'FP16', 'Dynamic INT8', 'INT8 I/O + FP32')
+    colors = ('#59646f', '#357ab5', '#008568', '#aa4c91')
+    platforms = (('macos', 'o'), ('windows', 's'))
+    scatter_data = []
+    memory_data = []
+    for ds in ('wisdm', 'pamap2'):
+        for platform, _ in platforms:
+            for mode in ('1', 'default'):
+                base = lookup[ds, platform, mode, 'tflite_fp32']
+                for variant in quant:
+                    row = lookup[ds, platform, mode, variant]
+                    scatter_data.append({k: row[k] for k in (
+                        'dataset', 'platform', 'thread_mode', 'variant', 'model_kib', 'median_ms')})
+                    if variant == 'tflite_fp32':
+                        continue
+                    reduction = 100 * (1 - row['peak_process_memory_mib'] /
+                                       base['peak_process_memory_mib'])
+                    expected = next(c for c in changes if
+                        (c['dataset'], c['platform'], c['thread_mode'], c['target']) ==
+                        (ds, platform, mode, variant) and c['effect'] == 'quantization')
+                    same(reduction, expected['peak_process_memory_reduction_percent'], 'Memory effect')
+                    memory_data.append(dict(dataset=ds, platform=platform, thread_mode=mode,
+                        variant=variant, memory_metric=row['memory_metric'],
+                        fp32_peak_mib=base['peak_process_memory_mib'],
+                        target_peak_mib=row['peak_process_memory_mib'],
+                        memory_reduction_percent=reduction))
+    require(len(scatter_data) == 32 and len(memory_data) == 24, 'Incomplete figure data')
+    write_csv(out / 'size-latency.csv', scatter_data)
+    write_csv(out / 'memory-effects.csv', memory_data)
+
+    def save(fig, name):
+        fig.savefig(out / f'{name}.png', dpi=180, bbox_inches='tight')
+        with plt.rc_context({'svg.hashsalt': 'har-platform-integration-v1'}):
+            fig.savefig(out / f'{name}.svg', bbox_inches='tight',
+                        metadata={'Date': None, 'Creator': 'HAR platform integration'})
+        plt.close(fig)
+
+    fig, axes = plt.subplots(2, 2, figsize=(12, 8))
+    fig.subplots_adjust(left=.12, right=.98, bottom=.18, top=.90, hspace=.40, wspace=.30)
+    for i, ds in enumerate(('wisdm', 'pamap2')):
+        group = [r for r in scatter_data if r['dataset'] == ds]
+        low, high = min(r['median_ms'] for r in group), max(r['median_ms'] for r in group)
+        for j, mode in enumerate(('1', 'default')):
+            ax = axes[i, j]
+            for platform, marker in platforms:
+                for variant, color in zip(quant, colors):
+                    row = lookup[ds, platform, mode, variant]
+                    ax.scatter(row['model_kib'], row['median_ms'], color=color,
+                               marker=marker, s=100, edgecolor='white', linewidth=.9, zorder=3)
+            ax.set_yscale('log')
+            ax.set_ylim(low / 1.5, high * 1.5)
+            ax.xaxis.set_major_locator(MaxNLocator(nbins=5))
+            ax.margins(x=.12)
+            ax.set_xlabel('TFLite model file (KiB)')
+            ax.set_ylabel('Median latency (ms, log scale)')
+            ax.set_title(f'{ds.upper()} / threads={mode}')
+            ax.grid(alpha=.2, which='both')
+    handles = [Line2D([], [], marker='o', linestyle='', color=c, label=n)
+               for c, n in zip(colors, names)]
+    handles += [Line2D([], [], marker=m, linestyle='', color='#252525', label=p)
+                for p, m in platforms]
+    fig.legend(handles=handles, loc='lower center', bbox_to_anchor=(.55, .07), ncol=6, frameon=False, fontsize=9)
+    fig.suptitle('Smaller files do not necessarily give lower latency', fontsize=15)
+    fig.text(.55, .015, 'TFLite only: Keras runtime effects are shown separately. Points are observed medians, not independent replicates.\n'
+             'Mac / Windows are different devices. PAMAP2 timed-input schedules differ.', ha='center', fontsize=9)
+    save(fig, 'size-latency')
+
+    fig, axes = plt.subplots(2, 2, figsize=(12, 8))
+    fig.subplots_adjust(left=.12, right=.98, bottom=.18, top=.90, hspace=.40, wspace=.30)
+    for i, ds in enumerate(('wisdm', 'pamap2')):
+        for j, mode in enumerate(('1', 'default')):
+            ax = axes[i, j]
+            for platform, offset, color in [('macos', -.18, '#c66725'), ('windows', .18, '#2269a1')]:
+                selected = [next(r for r in memory_data if
+                    (r['dataset'], r['platform'], r['thread_mode'], r['variant']) ==
+                    (ds, platform, mode, v)) for v in quant[1:]]
+                bars = ax.barh(np.arange(3) + offset,
+                    [r['memory_reduction_percent'] for r in selected], .32, color=color, label=platform)
+                ax.bar_label(bars, labels=[f"{r['memory_reduction_percent']:+.2f}% ({r['target_peak_mib']:.2f} MiB)"
+                             for r in selected], padding=4, fontsize=8)
+            ax.set_yticks(np.arange(3), names[1:])
+            ax.invert_yaxis()
+            ax.axvline(0, color='#444444', linewidth=.8)
+            span = max(5, np.ceil(max(abs(r['memory_reduction_percent']) for r in memory_data)) + 2)
+            ax.set_xlim(-span, span)
+            ax.set_xlabel('Process peak reduction vs same-platform FP32 (%)')
+            ax.set_title(f'{ds.upper()} / threads={mode}')
+            ax.grid(axis='x', alpha=.2)
+    handles, legend_names = axes[0, 0].get_legend_handles_labels()
+    fig.legend(handles, legend_names, loc='lower center', bbox_to_anchor=(.55, .07), ncol=2, frameon=False)
+    fig.suptitle('Process memory: small observed changes despite smaller model files', fontsize=14)
+    fig.text(.55, .015, 'Positive = less memory; negative = more. Labels include target peak MiB. Single run per condition; no significance claim.\n'
+             'macOS native peak RSS and Windows peak working set include runtime, model and inputs; no cross-OS memory ratio.',
+             ha='center', fontsize=9)
+    save(fig, 'memory-effects')
+
+    fig, ax = plt.subplots(figsize=(12, 10))
+    ax.set(xlim=(0, 1), ylim=(0, 1))
+    ax.axis('off')
+
+    def card(x, y, w, h, title, body, color):
+        ax.add_patch(FancyBboxPatch((x, y), w, h,
+            boxstyle='round,pad=0.012,rounding_size=0.012',
+            facecolor=color, edgecolor='#9ba8b4', linewidth=1))
+        ax.text(x + w / 2, y + h - .02, title, ha='center', va='top', fontsize=11, weight='bold')
+        ax.text(x + w / 2, y + h - .053, body, ha='center', va='top', fontsize=9, linespacing=1.4)
+
+    def arrow(a, b):
+        ax.annotate('', xy=b, xytext=a,
+                    arrowprops=dict(arrowstyle='->', color='#526372', lw=1.5))
+
+    card(.05, .84, .42, .105, 'Published Keras checkpoints',
+         'Pinned file hashes / saved weights\nNo retraining', '#edf5ef')
+    card(.53, .84, .42, .105, 'Official WISDM + PAMAP2 data',
+         'Pinned archives / verify raw files', '#eaf2fa')
+    card(.53, .69, .42, .10, 'Preprocess / window / split',
+         '80:20 stratified window split, seed 42\nWISDM 80/40; PAMAP2 200/100 (length/stride)', '#eaf2fa')
+    card(.53, .53, .19, .105, 'Training windows',
+         'Fit scaler\n300 calibration windows', '#eaf2fa')
+    card(.76, .53, .19, .105, 'Test windows',
+         'Apply train scaler\nHeld-out window IDs', '#eaf2fa')
+    card(.05, .53, .42, .12, 'Model variants',
+         'Keras / TFLite FP32 / FP16 / dynamic INT8\nINT8 I/O retains some FP32 operations', '#edf5ef')
+    arrow((.26, .84), (.26, .65))
+    arrow((.74, .84), (.74, .79))
+    arrow((.68, .69), (.625, .635))
+    arrow((.80, .69), (.855, .635))
+    arrow((.53, .58), (.47, .58))
+    arrow((.72, .58), (.76, .58))
+    ax.text(.74, .61, 'stats', ha='center', fontsize=8)
+    ax.plot([.26, .26, .855, .855], [.53, .48, .48, .53], color='#526372', lw=1.4)
+    ax.text(.53, .487, 'Models + scaled test inputs', ha='center', fontsize=9, color='#526372')
+    card(.05, .29, .42, .14, 'Full test-set quality',
+         'WISDM: 5,358 windows / PAMAP2: 494\nAccuracy / Macro-F1 / confusion matrices\nFile size recorded separately', '#fff3df')
+    card(.53, .29, .42, .14, 'Mac + Windows benchmark',
+         '6 paths x 2 thread settings, fresh processes\nBatch 1 / warmup 50 / timed calls 1,000\nMedian / p95 / whole-process peak memory', '#fff3df')
+    arrow((.26, .48), (.26, .43))
+    arrow((.74, .48), (.74, .43))
+    card(.14, .095, .72, .13, 'Integrate pinned CSV / JSON records',
+         '48 conditions / 48,000 timed calls: verify hashes, metrics and predictions\nSeparate Keras API, runtime-conversion and quantization effects\nReport tables, plots and limits; this integration executes no new inference', '#f2edf8')
+    arrow((.26, .29), (.35, .225))
+    arrow((.74, .29), (.65, .225))
+    ax.text(.5, .035, 'Window overlap / original training scaler and split unverified / PAMAP2 timing schedules differ',
+            ha='center', fontsize=9, color='#526372')
+    ax.set_title('HAR experiment and integration workflow', fontsize=16, pad=18)
+    save(fig, 'experiment-workflow')
 
 
 def report(out, rows, changes, config):
     lookup = {(r['dataset'], r['platform'], r['thread_mode'], r['variant']): r for r in rows}
+    memory_changes = [c['peak_process_memory_reduction_percent'] for c in changes if c['effect'] == 'quantization']
     lines = ['# Mac·Windows 통합 결과 초안', '',
         '새 추론 실험이 아니라 검증된 PR #7·#14·#17의 고정 커밋에서 원시 CSV와 JSON을 읽어 만든 통합 분석입니다. '
         '선행 실험 PR #7·#14·#17은 main에 반영됐습니다. 이 문서는 최종 제출본이 아닌 검토용 분석 초안입니다. 고정 커밋과 출처는 sources.json, 최신 승인/머지 상태는 각 PR에서 확인합니다.', '',
@@ -279,6 +438,11 @@ def report(out, rows, changes, config):
         '- INT8 입출력 모델은 일부 FP32 연산을 포함하며, 이번 모든 조건에서 TFLite FP32보다 느렸습니다. 원인 분해/프로파일링은 하지 않았습니다.',
         '- FP16의 이득은 일정하지 않습니다. Windows WISDM은 기본 설정에서 약 18.2% 빨랐지만 연산 스레드 1에서는 약 206.2% 느렸습니다. Windows PAMAP2도 기본 설정에서 약 73.0% 빨랐지만 스레드 1에서는 약 1.7% 느렸습니다. 원인을 스레드나 OS 하나로 확정하지 않습니다.',
         '- 작은 정확도 변화는 평가 구간 몇 개의 차이입니다. 재학습이나 일반적인 정확도 향상을 입증한 결과가 아닙니다.', '',
+        '## 실험 흐름', '',
+        '학습 구간으로 scaler를 적합하고 INT8 보정용 300개를 고릅니다. 전체 평가와 타이밍 측정은 분리하고, '
+        '마지막 통합 단계는 저장된 기록만 읽습니다. 구간 단위 분할의 중첩 및 원 학습 통계 미확인 한계는 아래에 정리했습니다.', '',
+        '![모델·데이터 준비부터 통합 분석까지](experiment-workflow.png)', '',
+        '[확대·편집용 흐름도 SVG](experiment-workflow.svg)', '',
         '## 정확도·크기', '',
         '전체 평가셋 기준이며 벤치마크 표본의 정확도가 아닙니다. Keras 두 호출 방식은 같은 저장 모델·전체 평가 값을 사용합니다.', '',
         '| 데이터 | 모델 | Mac 정확도/F1 (%) | Windows 정확도/F1 (%) | Mac/Windows 크기 (KiB) |',
@@ -290,6 +454,13 @@ def report(out, rows, changes, config):
             a, b = (lookup[ds, p, 'default', v] for p in ('macos', 'windows'))
             lines.append(f"| {ds.upper()} | {label} | {a['accuracy_percent']:.3f} / {a['macro_f1_percent']:.3f} | "
                          f"{b['accuracy_percent']:.3f} / {b['macro_f1_percent']:.3f} | {a['model_kib']:.3f} / {b['model_kib']:.3f} |")
+    lines += ['', '## 크기와 추론시간의 관계', '',
+        'TFLite 네 변형만 표시해 Keras와의 런타임 변경 효과를 분리했습니다. 가로축은 KiB, 세로축은 ms 로그 축이며, '
+        '색은 변형·모양은 플랫폼입니다. 점들을 회귀선으로 연결하거나 상관계수로 일반화하지 않습니다. '
+        '두 패널의 스레드 조건은 별도이며 각 점은 단일 세션의 중앙값입니다.', '',
+        '![TFLite 크기–지연시간 산점도](size-latency.png)', '',
+        '[점 32개의 실제 입력값](size-latency.csv) · [SVG](size-latency.svg)', '',
+        'INT8 입출력 파일은 FP32보다 작지만 더 느립니다. 따라서 파일 크기가 작다는 사실만으로 실제 추론시간 감소를 보장할 수 없습니다.']
     for mode, title in [('default', '기본 설정'), ('1', '연산 스레드 1')]:
         lines += ['', f'## {title}의 지연시간·프로세스 메모리', '',
             'ms는 중앙값/p95, MiB는 프로세스 피크입니다. macOS는 native peak RSS, Windows는 peak working set이므로 OS 간 메모리 절대값/절감률을 직접 비교하지 않습니다.', '',
@@ -301,6 +472,15 @@ def report(out, rows, changes, config):
                 lines.append(f"| {ds.upper()} | {label} | {a['median_ms']:.6f} / {a['p95_ms']:.6f} | "
                              f"{b['median_ms']:.6f} / {b['p95_ms']:.6f} | {a['peak_process_memory_mib']:.2f} | {b['peak_process_memory_mib']:.2f} |")
     lines += ['', '![조건별 중앙값과 p95](latency.png)', '',
+        '## FP32 대비 프로세스 메모리 변화', '',
+        '같은 데이터셋·플랫폼·스레드의 TFLite FP32를 기준으로 100 × (1 − 대상 피크 / FP32 피크)를 계산했습니다. '
+        '양수는 메모리 감소, 음수는 증가입니다. 막대에는 대상의 절대 피크 MiB도 표시했습니다. '
+        'macOS native peak RSS와 Windows peak working set을 서로 나눈 비율은 계산하지 않았습니다.', '',
+        '![플랫폼 내부 FP32 기준 프로세스 메모리 변화](memory-effects.png)', '',
+        '[FP32/대상 피크와 변화율 24개](memory-effects.csv) · [SVG](memory-effects.svg)', '',
+        f"이번 TFLite 변형들의 프로세스 피크 감소율은 {min(memory_changes):+.2f}%~{max(memory_changes):+.2f}%입니다. "
+        '파일 크기 감소율만큼 프로세스 메모리가 줄지는 않았으며 런타임·입력·모델 등을 포함한 값입니다. '
+        '조건별 한 번의 프로세스 측정이므로 작은 차이의 통계적 유의성이나 모델 전용 RAM 절감으로 해석하지 않습니다.', '',
         '## 효과를 나눠 읽기', '',
         '감소율 = 100 × (1 − 대상 중앙값 / 기준 중앙값). 양수는 빨라짐, 음수는 느려짐입니다. '
         '원시 정밀도로 계산하고 표시할 때만 반올림했습니다. 전체 40개 비교는 effects.csv에 있습니다.', '',
@@ -370,6 +550,8 @@ def main():
     write_json(out / 'sources.json', dict(config=config, measurements=details, artifacts=artifacts))
     write_json(out / 'validation.json', dict(status='passed', benchmark_cases=48, benchmark_rows=48000,
         comparisons=40, source_blob_count=len(artifacts), retraining=False, inference_executed=False,
+        figure_rows=dict(size_latency=32, memory_effects=24),
+        figure_pngs=5, vector_figures=3,
         checks=['full-evaluation CSV hashes, accuracy, Macro-F1 and confusion matrices',
                 '48 raw latency CSV hashes, positive times, iterations, warmup and batch size',
                 'raw median, linear p95 and mean match summary and per-case JSON',
