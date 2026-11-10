@@ -32,4 +32,4 @@ Windows 결과는 해당 Windows PC와 실행 설정에서 관측했으며 다�
 
 - Windows WISDM 원시 측정과 요약: [WISDM 결과 보고서](../results/2026-11-10-windows-wisdm-benchmark-final/windows-results.md)
 - Windows PAMAP2 원시 측정과 요약: [PAMAP2 결과 보고서](../results/2026-11-10-windows-pamap2-benchmark-final/pamap2-windows-results.md)
-- Mac·Windows 통합 표와 그래프: [PR #22 통합 분석 초안](https://github.com/IoT-Kimjangs/har-quantization/pull/22) (Draft)
+- Mac·Windows 통합 표와 그래프: [PR #22 통합 분석 초안](https://github.com/IoT-Kimjangs/har-quantization/pull/22)
