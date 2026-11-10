@@ -32,16 +32,16 @@ Evaluation used 494 test windows. TFLite FP32 is the comparison baseline.
 | Dynamic INT8 | 315.875 KiB | 97.368% | 96.736% | 100.000% |
 | INT8 I/O | 326.680 KiB | 97.571% | 96.867% | 99.798% |
 
-See the [PAMAP2 quantization metrics](../results/2026-11-10-windows-pamap2-quantization/metrics.json), calibration sample record and predictions in that result folder. INT8 I/O has not been verified as integer-only.
+See the [PAMAP2 quantization metrics](../results/2026-11-10-windows-pamap2-quantization/metrics.json), calibration sample record and predictions in that result folder. The INT8 I/O model retains floating-point operations (`DEQUANTIZE`, `NEG`, and `QUANTIZE`) and is not fully integer-only.
 
 ## Reproduce
 
 Run from the repository root in the prepared Windows virtual environment, after following the WISDM and PAMAP2 data/model setup instructions:
 
 ```powershell
-.venv\Scripts\python.exe scripts/convert_evaluate_wisdm_fp32.py
-.venv\Scripts\python.exe scripts/quantize_evaluate_wisdm.py
+.venv\Scripts\python.exe scripts/convert_evaluate_wisdm_fp32.py --output results/2026-11-10-windows-wisdm-tflite-fp32
+.venv\Scripts\python.exe scripts/quantize_evaluate_wisdm.py --output results/2026-11-10-windows-wisdm-quantization --fp32-result results/2026-11-10-windows-wisdm-tflite-fp32
 .venv\Scripts\python.exe scripts/quantize_evaluate_pamap2.py
 ```
 
-Scripts write model binaries under ignored `models/` and metrics, calibration records and predictions under `results/`. Model binaries are not committed.
+These commands are for a fresh run. The scripts refuse to overwrite existing outputs; move or remove an existing output directory and model artifact before rerunning. Scripts write model binaries under ignored `models/` and metrics, calibration records and predictions under `results/`. Model binaries are not committed.
