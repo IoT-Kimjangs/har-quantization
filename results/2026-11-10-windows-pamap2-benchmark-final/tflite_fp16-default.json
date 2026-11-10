@@ -1,0 +1,25 @@
+{
+  "variant": "tflite_fp16",
+  "thread_mode": "default",
+  "iterations": 1000,
+  "warmup": 50,
+  "batch_size": 1,
+  "test_windows": 494,
+  "sampling_with_replacement": true,
+  "median_ms": 0.1566,
+  "p95_ms": 0.2494299999999998,
+  "mean_ms": 0.1738444,
+  "runtime_threads": {
+    "interpreter_num_threads_requested": null,
+    "xnnpack_log_confirmed": true
+  },
+  "prediction_disagreements_with_prior_full_evaluation": 0,
+  "model_bytes": 536032,
+  "model_sha256": "cd25200a6e53446c05a889a79069a2f80ae105946a427bbcf199db066a3b955a",
+  "raw_csv": "tflite_fp16-default.csv",
+  "raw_csv_sha256": "492ace03b488e747ad1a2601553201bbff0308bfce841387d547fa3b2c095641",
+  "peak_working_set_bytes": 64217088,
+  "final_rss_bytes": 64217088,
+  "parent_sampled_peak_rss_bytes": 4460544,
+  "sampled_peak_os_threads": 3
+}

@@ -28,6 +28,8 @@
 
 ## 시작하기
 
+WISDM 저장 모델은 [단계별 모델 확인](docs/wisdm-model.md), PAMAP2는 [데이터·모델 재현 안내](docs/pamap2-data.md)에 따라 준비합니다.
+
 [PAMAP2 Mac 실험 결과](docs/pamap2-macos-results.md)에 데이터·전처리 원본 대조, 논문 수치와의 차이, 변환·양자화·성능 측정을 정리했습니다.
 
 [WISDM Mac 속도·메모리 비교](docs/wisdm-macos-benchmark.md)에 12개 조건의 실측 결과와 원시 기록을 정리했습니다.
@@ -42,11 +44,9 @@ WISDM 전체 평가에서 [정확도·Macro-F1이 논문 표시 정밀도까지 
 
 WISDM 분할·표준화는 [공개 코드 기준 재계산](docs/wisdm-preprocessing.md)에 정리했습니다.
 
-WISDM 저장 모델은 [단계별 모델 확인](docs/wisdm-model.md)에 따라 준비하고 입출력 형태를 직접 확인합니다.
+WISDM 원본은 [데이터 안내](docs/wisdm-data.md), PAMAP2는 [데이터·전처리·평가 안내](docs/pamap2-data.md)를 참고합니다. Windows 실행 환경은 [환경 기록](results/environment/windows-amd64-2026-11-10.json)과 [패키지 목록](requirements/windows-amd64-py312.txt)에, 변환·양자화 및 속도·메모리 결과는 [Windows 결과 안내](docs/windows-tflite-quantization.md)에 있습니다.
 
-WISDM 원본 데이터는 [데이터 준비와 검사 결과](docs/wisdm-data.md)를 참고합니다.
-
-현재 단계는 협업 환경과 실험 기록 체계를 마련하는 단계입니다. 모델 변환·평가 코드는 후속 PR에서 추가합니다.
+Windows 저장 모델 평가는 2026-11-10 기록이며 모델을 재학습하지 않았습니다. 원 scaler 확보 및 윈도우 단위 split의 일반화 한계를 보고서에 함께 반영하고, Mac의 같은 조건 결과를 모은 뒤 플랫폼별 분석을 진행합니다.
 
 1. [협업 규칙](CONTRIBUTING.md)을 읽습니다.
 2. [환경 구성](docs/setup.md)에 따라 개인 환경과 데이터 경로를 기록합니다.
@@ -99,5 +99,8 @@ git switch -c docs/environment-notes
 | 날짜 | 내용 |
 | --- | --- |
 | 2026-10-27 | 프로젝트 구조, 실험 규약, PR·리뷰 규칙 구성 |
+| 2026-11-10 | Windows saved-model evaluation for WISDM and PAMAP2 (see follow-up [TFLite conversion/quantization PR #15](https://github.com/IoT-Kimjangs/har-quantization/pull/15) and [benchmark PR #16](https://github.com/IoT-Kimjangs/har-quantization/pull/16)) |
 
 기존 계획서의 사전 검증 수치는 본 저장소에서 재현한 결과로 취급하지 않습니다. 재현 결과는 실행 조건과 원시 기록을 포함한 PR로 추가합니다.
+
+TFLite conversion and quantization results are documented in [the Windows report](docs/windows-tflite-quantization.md). Benchmark results are available in the [WISDM report](results/2026-11-10-windows-wisdm-benchmark-final/windows-results.md) and [PAMAP2 report](results/2026-11-10-windows-pamap2-benchmark-final/pamap2-windows-results.md), with raw measurements and plots alongside them.
