@@ -4,7 +4,7 @@ Mac ARM64와 Windows x86-64에서 CPU 실행 조건을 맞추기 위한 초기 �
 
 ## 현재 상태
 
-2026-11-03 Mac ARM64와 2026-11-10 Windows 11 AMD64에서 Python 3.12 가상환경과 CPU 실행을 확인했습니다. 두 환경에서 TensorFlow 2.21.0, Keras 3.13.2, LiteRT 2.3.0을 사용했습니다. Windows는 Python 3.12.10에서 `pip check`, Keras→TFLite FP32→LiteRT CPU smoke check, WISDM·PAMAP2 저장 모델 로드와 평가까지 완료했습니다. Windows 환경 기록은 [환경 실행 명세](../results/environment/windows-amd64-2026-11-10.json), 전체 의존성은 [Windows 패키지 목록](../requirements/windows-amd64-py312.txt)에 있습니다. 환경 점검은 해당 두 컴퓨터의 결과이며 모든 Windows/Mac 구성에서의 호환성을 보증하지 않습니다.
+2026-11-03 Mac ARM64에서 Python 3.12.14 기반 `.venv` 설치와 CPU 실행 점검을 완료했습니다. TensorFlow 2.21.0, Keras 3.13.2, LiteRT 2.3.0을 사용해 작은 모델의 Keras 출력과 TFLite FP32 변환 후 LiteRT 추론 출력이 일치함을 확인했습니다. `pip check`도 통과했습니다. Windows 11 AMD64 / Python 3.12.10에서도 CPU 환경 확인, 저장 모델의 WISDM·PAMAP2 평가, TFLite 변환·양자화 및 추론 성능 측정을 수행했습니다([Windows 결과 PR #17](https://github.com/IoT-Kimjangs/har-quantization/pull/17)). 확인 범위는 해당 Windows PC와 실행 조건에 한정됩니다.
 
 | 구성 | 버전 후보 | 선택 근거 |
 | --- | --- | --- |
@@ -15,9 +15,9 @@ Mac ARM64와 Windows x86-64에서 CPU 실행 조건을 맞추기 위한 초기 �
 
 확인한 저자 저장소 커밋은 `90eb53deec3ff166fa0f1e08211d8d9d1770411d`입니다. 저자 노트북에서 TensorFlow/Keras, NumPy, pandas, scikit-learn, matplotlib, LiteRT 사용을 확인했습니다. psutil과 openpyxl은 후속 메모리 측정과 결과 파일 처리에 사용합니다.
 
-`requirements.txt`는 핵심 세 패키지를 고정하고 보조 패키지는 호환 범위를 지정합니다. 전체 의존성을 고정한 lock 파일이 아닙니다. Mac과 Windows에서 같은 핵심 버전으로 실행을 확인했으며, 보조 패키지의 전체 freeze 파일은 각 OS별 기록으로 취급합니다.
+`requirements.txt`는 핵심 세 패키지를 고정하고 보조 패키지는 호환 범위를 지정합니다. 전체 의존성을 고정한 lock 파일이 아닙니다. Python 3.12와 TensorFlow 2.21.0, Keras 3.13.2, LiteRT 2.3.0 조합은 Mac ARM64와 Windows x86-64의 CPU 실행에서 확인했으며, 이 문서는 모든 기기·환경에 대한 호환성을 보장하지 않습니다.
 
-The Mac environment record lists 55 validated packages in [the Mac package list](../requirements/macos-arm64-py312.txt). Windows package versions are recorded in [the Windows package list](../requirements/windows-amd64-py312.txt) and [environment manifest](../results/environment/windows-amd64-2026-11-10.json). Both freeze files describe measured environments; neither is a platform lock file.
+Mac에서 검증한 패키지 55개의 설치 버전은 [Mac 패키지 목록](../requirements/macos-arm64-py312.txt), 주요 버전과 성공 상태는 [환경 점검 기록](../results/environment/macos-arm64-2026-11-03.json)에 남겼습니다. 패키지 목록은 해당 Mac 환경의 `pip freeze` 기록이며 Windows용 잠금 파일로 간주하지 않습니다. 이 환경 점검 기록 자체는 HAR 평가를 대신하지 않지만, Mac HAR 실험은 이미 수행됐습니다. 결과는 [WISDM 평가](wisdm-evaluation.md), [WISDM 양자화](wisdm-quantization.md), [WISDM 벤치마크](wisdm-macos-benchmark.md), [PAMAP2 Mac 결과](pamap2-macos-results.md)에서 확인할 수 있습니다. Windows 평가 결과와 한계는 [WISDM](../results/2026-11-10-windows-wisdm-benchmark-final/windows-results.md), [PAMAP2](../results/2026-11-10-windows-pamap2-benchmark-final/pamap2-windows-results.md) 보고서를 참조하세요.
 
 ## Mac에서 설치
 
@@ -48,9 +48,17 @@ PYTHON_BIN=/path/to/python3.12 bash scripts/setup_macos.sh
 
 이 점검은 환경 확인용이며 논문 HAR 모델 로드나 실제 데이터셋 정확도 재현을 대신하지 않습니다.
 
+## Windows 실행 결과
+
+Windows 11 AMD64 / Python 3.12.10에서 CPU 환경 확인, WISDM·PAMAP2 저장 모델 평가, TFLite 변환과 양자화, 추론 성능 측정을 수행했습니다. 환경 정보와 패키지 목록, 명령 및 결과는 [Windows 결과 PR #17](https://github.com/IoT-Kimjangs/har-quantization/pull/17)에서 확인할 수 있습니다.
+
+저장 모델을 재학습하지 않았습니다. 원 학습의 scaler 통계와 정확한 분할 인덱스를 확보하지 못해 평가 학습 분할에서 scaler를 다시 적합했습니다. PAMAP2는 윈도우 단위 무작위 분할이며 피험자 독립 평가가 아닙니다. 지표, 전처리 해시, 원시 측정값과 실행 명령은 Windows 결과 자료를 참조하세요.
+
+Windows와 Mac 결과는 각각 한 번의 환경에서 관측한 값입니다. 입력 샘플링 차이와 해석상 한계는 [저장소의 플랫폼 비교 문서](windows-macos-benchmark-comparison.md)에 정리했습니다. 통합표와 양자화 효과 분석은 [PR #22](https://github.com/IoT-Kimjangs/har-quantization/pull/22)에서 확인할 수 있습니다. Windows 원시 결과는 위의 WISDM·PAMAP2 보고서에서 확인할 수 있습니다.
+
 ## Windows에서 같은 환경 후보 설치
 
-64비트 Python 3.12를 준비한 뒤 저장소 루트에서 실행합니다.
+64비트 Python 3.12를 준비한 뒤 저장소 루트에서 실행합니다. 아래 절차는 새 Windows 환경을 설치하고 초기 점검하는 방법이며, 위에 기록한 결과는 별도의 특정 Windows PC에서 수행했습니다.
 
 ```powershell
 py -3.12 -m venv .venv
@@ -60,7 +68,7 @@ py -3.12 -m venv .venv
 .venv\Scripts\python.exe -m pip freeze > .venv/requirements-windows.txt
 ```
 
-가상환경 활성화 권한에 상관없이 실행하도록 Python 경로를 직접 지정했습니다. 2026-11-10에 위 설치·점검 명령을 실행했고, WISDM과 PAMAP2 저장 모델의 테스트 평가를 완료했습니다. 재현된 정확도와 조건은 [WISDM](../results/2026-11-10-windows-wisdm-fp32/metrics.json), [PAMAP2](../results/2026-11-10-windows-pamap2-fp32/metrics.json) 결과를 참조합니다. 변환·양자화·성능 측정은 별도 후속 변경으로 제출합니다.
+가상환경 활성화 권한에 상관없이 실행하도록 Python 경로를 직접 지정했습니다. `pip check`와 환경 확인은 패키지·작은 모델 경로를 점검하며, Windows HAR 실험의 전체 결과를 새 PC에서 재현했다는 의미는 아닙니다.
 
 ## 다시 점검하기
 
@@ -77,14 +85,14 @@ Mac은 다음 명령을 실행합니다.
 
 ## 데이터와 모델
 
-- WISDM·PAMAP2는 공식 배포처에서 다운로드하고 이용 조건을 확인합니다. Windows WISDM 및 PAMAP2 실행을 완료했으며, PAMAP2 준비법은 [데이터 안내](pamap2-data.md)를 참조합니다.
+- WISDM·PAMAP2는 공식 배포처에서 다운로드하고 이용 조건을 확인합니다.
 - 원본은 `data/raw/`, 전처리 결과는 `data/processed/`, 모델은 `models/`에 둡니다.
 - `.env.example`을 `.env`로 복사해 개인 경로를 기록합니다. 기존 `.env`는 덮어쓰지 않습니다. 현재 점검 스크립트는 데이터 경로를 사용하지 않습니다.
 - 저자 노트북의 하드코딩된 Windows 경로는 이후 로컬 설정으로 바꿉니다.
-- 저자 모델의 `AddPositionEmbedding` 커스텀 레이어 구현과 저장 모델 로드, 입출력 형태 확인을 완료했습니다. 실제 테스트셋의 scaler 일치 여부는 확인되지 않았으며 상세 한계는 [모델 안내](wisdm-model.md)에 기록했습니다.
-- Windows 데이터·모델 재현 스크립트는 WISDM의 `scripts/prepare_wisdm_preprocessing.py`, `scripts/evaluate_wisdm.py`와 PAMAP2의 `scripts/prepare_pamap2_data.py`, `scripts/prepare_pamap2_preprocessing.py`, `scripts/evaluate_pamap2.py`입니다. 후속 변환·성능 측정 절차는 별도 변경으로 추가합니다.
+- 저자 모델의 `AddPositionEmbedding` 등 커스텀 레이어는 저장 모델 평가에서 사용했습니다. 이 문서의 Mac 설치 점검은 작은 Dense 모델을 대상으로 하며, Windows HAR 실험 전체를 Mac에서 재현했다는 의미는 아닙니다.
+- Windows 측정은 [`benchmark_wisdm_windows.py`](../scripts/benchmark_wisdm_windows.py), [`benchmark_pamap2_windows.py`](../scripts/benchmark_pamap2_windows.py)를 사용하고, Mac 측정 스크립트는 [`benchmark_wisdm_macos.py`](../scripts/benchmark_wisdm_macos.py), [`benchmark_pamap2_macos.py`](../scripts/benchmark_pamap2_macos.py)입니다. 생성된 원시 측정과 요약은 각 플랫폼 결과 안내 문서에서 확인합니다.
 
-가상환경·캐시·전체 패키지 목록·개인 경로 설정은 `.venv` 또는 `.env`에 보관하며 Git에서 제외합니다. 두 OS 설치 성공 후 공개할 실행 환경 요약과 공통 버전 확정 내역을 PR에 남깁니다.
+가상환경·캐시·전체 패키지 목록·개인 경로 설정은 `.venv` 또는 `.env`에 보관하며 Git에서 제외합니다. 두 OS에서 확인한 실행 환경 요약과 공통 버전 후보의 검증 범위는 관련 PR에 기록합니다.
 
 ## 공식 자료
 
