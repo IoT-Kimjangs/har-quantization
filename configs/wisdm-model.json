@@ -1,0 +1,15 @@
+{
+  "local_path": "models/wisdm_transformer_best_fp32.keras",
+  "sha256": "c4b50d393409c73e1d259d7f21485e7a9c0e9f9d6f2c43cdd6f4cefb06d654a6",
+  "size_bytes": 2533793,
+  "saved_keras_version": "3.13.2",
+  "source_repository": "https://github.com/AASIFRASHIDKHANDAY/PATCH-BASED-TRANSFORMER-WITH-QUANTIZATION",
+  "source_commit": "90eb53deec3ff166fa0f1e08211d8d9d1770411d",
+  "source_path": "models/wisdm_transformer_best_fp32.keras",
+  "custom_layer": {
+    "class_name": "AddPositionEmbedding",
+    "max_len": 2048,
+    "d_model": 64,
+    "source_notebook": "code/Baseline Transformer/WISDMTRANSFORMER_BASELINE.ipynb"
+  }
+}

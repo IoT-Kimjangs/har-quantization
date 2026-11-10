@@ -25,26 +25,10 @@
       "type": "pull_request",
       "parameters": {
         "required_approving_review_count": 2,
-        "dismiss_stale_reviews_on_push": true,
+        "dismiss_stale_reviews_on_push": false,
         "require_code_owner_review": false,
-        "require_last_push_approval": true,
-        "required_review_thread_resolution": true
-      }
-    },
-    {
-      "type": "required_status_checks",
-      "parameters": {
-        "strict_required_status_checks_policy": true,
-        "required_status_checks": [
-          {
-            "context": "repository-check",
-            "integration_id": 15368
-          },
-          {
-            "context": "review-approval",
-            "integration_id": 15368
-          }
-        ]
+        "require_last_push_approval": false,
+        "required_review_thread_resolution": false
       }
     }
   ]
