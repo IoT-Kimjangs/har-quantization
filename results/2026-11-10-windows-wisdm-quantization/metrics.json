@@ -1,0 +1,475 @@
+{
+  "platform": "Windows-11-10.0.26200-SP0",
+  "architecture": "AMD64",
+  "python": "3.12.10",
+  "packages": {
+    "tensorflow": "2.21.0",
+    "keras": "3.13.2",
+    "ai-edge-litert": "2.3.0",
+    "numpy": "2.5.4",
+    "scikit-learn": "1.9.1"
+  },
+  "source_keras_sha256": "c4b50d393409c73e1d259d7f21485e7a9c0e9f9d6f2c43cdd6f4cefb06d654a6",
+  "fp32_model_sha256": "010b1a50eb3fb36d3efedcd7770d465f704841622de2220700fea2792d4a6a3f",
+  "fp32_baseline": {
+    "bytes": 303276,
+    "kib": 296.16796875,
+    "accuracy_percent": 96.77118327734229,
+    "macro_f1_percent": 95.4581609037699,
+    "correct_windows": 5185,
+    "confusion_matrix": [
+      [
+        426,
+        2,
+        0,
+        0,
+        56,
+        16
+      ],
+      [
+        6,
+        1596,
+        0,
+        0,
+        12,
+        8
+      ],
+      [
+        4,
+        0,
+        291,
+        1,
+        2,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        237,
+        1,
+        1
+      ],
+      [
+        22,
+        10,
+        4,
+        1,
+        565,
+        10
+      ],
+      [
+        1,
+        2,
+        2,
+        0,
+        11,
+        2070
+      ]
+    ]
+  },
+  "preprocessing_artifact_sha256": {
+    "X_train_s.npy": "f718da2ff470d9c3987f038c85d2ed7f9862ceeebfca299e09fa6bdfb19e8b7e",
+    "X_test_s.npy": "10f4a6111ad2a4a1a267c9290e36aede76b552b9fb2bbfd788aabc00d7dae8f2",
+    "y_train.npy": "ef2854327f8668164beaa5f8a29811875ad5c1a61cfff7e46d27769f4642e8ef",
+    "y_test.npy": "6ad104258cb8c1aa8c7d2f5c63fffa257630cd4cdb56cbdd09dca4b32fb08fdc",
+    "train_window_ids.npy": "56fbbadfcb5642f516d24e14fae42fc091225adfe2b2469f5a0a5e42eb4bb99a",
+    "test_window_ids.npy": "a276e84dce06432d02e59ba34369982fe959b43ca33b299469747c33a85d7ed4",
+    "window_users.npy": "4bf1f733abfaeb2b38565841a439d6dc2753f1da7c68f04ef4dbd6f8fa8b78de",
+    "window_starts.npy": "c19428a49e18166daa4d861b5237917b34d42feb8e15750a797116642bdd3af2",
+    "scaler.json": "f904e1d55e4d46c53cfc6caa486eca0f4fcfc4876cf0029f9c976508cf5b1b0d"
+  },
+  "label_order": [
+    "Downstairs",
+    "Jogging",
+    "Sitting",
+    "Standing",
+    "Upstairs",
+    "Walking"
+  ],
+  "calibration": {
+    "sampling": "numpy.random.RandomState(42).choice, replace=False",
+    "windows": 300,
+    "source": "X_train_s.npy",
+    "test_window_id_overlap": 0,
+    "indices_sha256": "3ca5afdaf0d8b49ba614da3b1f34d98a6d8ad8d16c203e8b6acd1221f7992c83"
+  },
+  "conversion": {
+    "optimizations": [
+      "DEFAULT"
+    ],
+    "select_tf_ops_enabled": false,
+    "fp16": "supported_types=[float16]",
+    "int8_dynamic": "no representative data",
+    "int8_full": "TFLITE_BUILTINS_INT8; int8 input/output; representative training data"
+  },
+  "interpreter_threads": 1,
+  "training_executed": false,
+  "latency_measured": false,
+  "matches_saved_model_training_statistics": "unverified",
+  "variants": {
+    "fp16": {
+      "status": "passed",
+      "bytes": 169752,
+      "kib": 165.7734375,
+      "sha256": "eab64dd5584bb81d78e499b31280faf3c918643b7fcd31ca436563021a37e72d",
+      "evaluated_windows": 5358,
+      "accuracy_percent": 96.7525195968645,
+      "macro_f1_percent": 95.43962743993437,
+      "accuracy_difference_pp": -0.018663680477786215,
+      "macro_f1_difference_pp": -0.018533463835524344,
+      "correct_windows": 5184,
+      "confusion_matrix": [
+        [
+          426,
+          2,
+          0,
+          0,
+          56,
+          16
+        ],
+        [
+          6,
+          1596,
+          0,
+          0,
+          12,
+          8
+        ],
+        [
+          4,
+          0,
+          291,
+          1,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          237,
+          1,
+          1
+        ],
+        [
+          22,
+          10,
+          4,
+          1,
+          564,
+          11
+        ],
+        [
+          1,
+          2,
+          2,
+          0,
+          11,
+          2070
+        ]
+      ],
+      "prediction_agreement_with_fp32_percent": 99.98133631952221,
+      "size_reduction_from_tflite_fp32_percent": 44.02722272781229,
+      "input_dtype": "float32",
+      "output_dtype": "float32",
+      "input_quantization": [
+        0.0,
+        0
+      ],
+      "output_quantization": [
+        0.0,
+        0
+      ],
+      "tensor_dtypes": {
+        "float32": 141,
+        "float16": 39,
+        "int32": 8
+      },
+      "floating_tensor_count": 180,
+      "integer_only_achieved": null,
+      "floating_operators": [],
+      "input_clipped_values": 0,
+      "input_values": 1285920
+    },
+    "int8_dynamic": {
+      "status": "passed",
+      "bytes": 113880,
+      "kib": 111.2109375,
+      "sha256": "61527b0bd6f04b580def5c52c958ec2ba40007fdefce4ab742b558d4b36c7437",
+      "evaluated_windows": 5358,
+      "accuracy_percent": 96.78984695782007,
+      "macro_f1_percent": 95.47385890229077,
+      "accuracy_difference_pp": 0.018663680477786215,
+      "macro_f1_difference_pp": 0.01569799852087783,
+      "correct_windows": 5186,
+      "confusion_matrix": [
+        [
+          426,
+          2,
+          0,
+          0,
+          56,
+          16
+        ],
+        [
+          6,
+          1598,
+          0,
+          0,
+          10,
+          8
+        ],
+        [
+          4,
+          0,
+          291,
+          1,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          237,
+          1,
+          1
+        ],
+        [
+          22,
+          10,
+          4,
+          1,
+          564,
+          11
+        ],
+        [
+          1,
+          2,
+          2,
+          0,
+          11,
+          2070
+        ]
+      ],
+      "prediction_agreement_with_fp32_percent": 99.92534527808884,
+      "size_reduction_from_tflite_fp32_percent": 62.45004550310609,
+      "input_dtype": "float32",
+      "output_dtype": "float32",
+      "input_quantization": [
+        0.0,
+        0
+      ],
+      "output_quantization": [
+        0.0,
+        0
+      ],
+      "tensor_dtypes": {
+        "float32": 128,
+        "int32": 8,
+        "int8": 13
+      },
+      "floating_tensor_count": 128,
+      "integer_only_achieved": null,
+      "floating_operators": [],
+      "input_clipped_values": 0,
+      "input_values": 1285920
+    },
+    "int8_full": {
+      "status": "passed",
+      "bytes": 120520,
+      "kib": 117.6953125,
+      "sha256": "4847e702a0fa8e75a2bd4ed2a9a67134c8968b0cbf35930d11663865e6d51efb",
+      "evaluated_windows": 5358,
+      "accuracy_percent": 96.71519223590892,
+      "macro_f1_percent": 95.36800061921996,
+      "accuracy_difference_pp": -0.05599104143337286,
+      "macro_f1_difference_pp": -0.0901602845499383,
+      "correct_windows": 5182,
+      "confusion_matrix": [
+        [
+          427,
+          2,
+          0,
+          0,
+          56,
+          15
+        ],
+        [
+          6,
+          1597,
+          0,
+          0,
+          11,
+          8
+        ],
+        [
+          3,
+          0,
+          291,
+          1,
+          3,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          236,
+          2,
+          1
+        ],
+        [
+          23,
+          11,
+          4,
+          1,
+          561,
+          12
+        ],
+        [
+          1,
+          2,
+          2,
+          0,
+          11,
+          2070
+        ]
+      ],
+      "prediction_agreement_with_fp32_percent": 99.68271743187756,
+      "size_reduction_from_tflite_fp32_percent": 60.26062068874556,
+      "input_dtype": "int8",
+      "output_dtype": "int8",
+      "input_quantization": [
+        0.03142688050866127,
+        5
+      ],
+      "output_quantization": [
+        0.00390625,
+        -128
+      ],
+      "tensor_dtypes": {
+        "int8": 139,
+        "int32": 16,
+        "float32": 8
+      },
+      "floating_tensor_count": 8,
+      "integer_only_achieved": false,
+      "floating_operators": [
+        {
+          "operator": "DEQUANTIZE",
+          "inputs": [
+            73
+          ],
+          "outputs": [
+            74
+          ]
+        },
+        {
+          "operator": "NEG",
+          "inputs": [
+            74
+          ],
+          "outputs": [
+            75
+          ]
+        },
+        {
+          "operator": "QUANTIZE",
+          "inputs": [
+            75
+          ],
+          "outputs": [
+            76
+          ]
+        },
+        {
+          "operator": "DEQUANTIZE",
+          "inputs": [
+            90
+          ],
+          "outputs": [
+            91
+          ]
+        },
+        {
+          "operator": "NEG",
+          "inputs": [
+            91
+          ],
+          "outputs": [
+            92
+          ]
+        },
+        {
+          "operator": "QUANTIZE",
+          "inputs": [
+            92
+          ],
+          "outputs": [
+            93
+          ]
+        },
+        {
+          "operator": "DEQUANTIZE",
+          "inputs": [
+            124
+          ],
+          "outputs": [
+            125
+          ]
+        },
+        {
+          "operator": "NEG",
+          "inputs": [
+            125
+          ],
+          "outputs": [
+            126
+          ]
+        },
+        {
+          "operator": "QUANTIZE",
+          "inputs": [
+            126
+          ],
+          "outputs": [
+            127
+          ]
+        },
+        {
+          "operator": "DEQUANTIZE",
+          "inputs": [
+            141
+          ],
+          "outputs": [
+            142
+          ]
+        },
+        {
+          "operator": "NEG",
+          "inputs": [
+            142
+          ],
+          "outputs": [
+            143
+          ]
+        },
+        {
+          "operator": "QUANTIZE",
+          "inputs": [
+            143
+          ],
+          "outputs": [
+            144
+          ]
+        }
+      ],
+      "input_clipped_values": 59,
+      "input_values": 1285920
+    }
+  },
+  "predictions_sha256": "f6dd13f72ce6f9db5925a500f5ad8616303d1dab847b51337374db3b41368bf8",
+  "model_parameter_count": 200006
+}

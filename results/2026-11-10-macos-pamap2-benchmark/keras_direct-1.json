@@ -1,0 +1,35 @@
+{
+  "variant": "keras_direct",
+  "thread_mode": "1",
+  "iterations": 1000,
+  "warmup": 50,
+  "batch_size": 1,
+  "unique_test_windows": 494,
+  "median_ms": 19.629521,
+  "p95_ms": 20.74892675,
+  "mean_ms": 19.60678765,
+  "min_ms": 17.854417,
+  "max_ms": 22.263084,
+  "native_peak_rss_bytes": 508329984,
+  "native_peak_rss_unit": "bytes on Darwin",
+  "runtime_threads": {
+    "tensorflow_intra_op": 1,
+    "tensorflow_inter_op": 1
+  },
+  "thread_environment": {
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "VECLIB_MAXIMUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "TF_NUM_INTRAOP_THREADS": "1",
+    "TF_NUM_INTEROP_THREADS": "1"
+  },
+  "tensorflow_imported": true,
+  "prediction_disagreements_with_prior_full_evaluation": 0,
+  "model_bytes": 3155086,
+  "model_sha256": "bf623195e5b288bbf42c3e83cb4da7d9291401264b7c682cd5a775bfedfd943d",
+  "raw_csv": "keras_direct-1.csv",
+  "raw_csv_sha256": "569c9652e62bc1138a82ac7742da67f5e1e131640d052d283a8a8579ac10e96b",
+  "sampled_peak_rss_bytes": 508395520,
+  "sampled_peak_os_threads": 4
+}

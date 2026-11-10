@@ -7,8 +7,8 @@
 ## 지금 할 수 있는 일과 남은 일
 
 - 지금: 정확도·Macro-F1·크기·중앙 지연시간·p95·프로세스 피크 메모리를 통합하고 Keras 호출·런타임 변경·양자화 효과를 나눠 해석합니다.
-- 선행 PR: [#7 WISDM Mac](https://github.com/IoT-Kimjangs/har-quantization/pull/7), [#14 PAMAP2 Mac](https://github.com/IoT-Kimjangs/har-quantization/pull/14), [#17 Windows](https://github.com/IoT-Kimjangs/har-quantization/pull/17). 이 초안을 만들 때는 세 PR 모두 main 반영 전입니다.
-- 통합 PR은 Draft로 검토합니다. 선행 PR의 검증·승인·머지를 대신하지 않습니다. 선행 PR이 반영된 뒤 결과 변경 여부와 문서 링크를 확인하고 최종 상태를 갱신합니다.
+- 선행 PR: [#7 WISDM Mac](https://github.com/IoT-Kimjangs/har-quantization/pull/7), [#14 PAMAP2 Mac](https://github.com/IoT-Kimjangs/har-quantization/pull/14), [#17 Windows](https://github.com/IoT-Kimjangs/har-quantization/pull/17). 2026-11-11(KST) 재검토 기준 세 PR 모두 main에 머지됐습니다. 고정 출처와 main의 원시 실험 파일이 같은지 대조했습니다.
+- 선행 PR의 main 반영과 충돌 정리를 완료해 통합 PR은 리뷰 가능한 상태로 전환합니다. 결과 문서는 발표·보고서용 초안이며 최종 제출 전 검토가 필요합니다. 이후 원시 결과가 변경되면 고정 출처와 달라지는지 다시 확인합니다.
 - Windows의 별도 비교 PR #18·#19는 통합 비교를 이 작업에서 진행하기로 해 닫았습니다. 그 문서나 수동 전사 숫자는 입력으로 사용하지 않았습니다. #17의 잘못된 새 비교표도 읽지 않고 실험 JSON/CSV만 사용합니다.
 - GitHub main 반영 규칙은 그대로입니다. 이 PR의 리뷰 요청은 장은성에게만 보냅니다.
 

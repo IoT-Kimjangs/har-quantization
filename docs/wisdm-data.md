@@ -95,8 +95,20 @@ python3 scripts/prepare_wisdm_data.py
 
 ## 여기까지 한 일과 다음 단계
 
-원본 다운로드, 압축·파일 해시 검증, 파일 형식·라벨·행 수 검사를 완료했습니다. 원본 파일을 수정하거나 정제본을 저장하지 않았고, 구간 생성·학습/평가 분할·표준화·예측도 아직 하지 않았습니다.
+Windows에서 원본 다운로드·해시 검증·형식 검사를 마치고, 저자 공개 코드의 WISDM 전처리 절차로 윈도우를 만들었습니다. 총 26,786개 윈도우를 얻었고 80:20 윈도우 단위 분할 결과는 학습 21,428개, 테스트 5,358개입니다. 전처리 배열은 로컬 `data/processed/`에 두며 원본·전처리 배열은 Git에 올리지 않습니다. 집계·해시는 [데이터 원본 검사 결과](../results/data/wisdm-raw-summary.json)와 [Windows 평가 결과](../results/2026-11-10-windows-wisdm-fp32/metrics.json)에 있습니다.
 
-다음에는 저자 코드의 학습 데이터 분할과 표준화 통계를 확보·재현할 수 있는지 확인합니다. 기존 저장 모델과 같은 전처리 조건을 확보한 뒤 `(1, 80, 3)` 시험 입력을 만들어 예측합니다. 검사 조건을 통과했다는 이유만으로 타임스탬프 연속성이나 모델 학습 조건까지 검증됐다고 보지는 않습니다.
+원본 형식 검사를 통과한 줄만 사용했습니다. 모델 성능 평가는 끝냈지만 저장 모델 학습 당시 scaler 통계 파일은 확보하지 못했습니다. 또한 윈도우 단위 분할에서는 인접 구간이 원본 센서 샘플을 공유하고 같은 사용자가 두 partition에 모두 포함됩니다. 이 결과를 사용자 독립 평가로 해석하지 않으며, 추후 별도 사용자 단위 split 결과와 구분해야 합니다. 검사 통과는 원본 타임스탬프의 연속성을 보증하지 않습니다.
 
 전처리와 라벨의 근거는 [저자 WISDM 기준 노트북의 고정 커밋](https://github.com/AASIFRASHIDKHANDAY/PATCH-BASED-TRANSFORMER-WITH-QUANTIZATION/blob/90eb53deec3ff166fa0f1e08211d8d9d1770411d/code/Baseline%20Transformer/WISDMTRANSFORMER_BASELINE.ipynb)입니다.
+
+새 환경에서 Windows WISDM 원본 준비·전처리·저장 모델 평가는 다음 순서로 실행합니다. 첫 번째 명령이 로컬 WISDM 원본을 준비하고, 저장된 Keras 모델은 [모델 안내](wisdm-model.md)의 방법으로 먼저 내려받습니다.
+
+```powershell
+.venv\Scripts\python.exe scripts\prepare_wisdm_data.py --download
+.venv\Scripts\python.exe scripts\prepare_wisdm_preprocessing.py
+.venv\Scripts\python.exe scripts\evaluate_wisdm.py --output results\2026-11-10-windows-wisdm-fp32
+```
+
+평가 결과는 [Windows FP32 metrics](../results/2026-11-10-windows-wisdm-fp32/metrics.json)에 있습니다. 변환·양자화와 지연시간·메모리 결과는 [Windows TFLite 안내](windows-tflite-quantization.md)에 있습니다.
+
+후속 단계의 결과는 [분할과 표준화 기준 재계산](wisdm-preprocessing.md)에 기록했습니다.

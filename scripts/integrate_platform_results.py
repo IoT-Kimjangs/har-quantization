@@ -271,7 +271,7 @@ def report(out, rows, changes, config):
     lookup = {(r['dataset'], r['platform'], r['thread_mode'], r['variant']): r for r in rows}
     lines = ['# Mac·Windows 통합 결과 초안', '',
         '새 추론 실험이 아니라 검증된 PR #7·#14·#17의 고정 커밋에서 원시 CSV와 JSON을 읽어 만든 통합 분석입니다. '
-        '선행 PR은 아직 main 반영 전이며, 이 문서는 최종 제출본이 아닙니다. 고정 커밋과 출처는 sources.json, 최신 승인/머지 상태는 각 PR에서 확인합니다.', '',
+        '선행 실험 PR #7·#14·#17은 main에 반영됐습니다. 이 문서는 최종 제출본이 아닌 검토용 분석 초안입니다. 고정 커밋과 출처는 sources.json, 최신 승인/머지 상태는 각 PR에서 확인합니다.', '',
         '## 핵심 결과', '',
         '- 두 데이터셋·두 플랫폼의 1스레드/기본 설정 모두 동적 INT8이 TFLite 변형 중 중앙 지연시간이 가장 짧았습니다.',
         '- Keras에서 TFLite FP32로 바꿀 때의 변화가 양자화 변화보다 큽니다. 런타임·호출·텐서 처리 차이가 포함되므로 양자화 효과로 부르지 않습니다.',

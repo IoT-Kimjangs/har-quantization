@@ -1,0 +1,35 @@
+{
+  "variant": "tflite_fp16",
+  "thread_mode": "1",
+  "iterations": 1000,
+  "warmup": 50,
+  "batch_size": 1,
+  "unique_test_windows": 494,
+  "median_ms": 0.255916,
+  "p95_ms": 0.27351875,
+  "mean_ms": 0.25874213199999996,
+  "min_ms": 0.253875,
+  "max_ms": 0.37675,
+  "native_peak_rss_bytes": 71630848,
+  "native_peak_rss_unit": "bytes on Darwin",
+  "runtime_threads": {
+    "interpreter_num_threads_requested": 1,
+    "delegate": "default CPU delegate; XNNPACK creation confirmed in process log"
+  },
+  "thread_environment": {
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "VECLIB_MAXIMUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "TF_NUM_INTRAOP_THREADS": "1",
+    "TF_NUM_INTEROP_THREADS": "1"
+  },
+  "tensorflow_imported": false,
+  "prediction_disagreements_with_prior_full_evaluation": 0,
+  "model_bytes": 536032,
+  "model_sha256": "cd25200a6e53446c05a889a79069a2f80ae105946a427bbcf199db066a3b955a",
+  "raw_csv": "tflite_fp16-1.csv",
+  "raw_csv_sha256": "e4ae7d1eeadb62e6477db00c02756702e149fefe0b548b200bc971907ba52fe3",
+  "sampled_peak_rss_bytes": 71122944,
+  "sampled_peak_os_threads": 1
+}

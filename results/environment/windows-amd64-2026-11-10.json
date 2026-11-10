@@ -1,0 +1,78 @@
+{
+  "run_id": "windows-amd64-har-reproduction-2026-11-10",
+  "base_commit": "336ea807f128b15762cb32fbf7c91b954208a627",
+  "source_revisions": {
+    "wisdm_preprocessing": "7358e2bf7127f3b9df225aff383138a5ea66c1a5",
+    "wisdm_evaluation": "922e6315eea4a291f41c5d1bf8d48dc934a435d6",
+    "author_code_and_models": "90eb53deec3ff166fa0f1e08211d8d9d1770411d"
+  },
+  "os": "Windows 11, build 10.0.26200",
+  "architecture": "AMD64",
+  "cpu": "Intel64 Family 6 Model 140 Stepping 1, GenuineIntel",
+  "logical_cpu_count": 8,
+  "ram_gb": 15.68,
+  "python": "3.12.10",
+  "tensorflow": "2.21.0",
+  "keras": "3.13.2",
+  "litert": "ai-edge-litert 2.3.0",
+  "other_packages": {
+    "numpy": "2.5.4",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.9.1",
+    "matplotlib": "3.11.2",
+    "psutil": "7.2.2",
+    "openpyxl": "3.1.5"
+  },
+  "environment_status": "passed",
+  "smoke_check": "Keras to TFLite FP32 conversion and LiteRT CPU inference; pip check passed",
+  "power_mode": "Samsung Mode",
+  "datasets": {
+    "WISDM": {
+      "source": "Fordham WISDM Activity Prediction v1.1 official archive",
+      "archive_sha256": "9aba4b1eaece56ab6d9187b16fc010c176e464750a4ec44c9d833514ecc1fa2e",
+      "window_split": "80:20 random window split, seed 42",
+      "test_windows": 5358
+    },
+    "PAMAP2": {
+      "source": "UCI Machine Learning Repository, dataset 231, DOI 10.24432/C5NW2H",
+      "archive_sha256": "76b3580bd5a804121f507717cb498c66a312ef5c774f4a78ac470e6558add352",
+      "window_split": "80:20 stratified random window split, seed 42",
+      "test_windows": 494
+    }
+  },
+  "models": {
+    "WISDM": {
+      "sha256": "c4b50d393409c73e1d259d7f21485e7a9c0e9f9d6f2c43cdd6f4cefb06d654a6",
+      "input_shape": [null, 80, 3],
+      "output_shape": [null, 6],
+      "parameter_count": 200006
+    },
+    "PAMAP2": {
+      "sha256": "bf623195e5b288bbf42c3e83cb4da7d9291401264b7c682cd5a775bfedfd943d",
+      "input_shape": [null, 200, 19],
+      "output_shape": [null, 18],
+      "parameter_count": 244434
+    }
+  },
+  "evaluation_method": "Stored Keras model, CPU, training=False; scaler refit on this run's train windows",
+  "timing_includes_quantization": null,
+  "completed_commands": [
+    "scripts/check_environment.py --output .venv/environment.json",
+    "scripts/prepare_wisdm_data.py --download",
+    "scripts/prepare_wisdm_preprocessing.py",
+    "scripts/evaluate_wisdm.py --output results/2026-11-10-windows-wisdm-fp32",
+    "scripts/prepare_pamap2_data.py",
+    "scripts/prepare_pamap2_preprocessing.py",
+    "scripts/evaluate_pamap2.py"
+  ],
+  "limitations": [
+    "Saved model weights are available, but original training-time StandardScaler mean/scale files and exact split indices are not; scaling was refit on this run's training windows.",
+    "Both reproductions use window-level random splits, not participant-independent splits.",
+    "PAMAP2 author preprocessing concatenates Protocol and Optional files before windowing; windows can cross file boundaries.",
+    "Background applications, CPU frequency and thermal state were not controlled."
+  ],
+  "result_files": [
+    "results/2026-11-10-windows-wisdm-fp32/metrics.json",
+    "results/2026-11-10-windows-pamap2-fp32/metrics.json"
+  ]
+}
