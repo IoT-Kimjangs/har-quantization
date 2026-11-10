@@ -48,19 +48,13 @@ PYTHON_BIN=/path/to/python3.12 bash scripts/setup_macos.sh
 
 이 점검은 환경 확인용이며 논문 HAR 모델 로드나 실제 데이터셋 정확도 재현을 대신하지 않습니다.
 
-## Windows에서 같은 환경 후보 설치
+## Windows execution status
 
-64비트 Python 3.12를 준비한 뒤 저장소 루트에서 실행합니다.
+Windows 11 AMD64 / Python 3.12.10 was used for CPU environment checks, WISDM and PAMAP2 saved-model evaluation, TFLite conversion and quantization, and inference benchmarks. The environment manifest and package freeze are recorded with the Windows results in [PR #17](https://github.com/IoT-Kimjangs/har-quantization/pull/17).
 
-```powershell
-py -3.12 -m venv .venv
-.venv\Scripts\python.exe -m pip install --index-url https://pypi.org/simple -r requirements.txt
-.venv\Scripts\python.exe -m pip check
-.venv\Scripts\python.exe scripts/check_environment.py --output .venv/environment.json
-.venv\Scripts\python.exe -m pip freeze > .venv/requirements-windows.txt
-```
+The stored models were not retrained. Original training-time scaler statistics and exact split indices were unavailable, so the evaluation refit the scaler on its training split. PAMAP2 uses window-level random splitting and is not a subject-independent evaluation. See the Windows report for metrics, preprocessing hashes, raw measurements, and run commands.
 
-가상환경 활성화 권한에 상관없이 실행하도록 Python 경로를 직접 지정했습니다. Windows 설치와 실제 실행은 아직 검증하지 않았습니다. 실패하면 명령과 오류, Python 버전·아키텍처를 공유하고 양쪽 환경을 함께 조정합니다.
+The Windows and Mac results are separate single-session observations. The comparison report in [PR #18](https://github.com/IoT-Kimjangs/har-quantization/pull/18) describes input-sampling differences and other interpretation limits.
 
 ## 다시 점검하기
 

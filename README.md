@@ -87,3 +87,8 @@ git switch -c docs/environment-notes
 | 2026-10-27 | 프로젝트 구조, 실험 규약, PR·리뷰 규칙 구성 |
 
 기존 계획서의 사전 검증 수치는 본 저장소에서 재현한 결과로 취급하지 않습니다. 재현 결과는 실행 조건과 원시 기록을 포함한 PR로 추가합니다.
+## Windows reproduction and platform results
+
+Windows 11 AMD64 results are available in [PR #17](https://github.com/IoT-Kimjangs/har-quantization/pull/17), including stored-model evaluation, TFLite quantization, and inference benchmarks. Cross-platform interpretation is in [PR #18](https://github.com/IoT-Kimjangs/har-quantization/pull/18); the presentation-ready latency figure and regeneration script are in [PR #19](https://github.com/IoT-Kimjangs/har-quantization/pull/19).
+
+The experiments did not retrain the saved models. PAMAP2 results use a run-fitted scaler because original training statistics and split artifacts were unavailable. Measurements describe individual Mac/Windows sessions; PAMAP2 timing inputs differ between platforms.
