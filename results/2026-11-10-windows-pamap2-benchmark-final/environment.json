@@ -1,0 +1,22 @@
+{
+  "platform": "Windows-11-10.0.26200-SP0",
+  "architecture": "AMD64",
+  "python": "3.12.10",
+  "cpu": "Intel64 Family 6 Model 140 Stepping 1, GenuineIntel",
+  "ram_gb": 15.68,
+  "logical_cpu_count": 8,
+  "packages": {
+    "tensorflow": "2.21.0",
+    "keras": "3.13.2",
+    "ai-edge-litert": "2.3.0",
+    "numpy": "2.5.4",
+    "psutil": "7.2.2"
+  },
+  "power_plan": "전원 구성표 GUID: ab6534a3-bc02-4c44-94d1-a8535b2eb070  (SAMSUNG MODE)",
+  "seed": 42,
+  "measurement_iterations": 1000,
+  "warmup_iterations": 50,
+  "test_windows": 494,
+  "sampling": "seeded test-window sample; replacement when population < 1000",
+  "note": "CPU run; background applications, CPU frequency and thermal state were not controlled."
+}

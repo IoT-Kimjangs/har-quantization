@@ -1,0 +1,10 @@
+{
+  "dataset": "PAMAP2 Physical Activity Monitoring",
+  "archive_bytes": 688226940,
+  "archive_sha256": "76b3580bd5a804121f507717cb498c66a312ef5c774f4a78ac470e6558add352",
+  "extracted_dat_files": 14,
+  "protocol_files": 9,
+  "optional_files": 5,
+  "raw_root": "data/raw/pamap2/PAMAP2_Dataset",
+  "license_source": "UCI dataset page lists CC BY 4.0; retain the bundled readme.pdf."
+}
