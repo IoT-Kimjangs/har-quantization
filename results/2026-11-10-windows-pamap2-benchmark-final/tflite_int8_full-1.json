@@ -1,0 +1,25 @@
+{
+  "variant": "tflite_int8_full",
+  "thread_mode": "1",
+  "iterations": 1000,
+  "warmup": 50,
+  "batch_size": 1,
+  "test_windows": 494,
+  "sampling_with_replacement": true,
+  "median_ms": 1.94725,
+  "p95_ms": 2.7775799999999995,
+  "mean_ms": 2.0606826000000003,
+  "runtime_threads": {
+    "interpreter_num_threads_requested": 1,
+    "xnnpack_log_confirmed": true
+  },
+  "prediction_disagreements_with_prior_full_evaluation": 0,
+  "model_bytes": 334520,
+  "model_sha256": "f694786978bfd8b625284ee64c713177a25a78c9123781ddfc67920762238b01",
+  "raw_csv": "tflite_int8_full-1.csv",
+  "raw_csv_sha256": "3f86a1e445bcf136a6179832378354b4fee921f6b6a76bc4c01ede6f5e5aadc8",
+  "peak_working_set_bytes": 63094784,
+  "final_rss_bytes": 62849024,
+  "parent_sampled_peak_rss_bytes": 4464640,
+  "sampled_peak_os_threads": 3
+}

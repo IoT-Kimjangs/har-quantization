@@ -1,0 +1,34 @@
+{
+  "variant": "keras_predict",
+  "thread_mode": "default",
+  "iterations": 1000,
+  "warmup": 50,
+  "batch_size": 1,
+  "median_ms": 208.73495,
+  "p95_ms": 232.847775,
+  "mean_ms": 210.7577998,
+  "min_ms": 167.0805,
+  "max_ms": 326.131,
+  "runtime_threads": {
+    "tensorflow_intra_op": 0,
+    "tensorflow_inter_op": 0,
+    "xnnpack_log_confirmed": null
+  },
+  "thread_environment": {
+    "OMP_NUM_THREADS": null,
+    "OPENBLAS_NUM_THREADS": null,
+    "NUMEXPR_NUM_THREADS": null,
+    "TF_NUM_INTRAOP_THREADS": null,
+    "TF_NUM_INTEROP_THREADS": null
+  },
+  "tensorflow_imported": true,
+  "prediction_disagreements_with_prior_full_evaluation": 0,
+  "model_bytes": 2533793,
+  "model_sha256": "c4b50d393409c73e1d259d7f21485e7a9c0e9f9d6f2c43cdd6f4cefb06d654a6",
+  "raw_csv": "keras_predict-default.csv",
+  "raw_csv_sha256": "7258474750f28decc189f7192bb26ca47091c1babab4bf32d6171ebcc28dee06",
+  "peak_working_set_bytes": 417050624,
+  "final_rss_bytes": 416718848,
+  "parent_sampled_peak_rss_bytes": 4485120,
+  "sampled_peak_os_threads": 3
+}

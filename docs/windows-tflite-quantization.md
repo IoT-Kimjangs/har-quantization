@@ -1,6 +1,6 @@
 # Windows TFLite conversion and quantization results
 
-This change converts the available WISDM and PAMAP2 saved Keras models to TFLite, evaluates FP32 and quantized artifacts, and records reproducible metrics. Neither model is retrained. Latency and memory benchmarks are a separate step.
+This change converts the available WISDM and PAMAP2 saved Keras models to TFLite, evaluates FP32 and quantized artifacts, and records reproducible metrics. Neither model is retrained. Latency and memory measurements are documented in the [WISDM benchmark report](../results/2026-11-10-windows-wisdm-benchmark-final/windows-results.md) and [PAMAP2 benchmark report](../results/2026-11-10-windows-pamap2-benchmark-final/pamap2-windows-results.md).
 
 ## Environment and limits
 

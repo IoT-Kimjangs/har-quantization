@@ -89,4 +89,4 @@ git switch -c docs/environment-notes
 
 기존 계획서의 사전 검증 수치는 본 저장소에서 재현한 결과로 취급하지 않습니다. 재현 결과는 실행 조건과 원시 기록을 포함한 PR로 추가합니다.
 
-TFLite conversion and quantization results are documented in [the Windows report](docs/windows-tflite-quantization.md). Latency and memory measurements follow in a separate change.
+TFLite conversion and quantization results are documented in [the Windows report](docs/windows-tflite-quantization.md). Benchmark results are available in the [WISDM report](results/2026-11-10-windows-wisdm-benchmark-final/windows-results.md) and [PAMAP2 report](results/2026-11-10-windows-pamap2-benchmark-final/pamap2-windows-results.md), with raw measurements and plots alongside them.
