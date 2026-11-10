@@ -30,7 +30,7 @@
 
 WISDM 저장 모델은 [단계별 모델 확인](docs/wisdm-model.md), PAMAP2는 [데이터·모델 재현 안내](docs/pamap2-data.md)에 따라 준비합니다.
 
-WISDM 원본 데이터는 [데이터 준비와 검사 결과](docs/wisdm-data.md), PAMAP2는 [데이터·모델 재현 안내](docs/pamap2-data.md)를 참고합니다. Windows 환경 준비와 두 저장 모델의 평가 결과는 [환경 기록](results/environment/windows-amd64-2026-11-10.json), [WISDM metrics](results/2026-11-10-windows-wisdm-fp32/metrics.json), [PAMAP2 metrics](results/2026-11-10-windows-pamap2-fp32/metrics.json)에 있습니다. TFLite 비교와 성능 측정은 별도 후속 변경으로 제출합니다.
+See [WISDM source data and metrics](docs/wisdm-data.md) and [PAMAP2 data, preprocessing record, and metrics](docs/pamap2-data.md). The Windows environment and package versions are recorded in [the environment manifest](results/environment/windows-amd64-2026-11-10.json) and [Windows package freeze](requirements/windows-amd64-py312.txt). TFLite conversion and inference benchmarks are tracked separately in [PR #15](https://github.com/IoT-Kimjangs/har-quantization/pull/15) and [PR #16](https://github.com/IoT-Kimjangs/har-quantization/pull/16).
 
 Windows 저장 모델 평가는 2026-11-10 기록이며 모델을 재학습하지 않았습니다. 원 scaler 확보 및 윈도우 단위 split의 일반화 한계를 보고서에 함께 반영하고, Mac의 같은 조건 결과를 모은 뒤 플랫폼별 분석을 진행합니다.
 
@@ -85,7 +85,7 @@ git switch -c docs/environment-notes
 | 날짜 | 내용 |
 | --- | --- |
 | 2026-10-27 | 프로젝트 구조, 실험 규약, PR·리뷰 규칙 구성 |
-| 2026-11-10 | Windows에서 WISDM·PAMAP2 저장 모델 평가, TFLite 변환·양자화, 24개 추론 벤치마크 결과 생성 |
+| 2026-11-10 | Windows saved-model evaluation for WISDM and PAMAP2 (see follow-up [TFLite conversion/quantization PR #15](https://github.com/IoT-Kimjangs/har-quantization/pull/15) and [benchmark PR #16](https://github.com/IoT-Kimjangs/har-quantization/pull/16)) |
 
 기존 계획서의 사전 검증 수치는 본 저장소에서 재현한 결과로 취급하지 않습니다. 재현 결과는 실행 조건과 원시 기록을 포함한 PR로 추가합니다.
 

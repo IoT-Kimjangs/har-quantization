@@ -17,7 +17,7 @@ Mac ARM64와 Windows x86-64에서 CPU 실행 조건을 맞추기 위한 초기 �
 
 `requirements.txt`는 핵심 세 패키지를 고정하고 보조 패키지는 호환 범위를 지정합니다. 전체 의존성을 고정한 lock 파일이 아닙니다. Mac과 Windows에서 같은 핵심 버전으로 실행을 확인했으며, 보조 패키지의 전체 freeze 파일은 각 OS별 기록으로 취급합니다.
 
-Mac에서 검증한 패키지 55개의 설치 버전은 [Mac 패키지 목록](../requirements/macos-arm64-py312.txt), 주요 버전과 성공 상태는 [환경 점검 기록](../results/environment/macos-arm64-2026-11-03.json)에 남겼습니다. Windows 패키지 freeze와 측정 환경은 [Windows 벤치마크 결과](../results/2026-11-10-windows-wisdm-benchmark-final/)에 보관했습니다. 두 freeze 파일은 각 실행 환경의 기록이지 Windows용 lock 파일은 아닙니다.
+The Mac environment record lists 55 validated packages in [the Mac package list](../requirements/macos-arm64-py312.txt). Windows package versions are recorded in [the Windows package list](../requirements/windows-amd64-py312.txt) and [environment manifest](../results/environment/windows-amd64-2026-11-10.json). Both freeze files describe measured environments; neither is a platform lock file.
 
 ## Mac에서 설치
 

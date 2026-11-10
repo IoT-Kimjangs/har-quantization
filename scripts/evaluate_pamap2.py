@@ -4,6 +4,7 @@ import json
 import os
 from pathlib import Path
 import platform
+import shutil
 import sys
 
 os.environ.setdefault('KERAS_BACKEND', 'tensorflow')
@@ -34,7 +35,10 @@ def main():
     output = ROOT / 'results/2026-11-10-windows-pamap2-fp32'
     output.mkdir(parents=True, exist_ok=True)
     prep_dir = ROOT / 'data/processed/pamap2-author-code'
-    prep = json.loads((prep_dir / 'preprocessing-summary.json').read_text(encoding='utf-8'))
+    prep_summary_path = prep_dir / 'preprocessing-summary.json'
+    prep = json.loads(prep_summary_path.read_text(encoding='utf-8'))
+    public_summary_path = output / 'preprocessing-summary.json'
+    shutil.copyfile(prep_summary_path, public_summary_path)
     for name, expected in prep['artifact_sha256'].items():
         if sha256(prep_dir / name) != expected:
             raise ValueError(f'Preprocessing artifact hash mismatch: {name}')
@@ -62,7 +66,8 @@ def main():
                      'numpy': np.__version__, 'scikit-learn': sklearn.__version__, 'pandas': pd.__version__},
         'model_parameter_count': int(model.count_params()),
         'model_sha256': config['sha256'], 'raw_archive_sha256': prep['source_archive_sha256'],
-        'preprocessing_summary_sha256': sha256(prep_dir / 'preprocessing-summary.json'),
+        'preprocessing_summary_path': 'preprocessing-summary.json',
+        'preprocessing_summary_sha256': sha256(public_summary_path),
         'evaluated_windows': len(y_true), 'correct_windows': int((y_true == pred).sum()),
         'accuracy': accuracy, 'macro_f1': macro_f1,
         'accuracy_percent': accuracy * 100, 'macro_f1_percent': macro_f1 * 100,

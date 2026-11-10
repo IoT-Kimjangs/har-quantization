@@ -1,0 +1,228 @@
+{
+  "dataset": "PAMAP2 Physical Activity Monitoring",
+  "source_archive_sha256": "76b3580bd5a804121f507717cb498c66a312ef5c774f4a78ac470e6558add352",
+  "source_files": [
+    {
+      "path": "Optional/subject101.dat",
+      "bytes": 121246257,
+      "sha256": "a8b71371406001ae563acad1d7d946ceacd0afeb51b97bfb9a9cbad95c78e52c"
+    },
+    {
+      "path": "Optional/subject105.dat",
+      "bytes": 72521536,
+      "sha256": "a7c4ccd8d7e8fe21abad8c111229649ec10ca9b353cc29fcc4986c2243301adc"
+    },
+    {
+      "path": "Optional/subject106.dat",
+      "bytes": 60905306,
+      "sha256": "50882fc519f01e8fe200a5a4373daff443e88624d7e8a2d31d759569823fb491"
+    },
+    {
+      "path": "Optional/subject108.dat",
+      "bytes": 85403002,
+      "sha256": "e871b2e5692867f8655b69b769e866927739aa288b9da5cc9a15dc930f154336"
+    },
+    {
+      "path": "Optional/subject109.dat",
+      "bytes": 90594049,
+      "sha256": "a6a8f7521d63fe80bd7f203c5ee1256a2bc8b3772f028ae767256ec1d6a93930"
+    },
+    {
+      "path": "Protocol/subject101.dat",
+      "bytes": 141698539,
+      "sha256": "80b3fffd089c236ae88098df3b906b8d3c67a858023fe4f75045d78612147266"
+    },
+    {
+      "path": "Protocol/subject102.dat",
+      "bytes": 207349310,
+      "sha256": "468f3c6ba3e6e961f383783665265afbcddbbd33a3a84bba0386b7d0d4e3c632"
+    },
+    {
+      "path": "Protocol/subject103.dat",
+      "bytes": 117863364,
+      "sha256": "5be64631d085e3efc700728395516da3512ff9de17dab30d253508441a98d3f0"
+    },
+    {
+      "path": "Protocol/subject104.dat",
+      "bytes": 153227482,
+      "sha256": "7eb272213cbfe11d9e466a2163b6c9c2ed8d2542fc6f08283fd1bf222cac8994"
+    },
+    {
+      "path": "Protocol/subject105.dat",
+      "bytes": 173773599,
+      "sha256": "7837cfede57fe45ec20d553c6c2b0c498ab324daae23bfd202c0ffea9f71a7f6"
+    },
+    {
+      "path": "Protocol/subject106.dat",
+      "bytes": 168263273,
+      "sha256": "0da1dda3fa56d75d6413fc9198949d3ebc2102d77574cb5fe0739674687609f2"
+    },
+    {
+      "path": "Protocol/subject107.dat",
+      "bytes": 145823268,
+      "sha256": "a02195e9599eb249f79103912d27eb4f62d8a0f59e4763b0dd8250fee5f3f020"
+    },
+    {
+      "path": "Protocol/subject108.dat",
+      "bytes": 190019653,
+      "sha256": "81ce6b21b9c1e01dc02099c4f9387699547b08b28b387d09a56e0cb0a8af22fc"
+    },
+    {
+      "path": "Protocol/subject109.dat",
+      "bytes": 3891140,
+      "sha256": "5109d5cd8334769566b4ae602adf3e5f4bb7b9ee8ca678f0c481d333114b07c7"
+    }
+  ],
+  "source_rows_before_cleaning": 3850505,
+  "clean_rows": 246712,
+  "window_length": 200,
+  "stride": 100,
+  "window_count": 2466,
+  "train_windows": 1972,
+  "test_windows": 494,
+  "feature_count": 19,
+  "feature_names": [
+    "hr",
+    "hand_acc_x",
+    "hand_acc_y",
+    "hand_acc_z",
+    "hand_gyro_x",
+    "hand_gyro_y",
+    "hand_gyro_z",
+    "chest_acc_x",
+    "chest_acc_y",
+    "chest_acc_z",
+    "chest_gyro_x",
+    "chest_gyro_y",
+    "chest_gyro_z",
+    "ankle_acc_x",
+    "ankle_acc_y",
+    "ankle_acc_z",
+    "ankle_gyro_x",
+    "ankle_gyro_y",
+    "ankle_gyro_z"
+  ],
+  "activity_ids": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    9,
+    10,
+    11,
+    12,
+    13,
+    16,
+    17,
+    18,
+    19,
+    20,
+    24
+  ],
+  "activity_windows": {
+    "0": 176,
+    "1": 170,
+    "2": 173,
+    "3": 211,
+    "4": 89,
+    "5": 147,
+    "6": 169,
+    "7": 77,
+    "8": 283,
+    "9": 49,
+    "10": 107,
+    "11": 93,
+    "12": 161,
+    "13": 216,
+    "14": 91,
+    "15": 170,
+    "16": 42,
+    "17": 42
+  },
+  "split": "sklearn train_test_split on windows, test_size=0.2, random_state=42, stratify=y_windows",
+  "scaler_fit_scope": "all timesteps in outer training windows",
+  "scaler": {
+    "n_samples_seen": 394400,
+    "mean": [
+      102.5690720081136,
+      -3.767591215629905,
+      3.57568620792949,
+      4.0095445465719255,
+      0.003434905982424859,
+      0.03495667982729852,
+      -0.007171517213680554,
+      0.3714299713287549,
+      8.160939033022428,
+      -1.3960813601723678,
+      0.005379872754604819,
+      0.004605271802477283,
+      -0.020815193922123724,
+      9.028933354699083,
+      -0.3228314820991428,
+      -2.7690157889879377,
+      0.005519186316418092,
+      -0.02238159311928567,
+      0.005762057690753416
+    ],
+    "variance": [
+      745.1580383842298,
+      39.745695178854476,
+      43.990951085346666,
+      17.669960847546083,
+      1.6901682747011384,
+      0.8835453485749553,
+      2.1283045428694165,
+      2.8204171812451104,
+      19.465327148036472,
+      22.96806102112639,
+      0.17851505722709488,
+      0.3070619260932373,
+      0.09680985932832571,
+      38.683334937420675,
+      49.99702899097624,
+      15.136726149373821,
+      1.0698891299101256,
+      0.3314518235156853,
+      3.0956919361537656
+    ],
+    "scale": [
+      27.29758301359719,
+      6.304418702692143,
+      6.6325674580321206,
+      4.203565254346135,
+      1.3000647194278978,
+      0.9399709296435477,
+      1.4588709822562846,
+      1.679409771689182,
+      4.411952759044057,
+      4.792500497770072,
+      0.4225104226254009,
+      0.5541316865991669,
+      0.31114282785937025,
+      6.219592827301533,
+      7.0708577266818375,
+      3.8905945753025746,
+      1.03435445080984,
+      0.5757185280288323,
+      1.7594578529063336
+    ],
+    "with_mean": true,
+    "with_std": true
+  },
+  "arrays_dtype": "float32",
+  "artifact_sha256": {
+    "X_train_s.npy": "26897338bbca5253e3afea6746df029fd9db536533a359ddb5e7f75183ed24d4",
+    "X_test_s.npy": "aa381e92c9a56776e0ccfe634c952dec5872aff288623b2b6fea8baf88c76381",
+    "y_train.npy": "f5134c3816b85c1d07f5278e2dd17c945d41e9825c5a883a0636d1ca02d6151f",
+    "y_test.npy": "77f163042894de1ac30e6c2e42e2b7ef5f413d8d8dc7db4ec4d27610a5fc6453",
+    "train_window_ids.npy": "2cdf484293880f96f8a35c3152375a0149c3c4c3db895265c136180034a6ff4b",
+    "test_window_ids.npy": "043c2fd9a9824164166292d8fc2f1894939f7a002ea236c756e45f4ef58b18c6",
+    "window_starts.npy": "2793ec9a5eca2223e8230d45dd2bfadab6d7e1d41f275a9abcb3ecaffcfd9ad9",
+    "window_labels.npy": "482453eeb7caad94b000ea8ddc556b703612f2d54d00e3d8ab0da7ef7bc07129",
+    "labels.json": "766c08cea2898e0fd99c0303f24b08be089e4eaaead8dfedbdc88791bdfccbd9"
+  },
+  "limitation": "Protocol and Optional subject files are concatenated before windowing, matching author notebook. Windows can cross file boundaries; random window split is not subject-independent."
+}

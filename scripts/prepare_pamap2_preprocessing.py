@@ -83,6 +83,13 @@ def main():
         'activity_windows': {str(index): int(np.sum(y_windows == index)) for index in range(len(activity_ids))},
         'split': 'sklearn train_test_split on windows, test_size=0.2, random_state=42, stratify=y_windows',
         'scaler_fit_scope': 'all timesteps in outer training windows',
+        'scaler': {
+            'n_samples_seen': int(scaler.n_samples_seen_),
+            'mean': [float(value) for value in scaler.mean_],
+            'variance': [float(value) for value in scaler.var_],
+            'scale': [float(value) for value in scaler.scale_],
+            'with_mean': bool(scaler.with_mean), 'with_std': bool(scaler.with_std),
+        },
         'arrays_dtype': 'float32', 'artifact_sha256': artifact_hashes,
         'limitation': 'Protocol and Optional subject files are concatenated before windowing, matching author notebook. Windows can cross file boundaries; random window split is not subject-independent.',
     }
