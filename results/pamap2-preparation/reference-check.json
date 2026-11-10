@@ -1,0 +1,10 @@
+{
+  "notebook_sha256": "1ebbd2ba7ba785573d3b758c13e783a2a4219f2d79fa5da84f44219e49af8c90",
+  "source_commit": "90eb53deec3ff166fa0f1e08211d8d9d1770411d",
+  "raw_files_checked": 14,
+  "exact_cleaned_rows_match": true,
+  "exact_windows_match": true,
+  "exact_train_test_arrays_match": true,
+  "test_windows": 494,
+  "notebook_training_executed": false
+}

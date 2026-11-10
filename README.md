@@ -28,6 +28,8 @@
 
 ## 시작하기
 
+[PAMAP2 Mac 실험 결과](docs/pamap2-macos-results.md)에 데이터·전처리 원본 대조, 논문 수치와의 차이, 변환·양자화·성능 측정을 정리했습니다.
+
 WISDM 저장 모델은 [단계별 모델 확인](docs/wisdm-model.md)에 따라 준비하고 입출력 형태를 직접 확인합니다.
 
 WISDM 원본 데이터는 [데이터 준비와 검사 결과](docs/wisdm-data.md)를 참고합니다.
