@@ -103,11 +103,11 @@ git switch -c docs/environment-notes
 
 기존 계획서의 사전 검증 수치는 본 저장소에서 재현한 결과로 취급하지 않습니다. 재현 결과는 실행 조건과 원시 기록을 포함한 PR로 추가합니다.
 
-## Windows reproduction and platform results
+## Windows 재현과 플랫폼 결과
 
-Windows 11 AMD64 results are available in [PR #17](https://github.com/IoT-Kimjangs/har-quantization/pull/17), including stored-model evaluation, TFLite quantization, and inference benchmarks. Cross-platform interpretation is in [PR #18](https://github.com/IoT-Kimjangs/har-quantization/pull/18); the presentation-ready latency figure and regeneration script are in [PR #19](https://github.com/IoT-Kimjangs/har-quantization/pull/19).
+Windows 11 AMD64의 저장 모델 평가, TFLite 양자화, 추론 벤치마크와 원시 결과는 저장소의 [WISDM 결과](results/2026-11-10-windows-wisdm-benchmark-final/windows-results.md), [PAMAP2 결과](results/2026-11-10-windows-pamap2-benchmark-final/pamap2-windows-results.md), [양자화 안내](docs/windows-tflite-quantization.md)에서 확인할 수 있습니다. Mac과 Windows의 기존 측정 비교는 [플랫폼 비교 문서](docs/windows-macos-benchmark-comparison.md)에 있습니다. 통합 분석 초안은 [PR #22](https://github.com/IoT-Kimjangs/har-quantization/pull/22)에서 검토 중이며 아직 Draft입니다.
 
-The experiments did not retrain the saved models. PAMAP2 results use a run-fitted scaler because original training statistics and split artifacts were unavailable. Measurements describe individual Mac/Windows sessions; PAMAP2 timing inputs differ between platforms.
+저장 모델은 재학습하지 않았습니다. PAMAP2 평가는 원 학습 scaler 통계와 split 자료를 확보하지 못해 실행에서 scaler를 다시 적합했습니다. 측정은 각 Mac/Windows 환경의 개별 세션 결과이며 PAMAP2 타이밍 입력은 플랫폼마다 다릅니다.
 
 
 TFLite conversion and quantization results are documented in [the Windows report](docs/windows-tflite-quantization.md). Benchmark results are available in the [WISDM report](results/2026-11-10-windows-wisdm-benchmark-final/windows-results.md) and [PAMAP2 report](results/2026-11-10-windows-pamap2-benchmark-final/pamap2-windows-results.md), with raw measurements and plots alongside them.
