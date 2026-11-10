@@ -1,4 +1,4 @@
-﻿"""Evaluate the saved WISDM model on every prepared test window."""
+"""Evaluate the saved WISDM model on every prepared test window."""
 import argparse
 import csv
 import importlib.metadata

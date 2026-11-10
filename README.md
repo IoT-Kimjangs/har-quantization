@@ -30,7 +30,21 @@
 
 WISDM 저장 모델은 [단계별 모델 확인](docs/wisdm-model.md), PAMAP2는 [데이터·모델 재현 안내](docs/pamap2-data.md)에 따라 준비합니다.
 
-See [WISDM source data and metrics](docs/wisdm-data.md) and [PAMAP2 data, preprocessing record, and metrics](docs/pamap2-data.md). The Windows environment and package versions are recorded in [the environment manifest](results/environment/windows-amd64-2026-11-10.json) and [Windows package freeze](requirements/windows-amd64-py312.txt). TFLite conversion and inference benchmarks are tracked separately in [PR #15](https://github.com/IoT-Kimjangs/har-quantization/pull/15) and [PR #16](https://github.com/IoT-Kimjangs/har-quantization/pull/16).
+[PAMAP2 Mac 실험 결과](docs/pamap2-macos-results.md)에 데이터·전처리 원본 대조, 논문 수치와의 차이, 변환·양자화·성능 측정을 정리했습니다.
+
+[WISDM Mac 속도·메모리 비교](docs/wisdm-macos-benchmark.md)에 12개 조건의 실측 결과와 원시 기록을 정리했습니다.
+
+[WISDM 양자화 비교](docs/wisdm-quantization.md)에 FP16·동적 INT8·INT8 입출력 모델의 크기·분류 성능과 연산 진단을 정리했습니다.
+
+[TFLite FP32 변환·전체 평가](docs/wisdm-tflite-fp32.md)에서 Keras와 예측 행동 100% 일치를 확인했습니다.
+
+WISDM 전체 평가에서 [정확도·Macro-F1이 논문 표시 정밀도까지 일치](docs/wisdm-evaluation.md)했습니다.
+
+논문과 코드가 맞는지는 [쉬운 대조표와 리뷰 체크리스트](docs/paper-code-check.md)에서 확인합니다.
+
+WISDM 분할·표준화는 [공개 코드 기준 재계산](docs/wisdm-preprocessing.md)에 정리했습니다.
+
+WISDM 원본은 [데이터 안내](docs/wisdm-data.md), PAMAP2는 [데이터·전처리·평가 안내](docs/pamap2-data.md)를 참고합니다. Windows 실행 환경은 [환경 기록](results/environment/windows-amd64-2026-11-10.json)과 [패키지 목록](requirements/windows-amd64-py312.txt)에, 변환·양자화 및 속도·메모리 결과는 [Windows 결과 안내](docs/windows-tflite-quantization.md)에 있습니다.
 
 Windows 저장 모델 평가는 2026-11-10 기록이며 모델을 재학습하지 않았습니다. 원 scaler 확보 및 윈도우 단위 split의 일반화 한계를 보고서에 함께 반영하고, Mac의 같은 조건 결과를 모은 뒤 플랫폼별 분석을 진행합니다.
 

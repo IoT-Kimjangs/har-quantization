@@ -1,4 +1,4 @@
-﻿"""Create three WISDM PTQ variants and evaluate the complete prepared test set."""
+"""Create three WISDM PTQ variants and evaluate the complete prepared test set."""
 import argparse
 from collections import Counter
 import csv

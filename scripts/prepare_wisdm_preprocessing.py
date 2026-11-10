@@ -1,4 +1,4 @@
-﻿"""Recalculate WISDM splits and scaler from the published baseline procedure."""
+"""Recalculate WISDM splits and scaler from the published baseline procedure."""
 import hashlib
 import json
 from pathlib import Path

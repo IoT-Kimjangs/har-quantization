@@ -101,11 +101,14 @@ Windows에서 원본 다운로드·해시 검증·형식 검사를 마치고, �
 
 전처리와 라벨의 근거는 [저자 WISDM 기준 노트북의 고정 커밋](https://github.com/AASIFRASHIDKHANDAY/PATCH-BASED-TRANSFORMER-WITH-QUANTIZATION/blob/90eb53deec3ff166fa0f1e08211d8d9d1770411d/code/Baseline%20Transformer/WISDMTRANSFORMER_BASELINE.ipynb)입니다.
 
-새 환경에서 Windows WISDM 전처리와 저장 모델 평가는 다음 순서로 실행합니다. 첫 번째 명령이 로컬 WISDM 원본을 준비하고, 저장된 Keras 모델은 [모델 안내](wisdm-model.md)의 방법으로 먼저 내려받습니다.
+새 환경에서 Windows WISDM 원본 준비·전처리·저장 모델 평가는 다음 순서로 실행합니다. 첫 번째 명령이 로컬 WISDM 원본을 준비하고, 저장된 Keras 모델은 [모델 안내](wisdm-model.md)의 방법으로 먼저 내려받습니다.
 
 ```powershell
+.venv\Scripts\python.exe scripts\prepare_wisdm_data.py --download
 .venv\Scripts\python.exe scripts\prepare_wisdm_preprocessing.py
 .venv\Scripts\python.exe scripts\evaluate_wisdm.py --output results\2026-11-10-windows-wisdm-fp32
 ```
 
-평가 결과는 [Windows FP32 metrics](../results/2026-11-10-windows-wisdm-fp32/metrics.json)에 있습니다. TFLite 변환·양자화와 성능 측정은 별도 변경으로 제출합니다. See [the Windows TFLite quantization report](windows-tflite-quantization.md) for conversion results; latency and memory measurements follow separately.
+평가 결과는 [Windows FP32 metrics](../results/2026-11-10-windows-wisdm-fp32/metrics.json)에 있습니다. 변환·양자화와 지연시간·메모리 결과는 [Windows TFLite 안내](windows-tflite-quantization.md)에 있습니다.
+
+후속 단계의 결과는 [분할과 표준화 기준 재계산](wisdm-preprocessing.md)에 기록했습니다.

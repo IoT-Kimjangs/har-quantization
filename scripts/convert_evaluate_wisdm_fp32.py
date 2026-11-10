@@ -1,4 +1,4 @@
-﻿"""Convert WISDM to TFLite FP32 and compare every test output against Keras."""
+"""Convert WISDM to TFLite FP32 and compare every test output against Keras."""
 import argparse
 from collections import Counter
 import csv
