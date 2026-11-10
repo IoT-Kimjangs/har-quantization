@@ -54,7 +54,7 @@ Windows 11 AMD64 / Python 3.12.10에서 CPU 환경 확인, WISDM·PAMAP2 저장 
 
 저장 모델을 재학습하지 않았습니다. 원 학습의 scaler 통계와 정확한 분할 인덱스를 확보하지 못해 평가 학습 분할에서 scaler를 다시 적합했습니다. PAMAP2는 윈도우 단위 무작위 분할이며 피험자 독립 평가가 아닙니다. 지표, 전처리 해시, 원시 측정값과 실행 명령은 Windows 결과 자료를 참조하세요.
 
-Windows와 Mac 결과는 각각 한 번의 환경에서 관측한 값입니다. 입력 샘플링 차이와 해석상 한계는 [저장소의 플랫폼 비교 문서](windows-macos-benchmark-comparison.md)에 정리했습니다. 더 넓은 통합표와 양자화 효과 분석은 [Draft PR #22](https://github.com/IoT-Kimjangs/har-quantization/pull/22)에서 검토 중입니다. Windows 원시 결과는 위의 WISDM·PAMAP2 보고서에서 확인할 수 있습니다.
+Windows와 Mac 결과는 각각 한 번의 환경에서 관측한 값입니다. 입력 샘플링 차이와 해석상 한계는 [저장소의 플랫폼 비교 문서](windows-macos-benchmark-comparison.md)에 정리했습니다. 통합표와 양자화 효과 분석은 [PR #22](https://github.com/IoT-Kimjangs/har-quantization/pull/22)에서 확인할 수 있습니다. Windows 원시 결과는 위의 WISDM·PAMAP2 보고서에서 확인할 수 있습니다.
 
 ## Windows에서 같은 환경 후보 설치
 
