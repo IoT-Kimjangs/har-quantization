@@ -1,0 +1,67 @@
+{
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "architecture": "arm64",
+  "python": "3.12.14",
+  "logical_cpu_count": 8,
+  "power_at_start": "Now drawing from 'AC Power'; 72%; discharging; 5:42 remaining present: true",
+  "packages": {
+    "tensorflow": "2.21.0",
+    "keras": "3.13.2",
+    "ai-edge-litert": "2.3.0",
+    "numpy": "2.5.4",
+    "psutil": "7.2.2"
+  },
+  "plan": [
+    {
+      "variant": "tflite_int8_dynamic",
+      "thread_mode": "default"
+    },
+    {
+      "variant": "tflite_fp16",
+      "thread_mode": "default"
+    },
+    {
+      "variant": "keras_predict",
+      "thread_mode": "1"
+    },
+    {
+      "variant": "tflite_fp32",
+      "thread_mode": "default"
+    },
+    {
+      "variant": "tflite_int8_full",
+      "thread_mode": "1"
+    },
+    {
+      "variant": "tflite_fp32",
+      "thread_mode": "1"
+    },
+    {
+      "variant": "keras_direct",
+      "thread_mode": "1"
+    },
+    {
+      "variant": "tflite_int8_full",
+      "thread_mode": "default"
+    },
+    {
+      "variant": "tflite_int8_dynamic",
+      "thread_mode": "1"
+    },
+    {
+      "variant": "keras_direct",
+      "thread_mode": "default"
+    },
+    {
+      "variant": "tflite_fp16",
+      "thread_mode": "1"
+    },
+    {
+      "variant": "keras_predict",
+      "thread_mode": "default"
+    }
+  ],
+  "seed": 42,
+  "input_sha256": "10f4a6111ad2a4a1a267c9290e36aede76b552b9fb2bbfd788aabc00d7dae8f2",
+  "note": "Background applications and CPU frequency were not controlled; CPU brand/memory sysctl access was unavailable."
+}
