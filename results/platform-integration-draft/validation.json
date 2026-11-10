@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "benchmark_cases": 48,
+  "benchmark_rows": 48000,
+  "comparisons": 40,
+  "source_blob_count": 118,
+  "retraining": false,
+  "inference_executed": false,
+  "checks": [
+    "full-evaluation CSV hashes, accuracy, Macro-F1 and confusion matrices",
+    "48 raw latency CSV hashes, positive times, iterations, warmup and batch size",
+    "raw median, linear p95 and mean match summary and per-case JSON",
+    "same sample order for all variants/thread modes within each dataset/platform",
+    "all 48000 benchmark labels match full-evaluation predictions",
+    "benchmark model hashes and TFLite sizes match evaluation metadata",
+    "cross-platform evaluation array hashes, window IDs and truth match"
+  ],
+  "generation_packages": {
+    "python": "3.12.14",
+    "numpy": "2.5.4",
+    "matplotlib": "3.11.2"
+  }
+}

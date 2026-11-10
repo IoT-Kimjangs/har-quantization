@@ -28,6 +28,8 @@
 
 ## 시작하기
 
+[Mac·Windows 통합 분석 초안](docs/platform-results-integration.md)에 같은 스레드 조건의 통합표·그래프와 고정 출처를 정리했습니다. 선행 실험 PR의 main 반영은 별도입니다.
+
 WISDM 저장 모델은 [단계별 모델 확인](docs/wisdm-model.md)에 따라 준비하고 입출력 형태를 직접 확인합니다.
 
 WISDM 원본 데이터는 [데이터 준비와 검사 결과](docs/wisdm-data.md)를 참고합니다.

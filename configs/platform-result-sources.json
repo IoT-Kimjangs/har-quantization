@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "repository": "IoT-Kimjangs/har-quantization",
+  "sources": [
+    {
+      "dataset": "wisdm", "platform": "macos", "pr": 7,
+      "commit": "2f2b6c04089da5bcd96ccaddbe15251e2253e942",
+      "evaluation": "results/2026-11-05-macos-wisdm-fp32",
+      "quantization": "results/2026-11-10-macos-wisdm-quantization",
+      "benchmark": "results/2026-11-10-macos-wisdm-benchmark"
+    },
+    {
+      "dataset": "pamap2", "platform": "macos", "pr": 14,
+      "commit": "edee959d239bf696832f869f6b523a579a0eead1",
+      "quantization": "results/2026-11-10-macos-pamap2-models",
+      "benchmark": "results/2026-11-10-macos-pamap2-benchmark"
+    },
+    {
+      "dataset": "wisdm", "platform": "windows", "pr": 17,
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "evaluation": "results/2026-11-10-windows-wisdm-fp32",
+      "quantization": "results/2026-11-10-windows-wisdm-quantization",
+      "benchmark": "results/2026-11-10-windows-wisdm-benchmark-final"
+    },
+    {
+      "dataset": "pamap2", "platform": "windows", "pr": 17,
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "evaluation": "results/2026-11-10-windows-pamap2-fp32",
+      "quantization": "results/2026-11-10-windows-pamap2-quantization",
+      "benchmark": "results/2026-11-10-windows-pamap2-benchmark-final"
+    }
+  ]
+}
