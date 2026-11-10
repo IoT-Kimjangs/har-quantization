@@ -93,7 +93,7 @@ def main():
         'arrays_dtype': 'float32', 'artifact_sha256': artifact_hashes,
         'limitation': 'Protocol and Optional subject files are concatenated before windowing, matching author notebook. Windows can cross file boundaries; random window split is not subject-independent.',
     }
-    (OUTPUT / 'preprocessing-summary.json').write_text(json.dumps(summary, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    (OUTPUT / 'preprocessing-summary.json').write_bytes((json.dumps(summary, ensure_ascii=False, indent=2) + '\n').encode('utf-8'))
     print(json.dumps({key: summary[key] for key in ('source_rows_before_cleaning','clean_rows','window_count','train_windows','test_windows','feature_count','activity_ids')}, indent=2))
 
 
