@@ -100,3 +100,5 @@ python3 scripts/prepare_wisdm_data.py
 다음에는 저자 코드의 학습 데이터 분할과 표준화 통계를 확보·재현할 수 있는지 확인합니다. 기존 저장 모델과 같은 전처리 조건을 확보한 뒤 `(1, 80, 3)` 시험 입력을 만들어 예측합니다. 검사 조건을 통과했다는 이유만으로 타임스탬프 연속성이나 모델 학습 조건까지 검증됐다고 보지는 않습니다.
 
 전처리와 라벨의 근거는 [저자 WISDM 기준 노트북의 고정 커밋](https://github.com/AASIFRASHIDKHANDAY/PATCH-BASED-TRANSFORMER-WITH-QUANTIZATION/blob/90eb53deec3ff166fa0f1e08211d8d9d1770411d/code/Baseline%20Transformer/WISDMTRANSFORMER_BASELINE.ipynb)입니다.
+
+후속 단계의 결과는 [분할과 표준화 기준 재계산](wisdm-preprocessing.md)에 기록했습니다.

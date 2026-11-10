@@ -30,6 +30,18 @@
 
 [PAMAP2 Mac 실험 결과](docs/pamap2-macos-results.md)에 데이터·전처리 원본 대조, 논문 수치와의 차이, 변환·양자화·성능 측정을 정리했습니다.
 
+[WISDM Mac 속도·메모리 비교](docs/wisdm-macos-benchmark.md)에 12개 조건의 실측 결과와 원시 기록을 정리했습니다.
+
+[WISDM 양자화 비교](docs/wisdm-quantization.md)에 FP16·동적 INT8·INT8 입출력 모델의 크기·분류 성능과 연산 진단을 정리했습니다.
+
+[TFLite FP32 변환·전체 평가](docs/wisdm-tflite-fp32.md)에서 Keras와 예측 행동 100% 일치를 확인했습니다.
+
+WISDM 전체 평가에서 [정확도·Macro-F1이 논문 표시 정밀도까지 일치](docs/wisdm-evaluation.md)했습니다.
+
+논문과 코드가 맞는지는 [쉬운 대조표와 리뷰 체크리스트](docs/paper-code-check.md)에서 확인합니다.
+
+WISDM 분할·표준화는 [공개 코드 기준 재계산](docs/wisdm-preprocessing.md)에 정리했습니다.
+
 WISDM 저장 모델은 [단계별 모델 확인](docs/wisdm-model.md)에 따라 준비하고 입출력 형태를 직접 확인합니다.
 
 WISDM 원본 데이터는 [데이터 준비와 검사 결과](docs/wisdm-data.md)를 참고합니다.
