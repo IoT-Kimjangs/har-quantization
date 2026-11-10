@@ -71,6 +71,8 @@ def main():
       '- 전처리: `.venv\\Scripts\\python.exe scripts\\prepare_pamap2_preprocessing.py`; 평가: `.venv\\Scripts\\python.exe scripts\\evaluate_pamap2.py`',
       '- 변환·평가: `.venv\\Scripts\\python.exe scripts\\quantize_evaluate_pamap2.py`; 벤치마크: `.venv\\Scripts\\python.exe scripts\\benchmark_pamap2_windows.py`',
       '- 표와 그림: `.venv\\Scripts\\python.exe scripts\\summarize_pamap2_results.py`']
+    md.append('Windows PAMAP2 sampled 1,000 inputs with replacement from 494 test windows (420 unique windows). The Mac run cycled through all 494 windows, so cross-OS timing is not an identical-input comparison.')
+    md.append('Worker logs are local execution records and are not included in Git; committed per-case JSON and CSV files contain the retained measurements.')
     (out/'pamap2-windows-results.md').write_text('\n'.join(md)+'\n',encoding='utf-8')
     colors=['#777777','#555555','#2878B5','#55A868','#C44E52','#8172B3']; y=np.arange(len(rows)); labels=[r['label'] for r in rows]
     fig,axes=plt.subplots(2,2,figsize=(12,8),constrained_layout=True)

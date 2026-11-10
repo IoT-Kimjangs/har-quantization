@@ -42,3 +42,5 @@
 - 전처리: `.venv\Scripts\python.exe scripts\prepare_pamap2_preprocessing.py`; 평가: `.venv\Scripts\python.exe scripts\evaluate_pamap2.py`
 - 변환·평가: `.venv\Scripts\python.exe scripts\quantize_evaluate_pamap2.py`; 벤치마크: `.venv\Scripts\python.exe scripts\benchmark_pamap2_windows.py`
 - 표와 그림: `.venv\Scripts\python.exe scripts\summarize_pamap2_results.py`
+Windows PAMAP2 sampled 1,000 inputs with replacement from 494 test windows (420 unique windows). The Mac run cycled through all 494 windows, so cross-OS timing is not an identical-input comparison.
+Worker logs are local execution records and are not included in Git; committed per-case JSON and CSV files contain the retained measurements.

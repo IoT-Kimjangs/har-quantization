@@ -107,6 +107,7 @@ def main():
         '- 표와 그림 재생성: `.venv\\Scripts\\python.exe scripts\\summarize_windows_results.py`',
         '- 전체 조건은 [실험 규약](../../docs/experiment-protocol.md), [모델 안내](../../docs/wisdm-model.md), [데이터 안내](../../docs/wisdm-data.md)을 참조',
     ]
+    md.append('Worker logs are local execution records and are not included in Git; committed per-case JSON and CSV files contain the retained measurements.')
     (output / 'windows-results.md').write_text('\n'.join(md) + '\n', encoding='utf-8')
 
     labels = [r['label'] for r in rows]

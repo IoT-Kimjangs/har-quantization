@@ -41,3 +41,4 @@ Keras 파일 크기는 `.keras`, 나머지는 각 `.tflite` 기준입니다. 압
 - 전체 요약: `summary.csv`, `summary.json`; 케이스별 로그와 JSON도 이 폴더에 보관
 - 표와 그림 재생성: `.venv\Scripts\python.exe scripts\summarize_windows_results.py`
 - 전체 조건은 [실험 규약](../../docs/experiment-protocol.md), [모델 안내](../../docs/wisdm-model.md), [데이터 안내](../../docs/wisdm-data.md)을 참조
+Worker logs are local execution records and are not included in Git; committed per-case JSON and CSV files contain the retained measurements.
