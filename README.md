@@ -28,6 +28,8 @@
 
 ## 시작하기
 
+[Mac·Windows 통합 분석](docs/platform-results-integration.md)에 같은 스레드 조건의 통합표·그래프와 고정 출처를 정리했습니다. 선행 실험 PR #7·#14·#17은 main에 반영됐습니다.
+
 WISDM 저장 모델은 [단계별 모델 확인](docs/wisdm-model.md), PAMAP2는 [데이터·모델 재현 안내](docs/pamap2-data.md)에 따라 준비합니다.
 
 [PAMAP2 Mac 실험 결과](docs/pamap2-macos-results.md)에 데이터·전처리 원본 대조, 논문 수치와의 차이, 변환·양자화·성능 측정을 정리했습니다.

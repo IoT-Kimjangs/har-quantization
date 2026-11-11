@@ -1,0 +1,1040 @@
+{
+  "config": {
+    "schema_version": 1,
+    "repository": "IoT-Kimjangs/har-quantization",
+    "sources": [
+      {
+        "dataset": "wisdm",
+        "platform": "macos",
+        "pr": 7,
+        "commit": "2f2b6c04089da5bcd96ccaddbe15251e2253e942",
+        "evaluation": "results/2026-11-05-macos-wisdm-fp32",
+        "quantization": "results/2026-11-10-macos-wisdm-quantization",
+        "benchmark": "results/2026-11-10-macos-wisdm-benchmark"
+      },
+      {
+        "dataset": "pamap2",
+        "platform": "macos",
+        "pr": 14,
+        "commit": "edee959d239bf696832f869f6b523a579a0eead1",
+        "quantization": "results/2026-11-10-macos-pamap2-models",
+        "benchmark": "results/2026-11-10-macos-pamap2-benchmark"
+      },
+      {
+        "dataset": "wisdm",
+        "platform": "windows",
+        "pr": 17,
+        "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+        "evaluation": "results/2026-11-10-windows-wisdm-fp32",
+        "quantization": "results/2026-11-10-windows-wisdm-quantization",
+        "benchmark": "results/2026-11-10-windows-wisdm-benchmark-final"
+      },
+      {
+        "dataset": "pamap2",
+        "platform": "windows",
+        "pr": 17,
+        "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+        "evaluation": "results/2026-11-10-windows-pamap2-fp32",
+        "quantization": "results/2026-11-10-windows-pamap2-quantization",
+        "benchmark": "results/2026-11-10-windows-pamap2-benchmark-final"
+      }
+    ]
+  },
+  "measurements": [
+    {
+      "dataset": "wisdm",
+      "platform": "macos",
+      "commit": "2f2b6c04089da5bcd96ccaddbe15251e2253e942",
+      "pr": 7,
+      "test_windows": 5358,
+      "unique_timed_test_windows": 1000,
+      "input_order_sha256": "347fb5582b9f535ce7f65fa8e1af10701f55e5547cd3daacf32f5cffcad86b6f",
+      "input_order_encoding": "test indices, little-endian int64",
+      "evaluation_artifacts": {
+        "X_test_s.npy": "10f4a6111ad2a4a1a267c9290e36aede76b552b9fb2bbfd788aabc00d7dae8f2",
+        "y_test.npy": "6ad104258cb8c1aa8c7d2f5c63fffa257630cd4cdb56cbdd09dca4b32fb08fdc",
+        "test_window_ids.npy": "a276e84dce06432d02e59ba34369982fe959b43ca33b299469747c33a85d7ed4"
+      },
+      "environment": {
+        "platform": "macOS-26.6.2-arm64-arm-64bit",
+        "architecture": "arm64",
+        "python": "3.12.14",
+        "logical_cpu_count": 8,
+        "power_at_start": "Now drawing from 'AC Power'; 72%; discharging; 5:42 remaining present: true",
+        "packages": {
+          "tensorflow": "2.21.0",
+          "keras": "3.13.2",
+          "ai-edge-litert": "2.3.0",
+          "numpy": "2.5.4",
+          "psutil": "7.2.2"
+        },
+        "plan": [
+          {
+            "variant": "tflite_int8_dynamic",
+            "thread_mode": "default"
+          },
+          {
+            "variant": "tflite_fp16",
+            "thread_mode": "default"
+          },
+          {
+            "variant": "keras_predict",
+            "thread_mode": "1"
+          },
+          {
+            "variant": "tflite_fp32",
+            "thread_mode": "default"
+          },
+          {
+            "variant": "tflite_int8_full",
+            "thread_mode": "1"
+          },
+          {
+            "variant": "tflite_fp32",
+            "thread_mode": "1"
+          },
+          {
+            "variant": "keras_direct",
+            "thread_mode": "1"
+          },
+          {
+            "variant": "tflite_int8_full",
+            "thread_mode": "default"
+          },
+          {
+            "variant": "tflite_int8_dynamic",
+            "thread_mode": "1"
+          },
+          {
+            "variant": "keras_direct",
+            "thread_mode": "default"
+          },
+          {
+            "variant": "tflite_fp16",
+            "thread_mode": "1"
+          },
+          {
+            "variant": "keras_predict",
+            "thread_mode": "default"
+          }
+        ],
+        "seed": 42,
+        "input_sha256": "10f4a6111ad2a4a1a267c9290e36aede76b552b9fb2bbfd788aabc00d7dae8f2",
+        "note": "Background applications and CPU frequency were not controlled; CPU brand/memory sysctl access was unavailable."
+      }
+    },
+    {
+      "dataset": "pamap2",
+      "platform": "macos",
+      "commit": "edee959d239bf696832f869f6b523a579a0eead1",
+      "pr": 14,
+      "test_windows": 494,
+      "unique_timed_test_windows": 494,
+      "input_order_sha256": "936ac542b43ed4af059ebc0dae8e9078c06ab4e5275c582495b82a8ed88f4d98",
+      "input_order_encoding": "test indices, little-endian int64",
+      "evaluation_artifacts": {
+        "X_test_s.npy": "aa381e92c9a56776e0ccfe634c952dec5872aff288623b2b6fea8baf88c76381",
+        "y_test.npy": "77f163042894de1ac30e6c2e42e2b7ef5f413d8d8dc7db4ec4d27610a5fc6453",
+        "test_window_ids.npy": "043c2fd9a9824164166292d8fc2f1894939f7a002ea236c756e45f4ef58b18c6"
+      },
+      "environment": {
+        "platform": "macOS-26.6.2-arm64-arm-64bit",
+        "architecture": "arm64",
+        "python": "3.12.14",
+        "logical_cpu_count": 8,
+        "power_at_start": "Now drawing from 'AC Power'; 62%; discharging; 4:20 remaining present: true",
+        "packages": {
+          "tensorflow": "2.21.0",
+          "keras": "3.13.2",
+          "ai-edge-litert": "2.3.0",
+          "numpy": "2.5.4",
+          "psutil": "7.2.2"
+        },
+        "plan": [
+          {
+            "variant": "tflite_int8_dynamic",
+            "thread_mode": "default"
+          },
+          {
+            "variant": "tflite_fp16",
+            "thread_mode": "default"
+          },
+          {
+            "variant": "keras_predict",
+            "thread_mode": "1"
+          },
+          {
+            "variant": "tflite_fp32",
+            "thread_mode": "default"
+          },
+          {
+            "variant": "tflite_int8_full",
+            "thread_mode": "1"
+          },
+          {
+            "variant": "tflite_fp32",
+            "thread_mode": "1"
+          },
+          {
+            "variant": "keras_direct",
+            "thread_mode": "1"
+          },
+          {
+            "variant": "tflite_int8_full",
+            "thread_mode": "default"
+          },
+          {
+            "variant": "tflite_int8_dynamic",
+            "thread_mode": "1"
+          },
+          {
+            "variant": "keras_direct",
+            "thread_mode": "default"
+          },
+          {
+            "variant": "tflite_fp16",
+            "thread_mode": "1"
+          },
+          {
+            "variant": "keras_predict",
+            "thread_mode": "default"
+          }
+        ],
+        "seed": 42,
+        "input_sha256": "aa381e92c9a56776e0ccfe634c952dec5872aff288623b2b6fea8baf88c76381",
+        "note": "Background applications and CPU frequency were not controlled; CPU brand/memory sysctl access was unavailable."
+      }
+    },
+    {
+      "dataset": "wisdm",
+      "platform": "windows",
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "pr": 17,
+      "test_windows": 5358,
+      "unique_timed_test_windows": 1000,
+      "input_order_sha256": "347fb5582b9f535ce7f65fa8e1af10701f55e5547cd3daacf32f5cffcad86b6f",
+      "input_order_encoding": "test indices, little-endian int64",
+      "evaluation_artifacts": {
+        "X_test_s.npy": "10f4a6111ad2a4a1a267c9290e36aede76b552b9fb2bbfd788aabc00d7dae8f2",
+        "y_test.npy": "6ad104258cb8c1aa8c7d2f5c63fffa257630cd4cdb56cbdd09dca4b32fb08fdc",
+        "test_window_ids.npy": "a276e84dce06432d02e59ba34369982fe959b43ca33b299469747c33a85d7ed4"
+      },
+      "environment": {
+        "platform": "Windows-11-10.0.26200-SP0",
+        "architecture": "AMD64",
+        "python": "3.12.10",
+        "logical_cpu_count": 8,
+        "packages": {
+          "tensorflow": "2.21.0",
+          "keras": "3.13.2",
+          "ai-edge-litert": "2.3.0",
+          "numpy": "2.5.4",
+          "psutil": "7.2.2"
+        },
+        "plan": [
+          {
+            "variant": "tflite_int8_dynamic",
+            "thread_mode": "default"
+          },
+          {
+            "variant": "tflite_fp16",
+            "thread_mode": "default"
+          },
+          {
+            "variant": "keras_predict",
+            "thread_mode": "1"
+          },
+          {
+            "variant": "tflite_fp32",
+            "thread_mode": "default"
+          },
+          {
+            "variant": "tflite_int8_full",
+            "thread_mode": "1"
+          },
+          {
+            "variant": "tflite_fp32",
+            "thread_mode": "1"
+          },
+          {
+            "variant": "keras_direct",
+            "thread_mode": "1"
+          },
+          {
+            "variant": "tflite_int8_full",
+            "thread_mode": "default"
+          },
+          {
+            "variant": "tflite_int8_dynamic",
+            "thread_mode": "1"
+          },
+          {
+            "variant": "keras_direct",
+            "thread_mode": "default"
+          },
+          {
+            "variant": "tflite_fp16",
+            "thread_mode": "1"
+          },
+          {
+            "variant": "keras_predict",
+            "thread_mode": "default"
+          }
+        ],
+        "seed": 42,
+        "input_sha256": "10f4a6111ad2a4a1a267c9290e36aede76b552b9fb2bbfd788aabc00d7dae8f2",
+        "power_plan": "전원 구성표 GUID: ab6534a3-bc02-4c44-94d1-a8535b2eb070  (SAMSUNG MODE)",
+        "note": "Windows CPU run; background applications, CPU frequency and thermal state were not controlled.",
+        "cpu": "Intel64 Family 6 Model 140 Stepping 1, GenuineIntel",
+        "ram_gb": 15.68
+      }
+    },
+    {
+      "dataset": "pamap2",
+      "platform": "windows",
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "pr": 17,
+      "test_windows": 494,
+      "unique_timed_test_windows": 420,
+      "input_order_sha256": "00c6810123f56ccacd2684cc18c265bd3287dea3873422e1bd29378bda1afef9",
+      "input_order_encoding": "test indices, little-endian int64",
+      "evaluation_artifacts": {
+        "X_test_s.npy": "aa381e92c9a56776e0ccfe634c952dec5872aff288623b2b6fea8baf88c76381",
+        "y_test.npy": "77f163042894de1ac30e6c2e42e2b7ef5f413d8d8dc7db4ec4d27610a5fc6453",
+        "test_window_ids.npy": "043c2fd9a9824164166292d8fc2f1894939f7a002ea236c756e45f4ef58b18c6"
+      },
+      "environment": {
+        "platform": "Windows-11-10.0.26200-SP0",
+        "architecture": "AMD64",
+        "python": "3.12.10",
+        "cpu": "Intel64 Family 6 Model 140 Stepping 1, GenuineIntel",
+        "ram_gb": 15.68,
+        "logical_cpu_count": 8,
+        "packages": {
+          "tensorflow": "2.21.0",
+          "keras": "3.13.2",
+          "ai-edge-litert": "2.3.0",
+          "numpy": "2.5.4",
+          "psutil": "7.2.2"
+        },
+        "power_plan": "전원 구성표 GUID: ab6534a3-bc02-4c44-94d1-a8535b2eb070  (SAMSUNG MODE)",
+        "seed": 42,
+        "measurement_iterations": 1000,
+        "warmup_iterations": 50,
+        "test_windows": 494,
+        "sampling": "seeded test-window sample; replacement when population < 1000",
+        "note": "CPU run; background applications, CPU frequency and thermal state were not controlled."
+      }
+    }
+  ],
+  "artifacts": [
+    {
+      "commit": "2f2b6c04089da5bcd96ccaddbe15251e2253e942",
+      "path": "results/2026-11-05-macos-wisdm-fp32/metrics.json",
+      "sha256": "f61fc1bd72958b612d2e2acfcdca6ca0ad69707dc5e7afde3ef4b29fb6de1f53",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/2f2b6c04089da5bcd96ccaddbe15251e2253e942/results/2026-11-05-macos-wisdm-fp32/metrics.json"
+    },
+    {
+      "commit": "2f2b6c04089da5bcd96ccaddbe15251e2253e942",
+      "path": "results/2026-11-05-macos-wisdm-fp32/predictions.csv",
+      "sha256": "756396e07af18f68ea4eac205a246d7dc817ef2ba95ab1a1ba347533ea9bc32f",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/2f2b6c04089da5bcd96ccaddbe15251e2253e942/results/2026-11-05-macos-wisdm-fp32/predictions.csv"
+    },
+    {
+      "commit": "2f2b6c04089da5bcd96ccaddbe15251e2253e942",
+      "path": "results/2026-11-10-macos-wisdm-benchmark/environment.json",
+      "sha256": "4c301c2239fae66208ba04788ba69fa342169ab5d824cea2e2e2249d118bbda5",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/2f2b6c04089da5bcd96ccaddbe15251e2253e942/results/2026-11-10-macos-wisdm-benchmark/environment.json"
+    },
+    {
+      "commit": "2f2b6c04089da5bcd96ccaddbe15251e2253e942",
+      "path": "results/2026-11-10-macos-wisdm-benchmark/keras_direct-1.csv",
+      "sha256": "5f7a1e9011fe48224912e53f4387a9b9c7575672d9e7647839026f85b0b9913b",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/2f2b6c04089da5bcd96ccaddbe15251e2253e942/results/2026-11-10-macos-wisdm-benchmark/keras_direct-1.csv"
+    },
+    {
+      "commit": "2f2b6c04089da5bcd96ccaddbe15251e2253e942",
+      "path": "results/2026-11-10-macos-wisdm-benchmark/keras_direct-1.json",
+      "sha256": "e193d3f9ea79a710426d1cb8510ea917633f519f4b5b5fdbf4cf443c870aacfc",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/2f2b6c04089da5bcd96ccaddbe15251e2253e942/results/2026-11-10-macos-wisdm-benchmark/keras_direct-1.json"
+    },
+    {
+      "commit": "2f2b6c04089da5bcd96ccaddbe15251e2253e942",
+      "path": "results/2026-11-10-macos-wisdm-benchmark/keras_direct-default.csv",
+      "sha256": "be04db7951355aeb0582e6611609ecbd3e927ab26f2215573cb2ca9175f794bb",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/2f2b6c04089da5bcd96ccaddbe15251e2253e942/results/2026-11-10-macos-wisdm-benchmark/keras_direct-default.csv"
+    },
+    {
+      "commit": "2f2b6c04089da5bcd96ccaddbe15251e2253e942",
+      "path": "results/2026-11-10-macos-wisdm-benchmark/keras_direct-default.json",
+      "sha256": "bae8f4bda800086e3e9d86457389e526d1be898af2f133de1474372394de2a42",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/2f2b6c04089da5bcd96ccaddbe15251e2253e942/results/2026-11-10-macos-wisdm-benchmark/keras_direct-default.json"
+    },
+    {
+      "commit": "2f2b6c04089da5bcd96ccaddbe15251e2253e942",
+      "path": "results/2026-11-10-macos-wisdm-benchmark/keras_predict-1.csv",
+      "sha256": "830ebcaaec0227c6a71463cbc339a8821a93f0dae75de51170ea1dc4fc2c161e",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/2f2b6c04089da5bcd96ccaddbe15251e2253e942/results/2026-11-10-macos-wisdm-benchmark/keras_predict-1.csv"
+    },
+    {
+      "commit": "2f2b6c04089da5bcd96ccaddbe15251e2253e942",
+      "path": "results/2026-11-10-macos-wisdm-benchmark/keras_predict-1.json",
+      "sha256": "d95c1c09f40728900e2e513a0ad4295b3efd19470011b2fd9eeea22bb1bd2b0f",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/2f2b6c04089da5bcd96ccaddbe15251e2253e942/results/2026-11-10-macos-wisdm-benchmark/keras_predict-1.json"
+    },
+    {
+      "commit": "2f2b6c04089da5bcd96ccaddbe15251e2253e942",
+      "path": "results/2026-11-10-macos-wisdm-benchmark/keras_predict-default.csv",
+      "sha256": "cdad8f9af0df3c61c6ce5fc7fcb73e3e6cdcc39e120e1984efe3c9428244024a",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/2f2b6c04089da5bcd96ccaddbe15251e2253e942/results/2026-11-10-macos-wisdm-benchmark/keras_predict-default.csv"
+    },
+    {
+      "commit": "2f2b6c04089da5bcd96ccaddbe15251e2253e942",
+      "path": "results/2026-11-10-macos-wisdm-benchmark/keras_predict-default.json",
+      "sha256": "662f446dc6e52f2816c09ecf4726fdef23470ca4a03efa1a977c1c4e10e7bac5",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/2f2b6c04089da5bcd96ccaddbe15251e2253e942/results/2026-11-10-macos-wisdm-benchmark/keras_predict-default.json"
+    },
+    {
+      "commit": "2f2b6c04089da5bcd96ccaddbe15251e2253e942",
+      "path": "results/2026-11-10-macos-wisdm-benchmark/summary.json",
+      "sha256": "b9a91fa4710e1b97d0bd517664af6e7151b3eb244a9a5ce64c7273c0a22c18c7",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/2f2b6c04089da5bcd96ccaddbe15251e2253e942/results/2026-11-10-macos-wisdm-benchmark/summary.json"
+    },
+    {
+      "commit": "2f2b6c04089da5bcd96ccaddbe15251e2253e942",
+      "path": "results/2026-11-10-macos-wisdm-benchmark/tflite_fp16-1.csv",
+      "sha256": "2d0db70039e113805577431265b2aff0750f426762783d7f786c5a5a2195f581",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/2f2b6c04089da5bcd96ccaddbe15251e2253e942/results/2026-11-10-macos-wisdm-benchmark/tflite_fp16-1.csv"
+    },
+    {
+      "commit": "2f2b6c04089da5bcd96ccaddbe15251e2253e942",
+      "path": "results/2026-11-10-macos-wisdm-benchmark/tflite_fp16-1.json",
+      "sha256": "cf8ea68361428ab600c6cc8fc5ca721d9bd857849764c6a43f5e82edcda23a25",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/2f2b6c04089da5bcd96ccaddbe15251e2253e942/results/2026-11-10-macos-wisdm-benchmark/tflite_fp16-1.json"
+    },
+    {
+      "commit": "2f2b6c04089da5bcd96ccaddbe15251e2253e942",
+      "path": "results/2026-11-10-macos-wisdm-benchmark/tflite_fp16-default.csv",
+      "sha256": "d1ae18736216026331a3f067c7cc998263d74d632ca8509ff73ab8dae5c8f202",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/2f2b6c04089da5bcd96ccaddbe15251e2253e942/results/2026-11-10-macos-wisdm-benchmark/tflite_fp16-default.csv"
+    },
+    {
+      "commit": "2f2b6c04089da5bcd96ccaddbe15251e2253e942",
+      "path": "results/2026-11-10-macos-wisdm-benchmark/tflite_fp16-default.json",
+      "sha256": "5aefce697e28b19186fd9360d526a36f491adbfa43a5d1b85141ebfee09b91fe",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/2f2b6c04089da5bcd96ccaddbe15251e2253e942/results/2026-11-10-macos-wisdm-benchmark/tflite_fp16-default.json"
+    },
+    {
+      "commit": "2f2b6c04089da5bcd96ccaddbe15251e2253e942",
+      "path": "results/2026-11-10-macos-wisdm-benchmark/tflite_fp32-1.csv",
+      "sha256": "ef754de09b3a96c23af3007d75b0403014c927fa0d0a790352e2816d7af66793",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/2f2b6c04089da5bcd96ccaddbe15251e2253e942/results/2026-11-10-macos-wisdm-benchmark/tflite_fp32-1.csv"
+    },
+    {
+      "commit": "2f2b6c04089da5bcd96ccaddbe15251e2253e942",
+      "path": "results/2026-11-10-macos-wisdm-benchmark/tflite_fp32-1.json",
+      "sha256": "94f29b01cb487df3cee26efa286250c99f2311710c9721c25547fbcaea0a9de8",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/2f2b6c04089da5bcd96ccaddbe15251e2253e942/results/2026-11-10-macos-wisdm-benchmark/tflite_fp32-1.json"
+    },
+    {
+      "commit": "2f2b6c04089da5bcd96ccaddbe15251e2253e942",
+      "path": "results/2026-11-10-macos-wisdm-benchmark/tflite_fp32-default.csv",
+      "sha256": "326a874b66eaddf3c839e597bd092d2382dfcd2301b85f1cb5478c6e9528b642",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/2f2b6c04089da5bcd96ccaddbe15251e2253e942/results/2026-11-10-macos-wisdm-benchmark/tflite_fp32-default.csv"
+    },
+    {
+      "commit": "2f2b6c04089da5bcd96ccaddbe15251e2253e942",
+      "path": "results/2026-11-10-macos-wisdm-benchmark/tflite_fp32-default.json",
+      "sha256": "0b53f08f2e069925e122855b5d8c115b81020c89e651a109ab9a873a5c99cbce",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/2f2b6c04089da5bcd96ccaddbe15251e2253e942/results/2026-11-10-macos-wisdm-benchmark/tflite_fp32-default.json"
+    },
+    {
+      "commit": "2f2b6c04089da5bcd96ccaddbe15251e2253e942",
+      "path": "results/2026-11-10-macos-wisdm-benchmark/tflite_int8_dynamic-1.csv",
+      "sha256": "25accd44a481ecc8058b7dddb6e7837421b069d4be787cf653c003a23e1c9378",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/2f2b6c04089da5bcd96ccaddbe15251e2253e942/results/2026-11-10-macos-wisdm-benchmark/tflite_int8_dynamic-1.csv"
+    },
+    {
+      "commit": "2f2b6c04089da5bcd96ccaddbe15251e2253e942",
+      "path": "results/2026-11-10-macos-wisdm-benchmark/tflite_int8_dynamic-1.json",
+      "sha256": "e52b297c043e08d2c3b474e53202376085a03f44e8f4cae4461462eb7d223810",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/2f2b6c04089da5bcd96ccaddbe15251e2253e942/results/2026-11-10-macos-wisdm-benchmark/tflite_int8_dynamic-1.json"
+    },
+    {
+      "commit": "2f2b6c04089da5bcd96ccaddbe15251e2253e942",
+      "path": "results/2026-11-10-macos-wisdm-benchmark/tflite_int8_dynamic-default.csv",
+      "sha256": "f9fc0952e218836ef91cbf28a63d0ec7ddc5b9b9920d3913862731256f42781e",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/2f2b6c04089da5bcd96ccaddbe15251e2253e942/results/2026-11-10-macos-wisdm-benchmark/tflite_int8_dynamic-default.csv"
+    },
+    {
+      "commit": "2f2b6c04089da5bcd96ccaddbe15251e2253e942",
+      "path": "results/2026-11-10-macos-wisdm-benchmark/tflite_int8_dynamic-default.json",
+      "sha256": "39503a21c0a686e76ded4089eb56274d8d94b8295b3c249ce0743d9c56a383c6",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/2f2b6c04089da5bcd96ccaddbe15251e2253e942/results/2026-11-10-macos-wisdm-benchmark/tflite_int8_dynamic-default.json"
+    },
+    {
+      "commit": "2f2b6c04089da5bcd96ccaddbe15251e2253e942",
+      "path": "results/2026-11-10-macos-wisdm-benchmark/tflite_int8_full-1.csv",
+      "sha256": "4aa8474291886271242ae0068742e1be9b2a7f649e0d58f8e62830bbc6ff06bd",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/2f2b6c04089da5bcd96ccaddbe15251e2253e942/results/2026-11-10-macos-wisdm-benchmark/tflite_int8_full-1.csv"
+    },
+    {
+      "commit": "2f2b6c04089da5bcd96ccaddbe15251e2253e942",
+      "path": "results/2026-11-10-macos-wisdm-benchmark/tflite_int8_full-1.json",
+      "sha256": "873a115568f3c05926c58e9868c025b4b88f4470f58b09c0bc3de8f55bc42f2d",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/2f2b6c04089da5bcd96ccaddbe15251e2253e942/results/2026-11-10-macos-wisdm-benchmark/tflite_int8_full-1.json"
+    },
+    {
+      "commit": "2f2b6c04089da5bcd96ccaddbe15251e2253e942",
+      "path": "results/2026-11-10-macos-wisdm-benchmark/tflite_int8_full-default.csv",
+      "sha256": "705cd1a4e39d81e7aff33426e53bb75869091b5646b533501e64d1f21ddf51ca",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/2f2b6c04089da5bcd96ccaddbe15251e2253e942/results/2026-11-10-macos-wisdm-benchmark/tflite_int8_full-default.csv"
+    },
+    {
+      "commit": "2f2b6c04089da5bcd96ccaddbe15251e2253e942",
+      "path": "results/2026-11-10-macos-wisdm-benchmark/tflite_int8_full-default.json",
+      "sha256": "80a2bac14d9da55c512a53b8c3a3f93bb106ec2f36130b0f5b827296d95c5bf2",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/2f2b6c04089da5bcd96ccaddbe15251e2253e942/results/2026-11-10-macos-wisdm-benchmark/tflite_int8_full-default.json"
+    },
+    {
+      "commit": "2f2b6c04089da5bcd96ccaddbe15251e2253e942",
+      "path": "results/2026-11-10-macos-wisdm-quantization/metrics.json",
+      "sha256": "1001a59de0c9057fee8ec1c52097df5fa80157b973313f2b5bc278480e8f80d3",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/2f2b6c04089da5bcd96ccaddbe15251e2253e942/results/2026-11-10-macos-wisdm-quantization/metrics.json"
+    },
+    {
+      "commit": "2f2b6c04089da5bcd96ccaddbe15251e2253e942",
+      "path": "results/2026-11-10-macos-wisdm-quantization/predictions.csv",
+      "sha256": "f6dd13f72ce6f9db5925a500f5ad8616303d1dab847b51337374db3b41368bf8",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/2f2b6c04089da5bcd96ccaddbe15251e2253e942/results/2026-11-10-macos-wisdm-quantization/predictions.csv"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-pamap2-benchmark-final/environment.json",
+      "sha256": "f80de6f80303cb7d1f3c64c7c9ccb3c6dd40f2f1173a771629a52bb29ab1b500",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-pamap2-benchmark-final/environment.json"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-pamap2-benchmark-final/keras_direct-1.csv",
+      "sha256": "3e8893f81ef8160b968acfe2e9a9bea54c8f1fca338398de570a61ee570ab733",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-pamap2-benchmark-final/keras_direct-1.csv"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-pamap2-benchmark-final/keras_direct-1.json",
+      "sha256": "455748d09522c4c04ba979357f912ff6d772ab0eb9e0f6d97af9fe1cf3da590e",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-pamap2-benchmark-final/keras_direct-1.json"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-pamap2-benchmark-final/keras_direct-default.csv",
+      "sha256": "12fba74f7ea6dad6cd632dffed813b6f66c9c7cca939dc7e6857c0c5497a496c",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-pamap2-benchmark-final/keras_direct-default.csv"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-pamap2-benchmark-final/keras_direct-default.json",
+      "sha256": "c94e217107b1329ade919a19491ef79790a554ab93a05fdc2a94db288a7322ae",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-pamap2-benchmark-final/keras_direct-default.json"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-pamap2-benchmark-final/keras_predict-1.csv",
+      "sha256": "42a5f6ba98e7a2b7600f38aecb65726c21ba1170b0bb6fc8b1f6d6ba8de10ee6",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-pamap2-benchmark-final/keras_predict-1.csv"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-pamap2-benchmark-final/keras_predict-1.json",
+      "sha256": "6713f4256292e68e3041d5f85606af3b2ff53e21d34c5adf7656614d70eeffd1",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-pamap2-benchmark-final/keras_predict-1.json"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-pamap2-benchmark-final/keras_predict-default.csv",
+      "sha256": "5f5e99f606fd5208d23b2d27e09dc494c7ec8a14e9c004e4154d140e5796ece5",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-pamap2-benchmark-final/keras_predict-default.csv"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-pamap2-benchmark-final/keras_predict-default.json",
+      "sha256": "087fc1d6feab7db76a9840dec7eb813720ca5b538292accb5b9a573f2f38685f",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-pamap2-benchmark-final/keras_predict-default.json"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-pamap2-benchmark-final/summary.json",
+      "sha256": "c1e3b99160d76328130e970ed5ff1063f5c3afe2c4053460a9cfac750e91da12",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-pamap2-benchmark-final/summary.json"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-pamap2-benchmark-final/tflite_fp16-1.csv",
+      "sha256": "99167ecb3f9d369a7834caf4a76ca3905c05221a9f8e38321a9c9d9ed55fada0",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-pamap2-benchmark-final/tflite_fp16-1.csv"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-pamap2-benchmark-final/tflite_fp16-1.json",
+      "sha256": "72685c3a778d43a71701d0c66064703aad0aaa159602ab0c569b71f12f62c2cb",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-pamap2-benchmark-final/tflite_fp16-1.json"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-pamap2-benchmark-final/tflite_fp16-default.csv",
+      "sha256": "492ace03b488e747ad1a2601553201bbff0308bfce841387d547fa3b2c095641",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-pamap2-benchmark-final/tflite_fp16-default.csv"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-pamap2-benchmark-final/tflite_fp16-default.json",
+      "sha256": "10c1bf369bcb0635e48b5045d592fd7fd4dd6b89c80e31d0d85c00a9d1758a3c",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-pamap2-benchmark-final/tflite_fp16-default.json"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-pamap2-benchmark-final/tflite_fp32-1.csv",
+      "sha256": "212b14e7054d93aa0781b559533d3eac95b874ee48cd426bb47544e859232773",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-pamap2-benchmark-final/tflite_fp32-1.csv"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-pamap2-benchmark-final/tflite_fp32-1.json",
+      "sha256": "c63b430f3858c9d7016766c17a72ff8cd2d540fd8cef0bd2d662ac16279de5c3",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-pamap2-benchmark-final/tflite_fp32-1.json"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-pamap2-benchmark-final/tflite_fp32-default.csv",
+      "sha256": "4da15af56ef49c9740b00933080d9b14d644cc01c0b6b5014fddeb5f4c196a79",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-pamap2-benchmark-final/tflite_fp32-default.csv"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-pamap2-benchmark-final/tflite_fp32-default.json",
+      "sha256": "b7fc54e6db41ed01f58b317745864d5da06ffc8c6318ecea785db2792abe4e20",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-pamap2-benchmark-final/tflite_fp32-default.json"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-pamap2-benchmark-final/tflite_int8_dynamic-1.csv",
+      "sha256": "92453defe5c87bbb26818ed7ce27829bb95212e52473a729e9ae3dfc35a325ed",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-pamap2-benchmark-final/tflite_int8_dynamic-1.csv"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-pamap2-benchmark-final/tflite_int8_dynamic-1.json",
+      "sha256": "b2291862cbfb1f1943562560eaba0a7e075d1a8d1764e9ef46af6ba09e5e3b70",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-pamap2-benchmark-final/tflite_int8_dynamic-1.json"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-pamap2-benchmark-final/tflite_int8_dynamic-default.csv",
+      "sha256": "385bc1fec1802939ab8550d977a617ca88843c5bb48e1efbc292fbccb6f12039",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-pamap2-benchmark-final/tflite_int8_dynamic-default.csv"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-pamap2-benchmark-final/tflite_int8_dynamic-default.json",
+      "sha256": "7ed644585833557656f2d21b2164e4249f496f6180c406982989bea31abf5971",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-pamap2-benchmark-final/tflite_int8_dynamic-default.json"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-pamap2-benchmark-final/tflite_int8_full-1.csv",
+      "sha256": "3f86a1e445bcf136a6179832378354b4fee921f6b6a76bc4c01ede6f5e5aadc8",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-pamap2-benchmark-final/tflite_int8_full-1.csv"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-pamap2-benchmark-final/tflite_int8_full-1.json",
+      "sha256": "25ede3f372cf3f4813b8e2e404996237e1153ec26e9d43c9c40fb8ff01805a44",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-pamap2-benchmark-final/tflite_int8_full-1.json"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-pamap2-benchmark-final/tflite_int8_full-default.csv",
+      "sha256": "af1ac69edd15951b98aacb4accc2d0c7d223f05b54da91177a2adb29f7429ed9",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-pamap2-benchmark-final/tflite_int8_full-default.csv"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-pamap2-benchmark-final/tflite_int8_full-default.json",
+      "sha256": "676666afa84734626b4fd638a88c2ba01fe59a4ff29af59d28bd1cad42db6e2b",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-pamap2-benchmark-final/tflite_int8_full-default.json"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-pamap2-fp32/metrics.json",
+      "sha256": "7b03c1584bacf0e3bf02b3478f04a4a62ef0f1b5e5d8a67899b26c26afbe5a6b",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-pamap2-fp32/metrics.json"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-pamap2-fp32/predictions.csv",
+      "sha256": "c6a1b615b621fbbcc3e6e4d87680d56503be2ac114dd63ca9d37d799b1265616",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-pamap2-fp32/predictions.csv"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-pamap2-quantization/metrics.json",
+      "sha256": "4975d02f0a200ffd357b6895f793ee3cc00ebb1c9f3fc5690126e40101ee42b8",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-pamap2-quantization/metrics.json"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-pamap2-quantization/predictions.csv",
+      "sha256": "886b151b7dfc4b2f92de6d384f55512d3ee220bf206a273cec2f4a241a9d756a",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-pamap2-quantization/predictions.csv"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-wisdm-benchmark-final/environment.json",
+      "sha256": "7541bacd13853139eead8c1da007710e9f802330e0065f24fc83348d504bea50",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-wisdm-benchmark-final/environment.json"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-wisdm-benchmark-final/keras_direct-1.csv",
+      "sha256": "15d7f0d26bead655d4c191e4c35ffc43c0670fcf28ec8fb80fc2aeb9c1585ae3",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-wisdm-benchmark-final/keras_direct-1.csv"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-wisdm-benchmark-final/keras_direct-1.json",
+      "sha256": "f5467519a7eae8e30e2d41fc2a8300edd092a50db708e099f4dfb4fac894312f",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-wisdm-benchmark-final/keras_direct-1.json"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-wisdm-benchmark-final/keras_direct-default.csv",
+      "sha256": "5cff10ee1ee4381d64db3b22348a2752c571a445d59863f1272cb6f5b547fcb0",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-wisdm-benchmark-final/keras_direct-default.csv"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-wisdm-benchmark-final/keras_direct-default.json",
+      "sha256": "3bb75adae57f46d2ed6a833c54e0366e97fec4304466e8d70f93e3dbce9c051a",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-wisdm-benchmark-final/keras_direct-default.json"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-wisdm-benchmark-final/keras_predict-1.csv",
+      "sha256": "e6fddb5c0cce1ad1a8daf53882e8538fd951f884857664104cdf1a208093cf50",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-wisdm-benchmark-final/keras_predict-1.csv"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-wisdm-benchmark-final/keras_predict-1.json",
+      "sha256": "680ad9ececfd1bf01e305cd28aed5e2be24b4c24166e60d38eb77157ed2b6e51",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-wisdm-benchmark-final/keras_predict-1.json"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-wisdm-benchmark-final/keras_predict-default.csv",
+      "sha256": "7258474750f28decc189f7192bb26ca47091c1babab4bf32d6171ebcc28dee06",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-wisdm-benchmark-final/keras_predict-default.csv"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-wisdm-benchmark-final/keras_predict-default.json",
+      "sha256": "7c8dbcf8eea15f7d232d5f84b0aa8aa6472d2f7e0271378a74e7e3b7611be109",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-wisdm-benchmark-final/keras_predict-default.json"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-wisdm-benchmark-final/summary.json",
+      "sha256": "111fc7379c4c80730ae1339e80d1639eea581a78bb3ee66cf6cad1b111b6d1d0",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-wisdm-benchmark-final/summary.json"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-wisdm-benchmark-final/tflite_fp16-1.csv",
+      "sha256": "551c4467755ede34a195a73230e47b2fffd4b7fed554a3af382e8f54be5c3aa6",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-wisdm-benchmark-final/tflite_fp16-1.csv"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-wisdm-benchmark-final/tflite_fp16-1.json",
+      "sha256": "6378c39cb6561e0181f8d16256c89fd12d422e33e96a16d66fc0b423a6bc726a",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-wisdm-benchmark-final/tflite_fp16-1.json"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-wisdm-benchmark-final/tflite_fp16-default.csv",
+      "sha256": "e4493fe18476ea79754477902a745db5c63f1f3dc9a39c55bb6720d469820754",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-wisdm-benchmark-final/tflite_fp16-default.csv"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-wisdm-benchmark-final/tflite_fp16-default.json",
+      "sha256": "ca8bf9649b335523d7c5713b186c1694477b692b959d5de0a27e316105fb4a6c",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-wisdm-benchmark-final/tflite_fp16-default.json"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-wisdm-benchmark-final/tflite_fp32-1.csv",
+      "sha256": "8c6d0ac529d3876a641f484a3ca14f968dfddc7daa714ab52232a6394e59f77f",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-wisdm-benchmark-final/tflite_fp32-1.csv"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-wisdm-benchmark-final/tflite_fp32-1.json",
+      "sha256": "9267a3f20e6884b33e09b46f11955cb0b6cca40a6be49230b1e87c24917f0888",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-wisdm-benchmark-final/tflite_fp32-1.json"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-wisdm-benchmark-final/tflite_fp32-default.csv",
+      "sha256": "b3d0a408dc74ca106e03c6d3fb590aced43d4dd3188d54154374098f2ca01c6c",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-wisdm-benchmark-final/tflite_fp32-default.csv"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-wisdm-benchmark-final/tflite_fp32-default.json",
+      "sha256": "649de0998c92671cd3ba5b29f14c26867ac9d21268e32069deeef3e109fd9789",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-wisdm-benchmark-final/tflite_fp32-default.json"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-wisdm-benchmark-final/tflite_int8_dynamic-1.csv",
+      "sha256": "384135743e7f3db593e11dcea207b2f969c05d43d87facefdf444e95f28ce71a",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-wisdm-benchmark-final/tflite_int8_dynamic-1.csv"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-wisdm-benchmark-final/tflite_int8_dynamic-1.json",
+      "sha256": "7c5b290149c02a3b849d75774a4159bf8615b5c8999fe56f4822d63bfe9b2108",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-wisdm-benchmark-final/tflite_int8_dynamic-1.json"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-wisdm-benchmark-final/tflite_int8_dynamic-default.csv",
+      "sha256": "9f86daf33477704e82e8c19863e7bcbde534b46c98f63fc08ada8cbbd03d4b07",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-wisdm-benchmark-final/tflite_int8_dynamic-default.csv"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-wisdm-benchmark-final/tflite_int8_dynamic-default.json",
+      "sha256": "091b481499b351d0b2ad970647b15360ccec02fa1ef011ee70ca8ae536fa0c14",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-wisdm-benchmark-final/tflite_int8_dynamic-default.json"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-wisdm-benchmark-final/tflite_int8_full-1.csv",
+      "sha256": "add32e04114d3144fa24290f3a680b8a76ddbb757f50c0731f7d66f74e0083c7",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-wisdm-benchmark-final/tflite_int8_full-1.csv"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-wisdm-benchmark-final/tflite_int8_full-1.json",
+      "sha256": "6a58277b859e5a4ceda1f908c26ef24a31c998415796ea144373ec91353f4930",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-wisdm-benchmark-final/tflite_int8_full-1.json"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-wisdm-benchmark-final/tflite_int8_full-default.csv",
+      "sha256": "53d462b1673b8bbeb9c1f9f1cf3a7f841256afd9767c65ad87b58301cda4ad3a",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-wisdm-benchmark-final/tflite_int8_full-default.csv"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-wisdm-benchmark-final/tflite_int8_full-default.json",
+      "sha256": "473548159c19f6082b43398bf9d5d88fef54f35ac5c8b5df2c58195231332108",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-wisdm-benchmark-final/tflite_int8_full-default.json"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-wisdm-fp32/metrics.json",
+      "sha256": "9504d38e29818fb622deb338b6e6c994fece27cf438cf892aa339f605ad8283e",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-wisdm-fp32/metrics.json"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-wisdm-fp32/predictions.csv",
+      "sha256": "756396e07af18f68ea4eac205a246d7dc817ef2ba95ab1a1ba347533ea9bc32f",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-wisdm-fp32/predictions.csv"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-wisdm-quantization/metrics.json",
+      "sha256": "97091810257b10e3e71a84f4397f92a90d57a746c61e39a0c642cdad5b4a5033",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-wisdm-quantization/metrics.json"
+    },
+    {
+      "commit": "cb5d712b2773a4aced0c3893a13141c4687c1c67",
+      "path": "results/2026-11-10-windows-wisdm-quantization/predictions.csv",
+      "sha256": "f6dd13f72ce6f9db5925a500f5ad8616303d1dab847b51337374db3b41368bf8",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/cb5d712b2773a4aced0c3893a13141c4687c1c67/results/2026-11-10-windows-wisdm-quantization/predictions.csv"
+    },
+    {
+      "commit": "edee959d239bf696832f869f6b523a579a0eead1",
+      "path": "results/2026-11-10-macos-pamap2-benchmark/environment.json",
+      "sha256": "339ea08df508044025e481836d70ad4783758cea1cba6c11821989e04fea7a18",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/edee959d239bf696832f869f6b523a579a0eead1/results/2026-11-10-macos-pamap2-benchmark/environment.json"
+    },
+    {
+      "commit": "edee959d239bf696832f869f6b523a579a0eead1",
+      "path": "results/2026-11-10-macos-pamap2-benchmark/keras_direct-1.csv",
+      "sha256": "569c9652e62bc1138a82ac7742da67f5e1e131640d052d283a8a8579ac10e96b",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/edee959d239bf696832f869f6b523a579a0eead1/results/2026-11-10-macos-pamap2-benchmark/keras_direct-1.csv"
+    },
+    {
+      "commit": "edee959d239bf696832f869f6b523a579a0eead1",
+      "path": "results/2026-11-10-macos-pamap2-benchmark/keras_direct-1.json",
+      "sha256": "591611964ac9458b7ee7a9812c8062e81620267835971bbdfb351e18795284d2",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/edee959d239bf696832f869f6b523a579a0eead1/results/2026-11-10-macos-pamap2-benchmark/keras_direct-1.json"
+    },
+    {
+      "commit": "edee959d239bf696832f869f6b523a579a0eead1",
+      "path": "results/2026-11-10-macos-pamap2-benchmark/keras_direct-default.csv",
+      "sha256": "ab4757560aa14e0d6e9a15406f4569a8c9ad49dba952a3c35b93ee61b6456495",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/edee959d239bf696832f869f6b523a579a0eead1/results/2026-11-10-macos-pamap2-benchmark/keras_direct-default.csv"
+    },
+    {
+      "commit": "edee959d239bf696832f869f6b523a579a0eead1",
+      "path": "results/2026-11-10-macos-pamap2-benchmark/keras_direct-default.json",
+      "sha256": "e27bc4659a51c524329a668acd62faf7d7e0d0eb11cece2c7cc3997d9eee5b59",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/edee959d239bf696832f869f6b523a579a0eead1/results/2026-11-10-macos-pamap2-benchmark/keras_direct-default.json"
+    },
+    {
+      "commit": "edee959d239bf696832f869f6b523a579a0eead1",
+      "path": "results/2026-11-10-macos-pamap2-benchmark/keras_predict-1.csv",
+      "sha256": "b9625da465280c75bfc5f405306ed1b2a9095b512cc6b0648a0505da3abe219e",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/edee959d239bf696832f869f6b523a579a0eead1/results/2026-11-10-macos-pamap2-benchmark/keras_predict-1.csv"
+    },
+    {
+      "commit": "edee959d239bf696832f869f6b523a579a0eead1",
+      "path": "results/2026-11-10-macos-pamap2-benchmark/keras_predict-1.json",
+      "sha256": "946fc910ea6b9fae0ef012a5e3fd6875c8fc57cc81ef5d7c0db401100f671de3",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/edee959d239bf696832f869f6b523a579a0eead1/results/2026-11-10-macos-pamap2-benchmark/keras_predict-1.json"
+    },
+    {
+      "commit": "edee959d239bf696832f869f6b523a579a0eead1",
+      "path": "results/2026-11-10-macos-pamap2-benchmark/keras_predict-default.csv",
+      "sha256": "b7b794a0861f65e2c88e5ac1b03c38ba50ab652e1589eaa9593c7864b4316226",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/edee959d239bf696832f869f6b523a579a0eead1/results/2026-11-10-macos-pamap2-benchmark/keras_predict-default.csv"
+    },
+    {
+      "commit": "edee959d239bf696832f869f6b523a579a0eead1",
+      "path": "results/2026-11-10-macos-pamap2-benchmark/keras_predict-default.json",
+      "sha256": "7dca1cf3be19cda635af87be7f26e5a86af18b6746baa496073525b3b78f78ed",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/edee959d239bf696832f869f6b523a579a0eead1/results/2026-11-10-macos-pamap2-benchmark/keras_predict-default.json"
+    },
+    {
+      "commit": "edee959d239bf696832f869f6b523a579a0eead1",
+      "path": "results/2026-11-10-macos-pamap2-benchmark/summary.json",
+      "sha256": "8870c9020830d7fb8f89efff3091354a82f8d969fa1b8671311356bbfa1b045d",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/edee959d239bf696832f869f6b523a579a0eead1/results/2026-11-10-macos-pamap2-benchmark/summary.json"
+    },
+    {
+      "commit": "edee959d239bf696832f869f6b523a579a0eead1",
+      "path": "results/2026-11-10-macos-pamap2-benchmark/tflite_fp16-1.csv",
+      "sha256": "e4ae7d1eeadb62e6477db00c02756702e149fefe0b548b200bc971907ba52fe3",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/edee959d239bf696832f869f6b523a579a0eead1/results/2026-11-10-macos-pamap2-benchmark/tflite_fp16-1.csv"
+    },
+    {
+      "commit": "edee959d239bf696832f869f6b523a579a0eead1",
+      "path": "results/2026-11-10-macos-pamap2-benchmark/tflite_fp16-1.json",
+      "sha256": "0134bf7ba6091fcd2e522e86feff391720c3fde7e46dcfdb0d630391f2abc1d1",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/edee959d239bf696832f869f6b523a579a0eead1/results/2026-11-10-macos-pamap2-benchmark/tflite_fp16-1.json"
+    },
+    {
+      "commit": "edee959d239bf696832f869f6b523a579a0eead1",
+      "path": "results/2026-11-10-macos-pamap2-benchmark/tflite_fp16-default.csv",
+      "sha256": "ad213b84ac6b0cd022bcb797110a18fe7c1d4fe6ba3a8d8e1fa6cbec2de4e7b2",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/edee959d239bf696832f869f6b523a579a0eead1/results/2026-11-10-macos-pamap2-benchmark/tflite_fp16-default.csv"
+    },
+    {
+      "commit": "edee959d239bf696832f869f6b523a579a0eead1",
+      "path": "results/2026-11-10-macos-pamap2-benchmark/tflite_fp16-default.json",
+      "sha256": "3d82bcb6b2e46fc02071dc84c7ce819aca105b29da86f99d3d6212def5663a53",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/edee959d239bf696832f869f6b523a579a0eead1/results/2026-11-10-macos-pamap2-benchmark/tflite_fp16-default.json"
+    },
+    {
+      "commit": "edee959d239bf696832f869f6b523a579a0eead1",
+      "path": "results/2026-11-10-macos-pamap2-benchmark/tflite_fp32-1.csv",
+      "sha256": "a593ab19c8cb9b52c4134202490b4b1fd3d308cccf886bf3d58324ad53c4508a",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/edee959d239bf696832f869f6b523a579a0eead1/results/2026-11-10-macos-pamap2-benchmark/tflite_fp32-1.csv"
+    },
+    {
+      "commit": "edee959d239bf696832f869f6b523a579a0eead1",
+      "path": "results/2026-11-10-macos-pamap2-benchmark/tflite_fp32-1.json",
+      "sha256": "c33ccd9734f3a5f2a758de580141475b0a8fa7f7d40de8fdfbe0999009014e48",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/edee959d239bf696832f869f6b523a579a0eead1/results/2026-11-10-macos-pamap2-benchmark/tflite_fp32-1.json"
+    },
+    {
+      "commit": "edee959d239bf696832f869f6b523a579a0eead1",
+      "path": "results/2026-11-10-macos-pamap2-benchmark/tflite_fp32-default.csv",
+      "sha256": "c525600cb0be9404a7e9ca4d350f99c9516df9702568186ace40e1512169e637",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/edee959d239bf696832f869f6b523a579a0eead1/results/2026-11-10-macos-pamap2-benchmark/tflite_fp32-default.csv"
+    },
+    {
+      "commit": "edee959d239bf696832f869f6b523a579a0eead1",
+      "path": "results/2026-11-10-macos-pamap2-benchmark/tflite_fp32-default.json",
+      "sha256": "47a660f2470610bc7e69e194e4c9de2b60e6054238dda9180477605f2c45c700",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/edee959d239bf696832f869f6b523a579a0eead1/results/2026-11-10-macos-pamap2-benchmark/tflite_fp32-default.json"
+    },
+    {
+      "commit": "edee959d239bf696832f869f6b523a579a0eead1",
+      "path": "results/2026-11-10-macos-pamap2-benchmark/tflite_int8_dynamic-1.csv",
+      "sha256": "4e1627cf47e00466bf3f569398d28a66d01ac61456e6d26b6e239f42d827d6e4",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/edee959d239bf696832f869f6b523a579a0eead1/results/2026-11-10-macos-pamap2-benchmark/tflite_int8_dynamic-1.csv"
+    },
+    {
+      "commit": "edee959d239bf696832f869f6b523a579a0eead1",
+      "path": "results/2026-11-10-macos-pamap2-benchmark/tflite_int8_dynamic-1.json",
+      "sha256": "c7eee463443108d07da5894a23df84cc4c306ee21d3b4f9198bfcb07c62fa6e6",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/edee959d239bf696832f869f6b523a579a0eead1/results/2026-11-10-macos-pamap2-benchmark/tflite_int8_dynamic-1.json"
+    },
+    {
+      "commit": "edee959d239bf696832f869f6b523a579a0eead1",
+      "path": "results/2026-11-10-macos-pamap2-benchmark/tflite_int8_dynamic-default.csv",
+      "sha256": "ce28204904f41f425de1f7afe35d88f93c03219a2316a5c037046cddf562e314",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/edee959d239bf696832f869f6b523a579a0eead1/results/2026-11-10-macos-pamap2-benchmark/tflite_int8_dynamic-default.csv"
+    },
+    {
+      "commit": "edee959d239bf696832f869f6b523a579a0eead1",
+      "path": "results/2026-11-10-macos-pamap2-benchmark/tflite_int8_dynamic-default.json",
+      "sha256": "30e335df8b90646b13563a41fd18a2c434419d4d5ec0565df5e7c462cac85dd5",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/edee959d239bf696832f869f6b523a579a0eead1/results/2026-11-10-macos-pamap2-benchmark/tflite_int8_dynamic-default.json"
+    },
+    {
+      "commit": "edee959d239bf696832f869f6b523a579a0eead1",
+      "path": "results/2026-11-10-macos-pamap2-benchmark/tflite_int8_full-1.csv",
+      "sha256": "f72cb57c764d207dab124be98b8f6f182f960454404de00bba7f42b9ab7e024f",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/edee959d239bf696832f869f6b523a579a0eead1/results/2026-11-10-macos-pamap2-benchmark/tflite_int8_full-1.csv"
+    },
+    {
+      "commit": "edee959d239bf696832f869f6b523a579a0eead1",
+      "path": "results/2026-11-10-macos-pamap2-benchmark/tflite_int8_full-1.json",
+      "sha256": "768ca11bf162703258901ef459deb62767de56f12ce9ce224a8492b055a955a1",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/edee959d239bf696832f869f6b523a579a0eead1/results/2026-11-10-macos-pamap2-benchmark/tflite_int8_full-1.json"
+    },
+    {
+      "commit": "edee959d239bf696832f869f6b523a579a0eead1",
+      "path": "results/2026-11-10-macos-pamap2-benchmark/tflite_int8_full-default.csv",
+      "sha256": "1acdcdd7f306e337e7bb1483e1280b2cd8c3f0994736a3d8b85cb2248d596a5d",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/edee959d239bf696832f869f6b523a579a0eead1/results/2026-11-10-macos-pamap2-benchmark/tflite_int8_full-default.csv"
+    },
+    {
+      "commit": "edee959d239bf696832f869f6b523a579a0eead1",
+      "path": "results/2026-11-10-macos-pamap2-benchmark/tflite_int8_full-default.json",
+      "sha256": "c5c74ad4a750770b4f72c97b755cc7a1e34502b102bf39270e3a63cd2c067f93",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/edee959d239bf696832f869f6b523a579a0eead1/results/2026-11-10-macos-pamap2-benchmark/tflite_int8_full-default.json"
+    },
+    {
+      "commit": "edee959d239bf696832f869f6b523a579a0eead1",
+      "path": "results/2026-11-10-macos-pamap2-models/metrics.json",
+      "sha256": "c96c14d79d025057d37c6e780b7da12923a8d0118f8f76b5ee0bb7d9524685cd",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/edee959d239bf696832f869f6b523a579a0eead1/results/2026-11-10-macos-pamap2-models/metrics.json"
+    },
+    {
+      "commit": "edee959d239bf696832f869f6b523a579a0eead1",
+      "path": "results/2026-11-10-macos-pamap2-models/predictions.csv",
+      "sha256": "cbe18dbdd9a1139f24e26bfa19175c743526b33797b71862f8e89a1299d7c8d6",
+      "url": "https://github.com/IoT-Kimjangs/har-quantization/blob/edee959d239bf696832f869f6b523a579a0eead1/results/2026-11-10-macos-pamap2-models/predictions.csv"
+    }
+  ]
+}
