@@ -169,7 +169,7 @@ PAMAP2는 OS별 전처리·실행 경로가 다릅니다. 공식 ZIP과 모델�
 | PAMAP2 Mac | [전체 보고서와 원시 기록 링크](docs/pamap2-macos-results.md) |
 | Windows | [WISDM](results/2026-11-10-windows-wisdm-benchmark-final/windows-results.md) · [PAMAP2](results/2026-11-10-windows-pamap2-benchmark-final/pamap2-windows-results.md) · [환경 기록](results/environment/windows-amd64-2026-11-10.json) |
 | 두 플랫폼 통합 | [보고서·그래프](results/platform-integration-draft/report.md) · [집계 코드·검증 범위](docs/platform-results-integration.md) · [고정 출처](results/platform-integration-draft/sources.json) |
-| 확장 계획 (발표 후 진행) | [양자화 모델이 느려진 원인 분석](docs/extension-plan.md) |
+| 확장·응용 계획 (발표 후 진행) | [느려진 원인 분석·휴대폰 데이터 평가](docs/extension-plan.md) |
 
 모델·데이터 준비부터 양자화·측정까지의 실험 기록과 통합 분석을 main에 반영했습니다. 발표·보고서용 해석은 검토 중이며 최종 제출본으로 확정한 상태는 아닙니다. 변경 내용과 리뷰는 [Pull requests](https://github.com/IoT-Kimjangs/har-quantization/pulls)에서 확인합니다.
 
