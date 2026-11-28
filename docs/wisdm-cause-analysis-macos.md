@@ -80,9 +80,25 @@ TFLite 공식 측정 도구(`benchmark_model --enable_op_profiling`)는 Mac·Win
 - 가속을 끈 FP32에서 `SQUARED_DIFFERENCE` 4개는 0.004 ms였지만, INT8에서는 가속을 켜도 0.016 ms였습니다. 같은 연산이 INT8 기본 커널에서 약 4배 오래 걸립니다.
 - 도구 안에서는 INT8 입출력(입력을 정수로 바로 넣음)과 INT8 실수 입출력(모델 안에서 변환)의 차이가 0.7 µs뿐이었습니다. 1번 표에서 입출력 변환이 약 7.6 µs였던 것은 **Python(NumPy)으로 변환한 비용**이며, 변환 자체가 본질적으로 비싼 것은 아닙니다.
 
+### 5. PAMAP2에서도 같은 연산이 가속 밖에 있음
+
+같은 방법으로 PAMAP2 모델 4개를 측정했습니다. ([도구 출력](../results/2026-11-28-linux-arm64-vm-pamap2-op-profile/run-info.json))
+
+| 모델 | 가속 켬 (µs) | 가속 끔 (µs) |
+| --- | ---: | ---: |
+| TFLite FP32 | 221.7 | 371.8 |
+| FP16 | 221.8 | 371.5 |
+| 동적 INT8 | 102.4 | 272.9 |
+| INT8 입출력 | 161.5 | 498.3 |
+
+- 가속을 켠 INT8 입출력 모델에서 LayerNormalization의 `SQUARED_DIFFERENCE` 6개가 0.078 ms로 연산 시간의 약 54%를 차지했습니다. 같은 연산이 FP32에서는 가속을 꺼도 0.018 ms라, INT8 기본 커널에서 약 4배 오래 걸리는 점이 WISDM과 같습니다. `SOFTMAX`·`BATCH_MATMUL`도 가속 밖에 있었습니다.
+- 다만 PAMAP2는 입력(200×19)과 Fully Connected 계산이 커서, FP32에서는 Fully Connected가 시간의 약 81%를 차지합니다. INT8에서 이 부분이 크게 줄어(0.174 → 0.027 ms) 느린 LayerNormalization을 상쇄하므로, 이 도구에서는 INT8 입출력이 FP32보다 빨랐습니다.
+- 즉 **INT8 입출력이 빨라질지 느려질지는 "INT8로 크게 줄어드는 행렬 계산"과 "INT8에서 느려지는 LayerNormalization 계산"의 비중에 달려 있습니다.** 계산량이 작은 WISDM 모델에서는 느려지는 쪽이 이겼습니다.
+- Python으로 잰 기존 Mac 결과(PAMAP2 INT8 입출력 1.03배)와 방향이 다른 것은 Python 입력 변환 비용(입력이 WISDM의 약 16배 크기)과 운영체제 차이 때문일 수 있으며, 아직 나눠 확인하지 않았습니다.
+
 ## 지금까지의 해석 (Mac)
 
-- INT8 입출력이 FP32보다 느린 주된 이유는 **Transformer의 LayerNormalization·어텐션 일부 연산이 INT8에서 CPU 가속(XNNPACK)을 받지 못하고 느린 기본 커널로 실행되기 때문**으로 보입니다. 특히 LayerNormalization의 `SQUARED_DIFFERENCE`가 가장 큽니다.
+- INT8 입출력이 FP32보다 느린 주된 이유는 **Transformer의 LayerNormalization·어텐션 일부 연산이 (WISDM·PAMAP2 모두) INT8에서 CPU 가속(XNNPACK)을 받지 못하고 느린 기본 커널로 실행되기 때문**으로 보입니다. 특히 LayerNormalization의 `SQUARED_DIFFERENCE`가 가장 큽니다.
 - Python 측정에서 보인 입출력 변환 비용(차이의 약 3분의 1)은 Python으로 변환한 구현 비용입니다. 실제 기기에서 입력을 정수로 바로 받으면 이 부분은 거의 없어질 수 있습니다.
 - 가속을 끄면 모든 모델이 비슷하게 느려지므로 "가속을 못 받는다"만으로는 부족하고, **INT8 기본 커널이 이 연산들에서 FP32보다 느린 것**이 함께 작용합니다.
 - 한계: 연산별 시간은 Mac이 아닌 리눅스 VM 결과이고 도구 표시 단위가 1 µs라 작은 연산은 0으로 보입니다. Mac 차이(1.54배)는 Windows(3.94배)보다 작으므로 Windows에서 같은 연산이 더 느린지 확인해야 합니다.
@@ -91,7 +107,7 @@ TFLite 공식 측정 도구(`benchmark_model --enable_op_profiling`)는 Mac·Win
 
 1. **Windows 실행 (장은성):** 같은 두 스크립트를 Windows 모델·기록으로 실행합니다. 3.94배 차이와 FP16 스레드 역전이 입출력 변환·가속 켜고 끄기로 어떻게 나뉘는지가 핵심입니다.
 2. **Windows 연산별 시간:** 공식 Windows 도구가 없으므로, Windows에서 WSL2(리눅스 x86-64)로 `linux_x86-64_benchmark_model`을 실행하는 방법을 검토합니다.
-3. **PAMAP2 확인:** 같은 연산(`SQUARED_DIFFERENCE` 등)이 PAMAP2 INT8 모델에서도 가속 밖에 있는지 확인합니다.
+3. **PAMAP2 Python 측정:** 연산별 시간에서는 PAMAP2 INT8 입출력이 FP32보다 빨랐으므로, 기존 Python 측정(1.03배)과의 차이가 입력 변환 비용 때문인지 `benchmark_wisdm_cause.py`와 같은 방식으로 나눠 확인합니다.
 
 ### Windows 실행 명령
 
