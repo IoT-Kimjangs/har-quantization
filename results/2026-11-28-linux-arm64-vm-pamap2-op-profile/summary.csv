@@ -1,0 +1,9 @@
+model,xnnpack,avg_us
+fp16,false,371.517
+fp16,true,221.783
+fp32,false,371.829
+fp32,true,221.73
+int8_dynamic,false,272.87
+int8_dynamic,true,102.357
+int8_full,false,498.325
+int8_full,true,161.472

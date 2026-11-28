@@ -1,0 +1,137 @@
+model,xnnpack,node_type,count,avg_ms,avg_percent
+fp16,false,FULLY_CONNECTED,13,0.035,62.5
+fp16,false,BATCH_MATMUL,4,0.01,17.857
+fp16,false,SQUARED_DIFFERENCE,4,0.004,7.143
+fp16,false,GELU,2,0.004,7.143
+fp16,false,SOFTMAX,3,0.002,3.571
+fp16,false,CONV_2D,1,0.001,1.786
+fp16,false,TRANSPOSE,10,0.0,0.0
+fp16,false,RSQRT,4,0.0,0.0
+fp16,false,RESHAPE,9,0.0,0.0
+fp16,false,NEG,4,0.0,0.0
+fp16,false,MUL,14,0.0,0.0
+fp16,false,MEAN,9,0.0,0.0
+fp16,false,EXPAND_DIMS,1,0.0,0.0
+fp16,false,DEQUANTIZE,39,0.0,0.0
+fp16,false,ADD,23,0.0,0.0
+fp16,true,"Fully Connected (NC, F32) GEMM",13,0.02,100.0
+fp16,true,Unary Elementwise (NC),10,0.0,0.0
+fp16,true,"Transpose (ND, X32) Transpose",10,0.0,0.0
+fp16,true,"Softmax (NC, F32)",3,0.0,0.0
+fp16,true,Mean (ND) Mean,9,0.0,0.0
+fp16,true,EXPAND_DIMS,1,0.0,0.0
+fp16,true,"Copy (NC, X32)",9,0.0,0.0
+fp16,true,"Convolution (NHWC, F32) IGEMM",1,0.0,0.0
+fp16,true,Binary Elementwise (ND),41,0.0,0.0
+fp16,true,"Batch Matrix Multiply (NC, F32) GEMM",4,0.0,0.0
+fp32,false,FULLY_CONNECTED,13,0.035,63.636
+fp32,false,BATCH_MATMUL,4,0.009,16.364
+fp32,false,SQUARED_DIFFERENCE,4,0.004,7.273
+fp32,false,GELU,2,0.004,7.273
+fp32,false,SOFTMAX,3,0.002,3.636
+fp32,false,CONV_2D,1,0.001,1.818
+fp32,false,TRANSPOSE,10,0.0,0.0
+fp32,false,RSQRT,4,0.0,0.0
+fp32,false,RESHAPE,9,0.0,0.0
+fp32,false,NEG,4,0.0,0.0
+fp32,false,MUL,14,0.0,0.0
+fp32,false,MEAN,9,0.0,0.0
+fp32,false,EXPAND_DIMS,1,0.0,0.0
+fp32,false,ADD,23,0.0,0.0
+fp32,true,"Fully Connected (NC, F32) GEMM",13,0.02,100.0
+fp32,true,Unary Elementwise (NC),10,0.0,0.0
+fp32,true,"Transpose (ND, X32) Transpose",10,0.0,0.0
+fp32,true,"Softmax (NC, F32)",3,0.0,0.0
+fp32,true,Mean (ND) Mean,9,0.0,0.0
+fp32,true,EXPAND_DIMS,1,0.0,0.0
+fp32,true,"Copy (NC, X32)",9,0.0,0.0
+fp32,true,"Convolution (NHWC, F32) IGEMM",1,0.0,0.0
+fp32,true,Binary Elementwise (ND),41,0.0,0.0
+fp32,true,"Batch Matrix Multiply (NC, F32) GEMM",4,0.0,0.0
+int8_dynamic,false,FULLY_CONNECTED,13,0.035,62.5
+int8_dynamic,false,BATCH_MATMUL,4,0.01,17.857
+int8_dynamic,false,SQUARED_DIFFERENCE,4,0.004,7.143
+int8_dynamic,false,GELU,2,0.004,7.143
+int8_dynamic,false,SOFTMAX,3,0.002,3.571
+int8_dynamic,false,CONV_2D,1,0.001,1.786
+int8_dynamic,false,TRANSPOSE,10,0.0,0.0
+int8_dynamic,false,RSQRT,4,0.0,0.0
+int8_dynamic,false,RESHAPE,9,0.0,0.0
+int8_dynamic,false,NEG,4,0.0,0.0
+int8_dynamic,false,MUL,14,0.0,0.0
+int8_dynamic,false,MEAN,9,0.0,0.0
+int8_dynamic,false,EXPAND_DIMS,1,0.0,0.0
+int8_dynamic,false,ADD,23,0.0,0.0
+int8_dynamic,true,"Convert (NC, F32, QP8)",12,0.005,55.556
+int8_dynamic,true,"Fully Connected (NC, QP8, F32, QC8W) GEMM",12,0.004,44.444
+int8_dynamic,true,Unary Elementwise (NC),10,0.0,0.0
+int8_dynamic,true,"Transpose (ND, X32) Transpose",10,0.0,0.0
+int8_dynamic,true,"Softmax (NC, F32)",3,0.0,0.0
+int8_dynamic,true,Mean (ND) Mean,9,0.0,0.0
+int8_dynamic,true,"Fully Connected (NC, F32) GEMM",1,0.0,0.0
+int8_dynamic,true,EXPAND_DIMS,1,0.0,0.0
+int8_dynamic,true,"Copy (NC, X32)",9,0.0,0.0
+int8_dynamic,true,"Convolution (NHWC, QD8, F32, QC8W) IGEMM",1,0.0,0.0
+int8_dynamic,true,"Convert (NC, F32, QD8)",1,0.0,0.0
+int8_dynamic,true,Binary Elementwise (ND),41,0.0,0.0
+int8_dynamic,true,"Batch Matrix Multiply (NC, F32) GEMM",4,0.0,0.0
+int8_float_io,false,MEAN,9,0.046,55.422
+int8_float_io,false,SQUARED_DIFFERENCE,4,0.016,19.277
+int8_float_io,false,FULLY_CONNECTED,13,0.014,16.867
+int8_float_io,false,BATCH_MATMUL,4,0.004,4.819
+int8_float_io,false,SOFTMAX,3,0.002,2.41
+int8_float_io,false,CONV_2D,1,0.001,1.205
+int8_float_io,false,TRANSPOSE,10,0.0,0.0
+int8_float_io,false,RSQRT,4,0.0,0.0
+int8_float_io,false,RESHAPE,9,0.0,0.0
+int8_float_io,false,QUANTIZE,5,0.0,0.0
+int8_float_io,false,NEG,4,0.0,0.0
+int8_float_io,false,MUL,14,0.0,0.0
+int8_float_io,false,GELU,2,0.0,0.0
+int8_float_io,false,EXPAND_DIMS,1,0.0,0.0
+int8_float_io,false,DEQUANTIZE,5,0.0,0.0
+int8_float_io,false,ADD,23,0.0,0.0
+int8_float_io,true,SQUARED_DIFFERENCE,4,0.016,72.727
+int8_float_io,true,BATCH_MATMUL,4,0.004,18.182
+int8_float_io,true,SOFTMAX,3,0.002,9.091
+int8_float_io,true,Unary Elementwise (NC),6,0.0,0.0
+int8_float_io,true,"Transpose (ND, X8) Transpose",5,0.0,0.0
+int8_float_io,true,RSQRT,4,0.0,0.0
+int8_float_io,true,Mean (ND) Mean,4,0.0,0.0
+int8_float_io,true,GELU,2,0.0,0.0
+int8_float_io,true,"Fully Connected (NC, QS8, QC8W) GEMM",8,0.0,0.0
+int8_float_io,true,EXPAND_DIMS,1,0.0,0.0
+int8_float_io,true,"Copy (NC, X8)",6,0.0,0.0
+int8_float_io,true,"Convolution (NHWC, QC8) IGEMM",1,0.0,0.0
+int8_float_io,true,Binary Elementwise (ND),11,0.0,0.0
+int8_float_io,true,ADD,6,0.0,0.0
+int8_full,false,MEAN,9,0.046,55.422
+int8_full,false,SQUARED_DIFFERENCE,4,0.016,19.277
+int8_full,false,FULLY_CONNECTED,13,0.014,16.867
+int8_full,false,BATCH_MATMUL,4,0.004,4.819
+int8_full,false,SOFTMAX,3,0.002,2.41
+int8_full,false,CONV_2D,1,0.001,1.205
+int8_full,false,TRANSPOSE,10,0.0,0.0
+int8_full,false,RSQRT,4,0.0,0.0
+int8_full,false,RESHAPE,9,0.0,0.0
+int8_full,false,QUANTIZE,4,0.0,0.0
+int8_full,false,NEG,4,0.0,0.0
+int8_full,false,MUL,14,0.0,0.0
+int8_full,false,GELU,2,0.0,0.0
+int8_full,false,EXPAND_DIMS,1,0.0,0.0
+int8_full,false,DEQUANTIZE,4,0.0,0.0
+int8_full,false,ADD,23,0.0,0.0
+int8_full,true,SQUARED_DIFFERENCE,4,0.016,72.727
+int8_full,true,BATCH_MATMUL,4,0.004,18.182
+int8_full,true,SOFTMAX,3,0.002,9.091
+int8_full,true,Unary Elementwise (NC),5,0.0,0.0
+int8_full,true,"Transpose (ND, X8) Transpose",5,0.0,0.0
+int8_full,true,RSQRT,4,0.0,0.0
+int8_full,true,Mean (ND) Mean,4,0.0,0.0
+int8_full,true,GELU,2,0.0,0.0
+int8_full,true,"Fully Connected (NC, QS8, QC8W) GEMM",8,0.0,0.0
+int8_full,true,EXPAND_DIMS,1,0.0,0.0
+int8_full,true,"Copy (NC, X8)",6,0.0,0.0
+int8_full,true,"Convolution (NHWC, QC8) IGEMM",1,0.0,0.0
+int8_full,true,Binary Elementwise (ND),11,0.0,0.0
+int8_full,true,ADD,6,0.0,0.0

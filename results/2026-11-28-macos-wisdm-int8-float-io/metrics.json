@@ -1,0 +1,75 @@
+{
+  "variant": "int8_float_io",
+  "purpose": "Cause analysis: same INT8 conversion as int8_full but float32 model input/output.",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "python": "3.12.14",
+  "tensorflow": "2.21.0",
+  "source_keras_sha256": "c4b50d393409c73e1d259d7f21485e7a9c0e9f9d6f2c43cdd6f4cefb06d654a6",
+  "calibration": {
+    "windows": 300,
+    "matches_existing_int8_full_record": true
+  },
+  "conversion": {
+    "optimizations": [
+      "DEFAULT"
+    ],
+    "supported_ops": [
+      "TFLITE_BUILTINS_INT8"
+    ],
+    "representative_data": "same 300 training windows as int8_full",
+    "inference_input_type": "float32 (default)",
+    "inference_output_type": "float32 (default)"
+  },
+  "int8_full_reconversion_sha256": "8ce0b14def2c15322568c71ac52eb0f062f67d6e0468b202a22a3f294495cbe7",
+  "int8_full_recorded_sha256": "8ce0b14def2c15322568c71ac52eb0f062f67d6e0468b202a22a3f294495cbe7",
+  "int8_full_reconversion_identical": true,
+  "model_bytes": 120776,
+  "kib": 117.9453125,
+  "sha256": "e094f0e6c51f10862d655cd968bec76aa3e2a2676e770ab5eb31a8f8decb6905",
+  "input": {
+    "dtype": "float32",
+    "shape": [
+      1,
+      80,
+      3
+    ]
+  },
+  "output": {
+    "dtype": "float32",
+    "shape": [
+      1,
+      6
+    ]
+  },
+  "tensor_dtype_counts": {
+    "float32": 10,
+    "int32": 16,
+    "int8": 139
+  },
+  "op_counts": {
+    "ADD": 23,
+    "BATCH_MATMUL": 4,
+    "CONV_2D": 1,
+    "DELEGATE": 19,
+    "DEQUANTIZE": 5,
+    "EXPAND_DIMS": 1,
+    "FULLY_CONNECTED": 13,
+    "GELU": 2,
+    "MEAN": 9,
+    "MUL": 14,
+    "NEG": 4,
+    "QUANTIZE": 5,
+    "RESHAPE": 9,
+    "RSQRT": 4,
+    "SOFTMAX": 3,
+    "SQUARED_DIFFERENCE": 4,
+    "TRANSPOSE": 10
+  },
+  "test_windows": 5358,
+  "accuracy_percent": 96.71519223590892,
+  "macro_f1_percent": 95.36800061921996,
+  "correct": 5182,
+  "agreement_with_int8_full_percent": 100.0,
+  "agreement_with_fp32_percent": 99.68271743187756,
+  "predictions_sha256": "f1466dbc0c8effa90fadfa69587a93b6a3a756ae57274eac338d8d5f34d13d74"
+}

@@ -1,0 +1,197 @@
+INFO: STARTING!
+INFO: Log parameter values verbosely: [0]
+INFO: Min num runs: [1000]
+INFO: Min runs duration (seconds): [0]
+INFO: Num threads: [1]
+INFO: Min warmup runs: [50]
+INFO: Graph: [/w/models/wisdm_transformer_int8_float_io.tflite]
+INFO: Signature to run: []
+INFO: Enable op profiling: [1]
+INFO: #threads used for CPU inference: [1]
+INFO: Use xnnpack: [0]
+INFO: Loaded model /w/models/wisdm_transformer_int8_float_io.tflite
+INFO: The input model file size (MB): 0.120776
+INFO: Initialized session in 4.445ms.
+INFO: Running benchmark for at least 50 iterations and at least 0.5 seconds but terminate if exceeding 150 seconds.
+INFO: count=4060 first=428 curr=121 min=120 max=428 avg=122.986 std=9 p5=120 median=121 p95=132
+
+INFO: Running benchmark for at least 1000 iterations and at least 0 seconds but terminate if exceeding 150 seconds.
+INFO: count=1000 first=142 curr=134 min=134 max=267 avg=138.395 std=10 p5=134 median=135 p95=152
+
+INFO: Inference timings in us: Init: 4445, First inference: 428, Warmup (avg): 122.986, Inference (avg): 138.395
+INFO: Note: as the benchmark tool itself affects memory footprint, the following is only APPROXIMATE to the actual memory footprint of the model at runtime. Take the information at your discretion.
+INFO: Memory footprint delta from the start of the tool (MB): init=3.0625 overall=3.1875
+INFO: Profiling Info for Benchmark Initialization:
+============================== Run Order ==============================
+	                             [node type]	  [first]	 [avg ms]	     [%]	  [cdf%]	  [mem KB]	[times called]	[Name]
+	                         AllocateTensors	    0.146	    0.146	100.000%	100.000%	   128.000	        1	AllocateTensors/0
+
+============================== Top by Computation Time ==============================
+	                             [node type]	  [first]	 [avg ms]	     [%]	  [cdf%]	  [mem KB]	[times called]	[Name]
+	                         AllocateTensors	    0.146	    0.146	100.000%	100.000%	   128.000	        1	AllocateTensors/0
+
+Number of nodes executed: 1
+============================== Summary by node type ==============================
+	                             [Node type]	  [count]	  [avg ms]	    [avg %]	    [cdf %]	  [mem KB]	[times called]
+	                         AllocateTensors	        1	     0.146	   100.000%	   100.000%	   128.000	        1
+
+Timings (microseconds): count=1 curr=146
+Memory (bytes): count=0
+1 nodes observed
+
+
+
+INFO: Operator-wise Profiling Info for Regular Benchmark Runs:
+============================== Run Order ==============================
+	                             [node type]	  [first]	 [avg ms]	     [%]	  [cdf%]	  [mem KB]	[times called]	[Name]
+	                                QUANTIZE	    0.001	    0.000	  0.175%	  0.175%	     0.000	        1	[tfl.quantize]:0
+	                             EXPAND_DIMS	    0.000	    0.000	  0.073%	  0.248%	     0.000	        1	[functional_1/conv1d_1_1/convolution/ExpandDims]:1
+	                                 CONV_2D	    0.002	    0.001	  0.963%	  1.210%	     0.000	        1	[functional_1/conv1d_1_1/convolution2]:2
+	                                 RESHAPE	    0.000	    0.000	  0.065%	  1.275%	     0.000	        1	[functional_1/conv1d_1_1/convolution/Squeeze]:3
+	                                     ADD	    0.001	    0.000	  0.342%	  1.618%	     0.000	        1	[functional_1/add_position_embedding_1/add;functional_1/conv1d_1_1/Squeeze;functional_1/conv1d_1_1/BiasAdd;functional_1/add_position_embedding_1/ExpandDims1]:4
+	                         FULLY_CONNECTED	    0.001	    0.001	  1.013%	  2.630%	     0.000	        1	[functional_1/multi_head_attention_1/key_1/MatMul1]:5
+	                                 RESHAPE	    0.000	    0.000	  0.078%	  2.708%	     0.000	        1	[functional_1/multi_head_attention_1/key_1/Reshape_1]:6
+	                                     ADD	    0.001	    0.001	  0.394%	  3.103%	     0.000	        1	[functional_1/multi_head_attention_1/key_1/Add]:7
+	                               TRANSPOSE	    0.001	    0.001	  0.476%	  3.579%	     0.000	        1	[functional_1/multi_head_attention_1/transpose]:8
+	                         FULLY_CONNECTED	    0.001	    0.001	  0.995%	  4.574%	     0.000	        1	[functional_1/multi_head_attention_1/query_1/MatMul1]:9
+	                                 RESHAPE	    0.000	    0.000	  0.054%	  4.629%	     0.000	        1	[functional_1/multi_head_attention_1/query_1/Reshape_1]:10
+	                                     ADD	    0.001	    0.001	  0.478%	  5.107%	     0.000	        1	[functional_1/multi_head_attention_1/query_1/Add]:11
+	                                     MUL	    0.000	    0.000	  0.343%	  5.450%	     0.000	        1	[functional_1/multi_head_attention_1/Mul]:12
+	                               TRANSPOSE	    0.001	    0.001	  0.494%	  5.944%	     0.000	        1	[functional_1/multi_head_attention_1/transpose_1]:13
+	                            BATCH_MATMUL	    0.002	    0.002	  1.141%	  7.086%	     0.000	        1	[functional_1/multi_head_attention_1/MatMul]:14
+	                               TRANSPOSE	    0.000	    0.000	  0.332%	  7.418%	     0.000	        1	[functional_1/multi_head_attention_1/transpose_2]:15
+	                                 SOFTMAX	    0.001	    0.001	  0.914%	  8.332%	     0.000	        1	[functional_1/multi_head_attention_1/softmax_1/Softmax]:16
+	                         FULLY_CONNECTED	    0.002	    0.001	  1.000%	  9.332%	     0.000	        1	[functional_1/multi_head_attention_1/value_1/MatMul1]:17
+	                                 RESHAPE	    0.000	    0.000	  0.053%	  9.385%	     0.000	        1	[functional_1/multi_head_attention_1/value_1/Reshape_1]:18
+	                                     ADD	    0.000	    0.000	  0.376%	  9.761%	     0.000	        1	[functional_1/multi_head_attention_1/value_1/Add]:19
+	                               TRANSPOSE	    0.001	    0.001	  0.456%	 10.217%	     0.000	        1	[functional_1/multi_head_attention_1/transpose_3]:20
+	                            BATCH_MATMUL	    0.002	    0.001	  1.080%	 11.297%	     0.000	        1	[functional_1/multi_head_attention_1/MatMul_1]:21
+	                               TRANSPOSE	    0.000	    0.001	  0.470%	 11.767%	     0.000	        1	[functional_1/multi_head_attention_1/transpose_4]:22
+	                                 RESHAPE	    0.000	    0.000	  0.062%	 11.829%	     0.000	        1	[functional_1/multi_head_attention_1/attention_output_1/Reshape]:23
+	                         FULLY_CONNECTED	    0.002	    0.001	  0.971%	 12.801%	     0.000	        1	[functional_1/multi_head_attention_1/attention_output_1/MatMul;functional_1/multi_head_attention_1/attention_output_1/BiasAdd]:24
+	                                     ADD	    0.000	    0.000	  0.349%	 13.150%	     0.000	        1	[functional_1/Add]:25
+	                                    MEAN	    0.006	    0.006	  4.517%	 17.666%	     0.000	        1	[functional_1/layer_normalization_1/moments/mean]:26
+	                              DEQUANTIZE	    0.001	    0.000	  0.126%	 17.793%	     0.000	        1	[tfl.dequantize]:27
+	                                     NEG	    0.000	    0.000	  0.081%	 17.874%	     0.000	        1	[functional_1/layer_normalization_1/Neg]:28
+	                                QUANTIZE	    0.000	    0.000	  0.082%	 17.955%	     0.000	        1	[tfl.quantize1]:29
+	                      SQUARED_DIFFERENCE	    0.005	    0.005	  3.588%	 21.543%	     0.000	        1	[functional_1/layer_normalization_1/moments/SquaredDifference]:30
+	                                    MEAN	    0.006	    0.006	  4.494%	 26.037%	     0.000	        1	[functional_1/layer_normalization_1/moments/variance]:31
+	                                     ADD	    0.000	    0.000	  0.181%	 26.218%	     0.000	        1	[functional_1/layer_normalization_1/add]:32
+	                                   RSQRT	    0.001	    0.001	  0.679%	 26.897%	     0.000	        1	[functional_1/layer_normalization_1/Rsqrt]:33
+	                                     MUL	    0.000	    0.000	  0.349%	 27.246%	     0.000	        1	[functional_1/layer_normalization_1/mul]:34
+	                                     MUL	    0.000	    0.000	  0.340%	 27.586%	     0.000	        1	[functional_1/layer_normalization_1/mul_1]:35
+	                                     ADD	    0.001	    0.001	  0.411%	 27.997%	     0.000	        1	[functional_1/layer_normalization_1/add_1]:36
+	                                     MUL	    0.000	    0.000	  0.291%	 28.288%	     0.000	        1	[functional_1/layer_normalization_1/mul_2]:37
+	                                     ADD	    0.000	    0.000	  0.337%	 28.625%	     0.000	        1	[functional_1/layer_normalization_1/add_2]:38
+	                         FULLY_CONNECTED	    0.003	    0.002	  1.786%	 30.411%	     0.000	        1	[functional_1/dense_1/MatMul;functional_1/dense_1/BiasAdd]:39
+	                                    GELU	    0.001	    0.001	  0.510%	 30.921%	     0.000	        1	[functional_1/dense_1/Gelu/mul_2;;functional_1/dense_1/Gelu/mul;functional_1/dense_1/Gelu/Neg;functional_1/dense_1/Gelu/mul_1;functional_1/dense_1/Gelu/Erfc]:40
+	                         FULLY_CONNECTED	    0.001	    0.002	  1.419%	 32.340%	     0.000	        1	[functional_1/dense_1_2/MatMul;functional_1/dense_1_2/BiasAdd]:41
+	                                     ADD	    0.001	    0.000	  0.370%	 32.710%	     0.000	        1	[functional_1/Add_1]:42
+	                                    MEAN	    0.006	    0.006	  4.498%	 37.209%	     0.000	        1	[functional_1/layer_normalization_1_2/moments/mean]:43
+	                              DEQUANTIZE	    0.000	    0.000	  0.133%	 37.342%	     0.000	        1	[tfl.dequantize1]:44
+	                                     NEG	    0.000	    0.000	  0.076%	 37.418%	     0.000	        1	[functional_1/layer_normalization_1_2/Neg]:45
+	                                QUANTIZE	    0.000	    0.000	  0.097%	 37.515%	     0.000	        1	[tfl.quantize2]:46
+	                      SQUARED_DIFFERENCE	    0.005	    0.005	  3.544%	 41.059%	     0.000	        1	[functional_1/layer_normalization_1_2/moments/SquaredDifference]:47
+	                                    MEAN	    0.006	    0.006	  4.451%	 45.509%	     0.000	        1	[functional_1/layer_normalization_1_2/moments/variance]:48
+	                                     ADD	    0.000	    0.000	  0.202%	 45.712%	     0.000	        1	[functional_1/layer_normalization_1_2/add]:49
+	                                   RSQRT	    0.001	    0.001	  0.671%	 46.382%	     0.000	        1	[functional_1/layer_normalization_1_2/Rsqrt]:50
+	                                     MUL	    0.001	    0.000	  0.313%	 46.695%	     0.000	        1	[functional_1/layer_normalization_1_2/mul]:51
+	                                     MUL	    0.000	    0.000	  0.360%	 47.054%	     0.000	        1	[functional_1/layer_normalization_1_2/mul_1]:52
+	                                     ADD	    0.001	    0.001	  0.385%	 47.440%	     0.000	        1	[functional_1/layer_normalization_1_2/add_1]:53
+	                                     MUL	    0.000	    0.000	  0.313%	 47.753%	     0.000	        1	[functional_1/layer_normalization_1_2/mul_2]:54
+	                                     ADD	    0.001	    0.000	  0.310%	 48.063%	     0.000	        1	[functional_1/layer_normalization_1_2/add_2]:55
+	                         FULLY_CONNECTED	    0.001	    0.001	  1.026%	 49.090%	     0.000	        1	[functional_1/multi_head_attention_1_2/key_1/MatMul1]:56
+	                                 RESHAPE	    0.000	    0.000	  0.063%	 49.153%	     0.000	        1	[functional_1/multi_head_attention_1_2/key_1/Reshape_1]:57
+	                                     ADD	    0.001	    0.000	  0.359%	 49.511%	     0.000	        1	[functional_1/multi_head_attention_1_2/key_1/Add]:58
+	                               TRANSPOSE	    0.000	    0.001	  0.481%	 49.993%	     0.000	        1	[functional_1/multi_head_attention_1_2/transpose]:59
+	                         FULLY_CONNECTED	    0.002	    0.001	  0.958%	 50.951%	     0.000	        1	[functional_1/multi_head_attention_1_2/query_1/MatMul1]:60
+	                                 RESHAPE	    0.000	    0.000	  0.072%	 51.023%	     0.000	        1	[functional_1/multi_head_attention_1_2/query_1/Reshape_1]:61
+	                                     ADD	    0.000	    0.001	  0.429%	 51.452%	     0.000	        1	[functional_1/multi_head_attention_1_2/query_1/Add]:62
+	                                     MUL	    0.001	    0.000	  0.319%	 51.772%	     0.000	        1	[functional_1/multi_head_attention_1_2/Mul]:63
+	                               TRANSPOSE	    0.001	    0.001	  0.510%	 52.282%	     0.000	        1	[functional_1/multi_head_attention_1_2/transpose_1]:64
+	                            BATCH_MATMUL	    0.001	    0.001	  1.055%	 53.337%	     0.000	        1	[functional_1/multi_head_attention_1_2/MatMul]:65
+	                               TRANSPOSE	    0.000	    0.000	  0.351%	 53.688%	     0.000	        1	[functional_1/multi_head_attention_1_2/transpose_2]:66
+	                                 SOFTMAX	    0.001	    0.001	  0.920%	 54.609%	     0.000	        1	[functional_1/multi_head_attention_1_2/softmax_1_1/Softmax]:67
+	                         FULLY_CONNECTED	    0.001	    0.001	  0.958%	 55.566%	     0.000	        1	[functional_1/multi_head_attention_1_2/value_1/MatMul1]:68
+	                                 RESHAPE	    0.000	    0.000	  0.070%	 55.637%	     0.000	        1	[functional_1/multi_head_attention_1_2/value_1/Reshape_1]:69
+	                                     ADD	    0.001	    0.001	  0.393%	 56.029%	     0.000	        1	[functional_1/multi_head_attention_1_2/value_1/Add]:70
+	                               TRANSPOSE	    0.000	    0.001	  0.438%	 56.468%	     0.000	        1	[functional_1/multi_head_attention_1_2/transpose_3]:71
+	                            BATCH_MATMUL	    0.002	    0.001	  1.079%	 57.546%	     0.000	        1	[functional_1/multi_head_attention_1_2/MatMul_1]:72
+	                               TRANSPOSE	    0.000	    0.001	  0.448%	 57.994%	     0.000	        1	[functional_1/multi_head_attention_1_2/transpose_4]:73
+	                                 RESHAPE	    0.000	    0.000	  0.064%	 58.058%	     0.000	        1	[functional_1/multi_head_attention_1_2/attention_output_1/Reshape]:74
+	                         FULLY_CONNECTED	    0.002	    0.001	  0.977%	 59.035%	     0.000	        1	[functional_1/multi_head_attention_1_2/attention_output_1/MatMul;functional_1/multi_head_attention_1_2/attention_output_1/BiasAdd]:75
+	                                     ADD	    0.000	    0.001	  0.379%	 59.414%	     0.000	        1	[functional_1/Add_2]:76
+	                                    MEAN	    0.006	    0.006	  4.457%	 63.871%	     0.000	        1	[functional_1/layer_normalization_2_1/moments/mean]:77
+	                              DEQUANTIZE	    0.000	    0.000	  0.121%	 63.992%	     0.000	        1	[tfl.dequantize2]:78
+	                                     NEG	    0.001	    0.000	  0.104%	 64.096%	     0.000	        1	[functional_1/layer_normalization_2_1/Neg]:79
+	                                QUANTIZE	    0.000	    0.000	  0.098%	 64.195%	     0.000	        1	[tfl.quantize3]:80
+	                      SQUARED_DIFFERENCE	    0.004	    0.005	  3.556%	 67.751%	     0.000	        1	[functional_1/layer_normalization_2_1/moments/SquaredDifference]:81
+	                                    MEAN	    0.006	    0.006	  4.528%	 72.279%	     0.000	        1	[functional_1/layer_normalization_2_1/moments/variance]:82
+	                                     ADD	    0.001	    0.000	  0.177%	 72.456%	     0.000	        1	[functional_1/layer_normalization_2_1/add]:83
+	                                   RSQRT	    0.001	    0.001	  0.666%	 73.122%	     0.000	        1	[functional_1/layer_normalization_2_1/Rsqrt]:84
+	                                     MUL	    0.000	    0.000	  0.320%	 73.442%	     0.000	        1	[functional_1/layer_normalization_2_1/mul]:85
+	                                     MUL	    0.000	    0.001	  0.384%	 73.826%	     0.000	        1	[functional_1/layer_normalization_2_1/mul_1]:86
+	                                     ADD	    0.000	    0.001	  0.380%	 74.206%	     0.000	        1	[functional_1/layer_normalization_2_1/add_1]:87
+	                                     MUL	    0.000	    0.000	  0.331%	 74.537%	     0.000	        1	[functional_1/layer_normalization_2_1/mul_2]:88
+	                                     ADD	    0.000	    0.000	  0.330%	 74.867%	     0.000	        1	[functional_1/layer_normalization_2_1/add_2]:89
+	                         FULLY_CONNECTED	    0.002	    0.002	  1.796%	 76.663%	     0.000	        1	[functional_1/dense_2_1/MatMul;functional_1/dense_2_1/BiasAdd]:90
+	                                    GELU	    0.001	    0.001	  0.508%	 77.171%	     0.000	        1	[functional_1/dense_2_1/Gelu/mul_2;;functional_1/dense_2_1/Gelu/mul;functional_1/dense_2_1/Gelu/Neg;functional_1/dense_2_1/Gelu/mul_1;functional_1/dense_2_1/Gelu/Erfc]:91
+	                         FULLY_CONNECTED	    0.002	    0.002	  1.437%	 78.608%	     0.000	        1	[functional_1/dense_3_1/MatMul;functional_1/dense_3_1/BiasAdd]:92
+	                                     ADD	    0.000	    0.000	  0.339%	 78.947%	     0.000	        1	[functional_1/Add_3]:93
+	                                    MEAN	    0.006	    0.006	  4.528%	 83.475%	     0.000	        1	[functional_1/layer_normalization_3_1/moments/mean]:94
+	                              DEQUANTIZE	    0.000	    0.000	  0.176%	 83.651%	     0.000	        1	[tfl.dequantize3]:95
+	                                     NEG	    0.000	    0.000	  0.092%	 83.743%	     0.000	        1	[functional_1/layer_normalization_3_1/Neg]:96
+	                                QUANTIZE	    0.000	    0.000	  0.086%	 83.830%	     0.000	        1	[tfl.quantize4]:97
+	                      SQUARED_DIFFERENCE	    0.004	    0.005	  3.530%	 87.359%	     0.000	        1	[functional_1/layer_normalization_3_1/moments/SquaredDifference]:98
+	                                    MEAN	    0.006	    0.006	  4.442%	 91.802%	     0.000	        1	[functional_1/layer_normalization_3_1/moments/variance]:99
+	                                     ADD	    0.000	    0.000	  0.196%	 91.998%	     0.000	        1	[functional_1/layer_normalization_3_1/add]:100
+	                                   RSQRT	    0.001	    0.001	  0.652%	 92.650%	     0.000	        1	[functional_1/layer_normalization_3_1/Rsqrt]:101
+	                                     MUL	    0.001	    0.000	  0.336%	 92.986%	     0.000	        1	[functional_1/layer_normalization_3_1/mul]:102
+	                                     MUL	    0.000	    0.000	  0.329%	 93.315%	     0.000	        1	[functional_1/layer_normalization_3_1/mul_1]:103
+	                                     ADD	    0.001	    0.001	  0.425%	 93.741%	     0.000	        1	[functional_1/layer_normalization_3_1/add_1]:104
+	                                     MUL	    0.000	    0.000	  0.291%	 94.032%	     0.000	        1	[functional_1/layer_normalization_3_1/mul_2]:105
+	                                     ADD	    0.001	    0.000	  0.341%	 94.372%	     0.000	        1	[functional_1/layer_normalization_3_1/add_2]:106
+	                                    MEAN	    0.007	    0.007	  5.246%	 99.618%	     0.000	        1	[functional_1/global_average_pooling1d_1/Mean]:107
+	                         FULLY_CONNECTED	    0.000	    0.000	  0.167%	 99.785%	     0.000	        1	[functional_1/dense_4_1/MatMul;functional_1/dense_4_1/BiasAdd]:108
+	                                 SOFTMAX	    0.000	    0.000	  0.099%	 99.884%	     0.000	        1	[StatefulPartitionedCall_1:01]:109
+	                              DEQUANTIZE	    0.001	    0.000	  0.116%	100.000%	     0.000	        1	[StatefulPartitionedCall_1:0]:110
+
+============================== Top by Computation Time ==============================
+	                             [node type]	  [first]	 [avg ms]	     [%]	  [cdf%]	  [mem KB]	[times called]	[Name]
+	                                    MEAN	    0.007	    0.007	  5.246%	  5.246%	     0.000	        1	[functional_1/global_average_pooling1d_1/Mean]:107
+	                                    MEAN	    0.006	    0.006	  4.528%	  9.774%	     0.000	        1	[functional_1/layer_normalization_3_1/moments/mean]:94
+	                                    MEAN	    0.006	    0.006	  4.528%	 14.302%	     0.000	        1	[functional_1/layer_normalization_2_1/moments/variance]:82
+	                                    MEAN	    0.006	    0.006	  4.517%	 18.818%	     0.000	        1	[functional_1/layer_normalization_1/moments/mean]:26
+	                                    MEAN	    0.006	    0.006	  4.498%	 23.317%	     0.000	        1	[functional_1/layer_normalization_1_2/moments/mean]:43
+	                                    MEAN	    0.006	    0.006	  4.494%	 27.811%	     0.000	        1	[functional_1/layer_normalization_1/moments/variance]:31
+	                                    MEAN	    0.006	    0.006	  4.457%	 32.268%	     0.000	        1	[functional_1/layer_normalization_2_1/moments/mean]:77
+	                                    MEAN	    0.006	    0.006	  4.451%	 36.718%	     0.000	        1	[functional_1/layer_normalization_1_2/moments/variance]:48
+	                                    MEAN	    0.006	    0.006	  4.442%	 41.161%	     0.000	        1	[functional_1/layer_normalization_3_1/moments/variance]:99
+	                      SQUARED_DIFFERENCE	    0.005	    0.005	  3.588%	 44.749%	     0.000	        1	[functional_1/layer_normalization_1/moments/SquaredDifference]:30
+
+Number of nodes executed: 111
+============================== Summary by node type ==============================
+	                             [Node type]	  [count]	  [avg ms]	    [avg %]	    [cdf %]	  [mem KB]	[times called]
+	                                    MEAN	        9	     0.046	    55.422%	    55.422%	     0.000	        9
+	                      SQUARED_DIFFERENCE	        4	     0.016	    19.277%	    74.699%	     0.000	        4
+	                         FULLY_CONNECTED	       13	     0.014	    16.867%	    91.566%	     0.000	       13
+	                            BATCH_MATMUL	        4	     0.004	     4.819%	    96.386%	     0.000	        4
+	                                 SOFTMAX	        3	     0.002	     2.410%	    98.795%	     0.000	        3
+	                                 CONV_2D	        1	     0.001	     1.205%	   100.000%	     0.000	        1
+	                               TRANSPOSE	       10	     0.000	     0.000%	   100.000%	     0.000	       10
+	                                   RSQRT	        4	     0.000	     0.000%	   100.000%	     0.000	        4
+	                                 RESHAPE	        9	     0.000	     0.000%	   100.000%	     0.000	        9
+	                                QUANTIZE	        5	     0.000	     0.000%	   100.000%	     0.000	        5
+	                                     NEG	        4	     0.000	     0.000%	   100.000%	     0.000	        4
+	                                     MUL	       14	     0.000	     0.000%	   100.000%	     0.000	       14
+	                                    GELU	        2	     0.000	     0.000%	   100.000%	     0.000	        2
+	                             EXPAND_DIMS	        1	     0.000	     0.000%	   100.000%	     0.000	        1
+	                              DEQUANTIZE	        5	     0.000	     0.000%	   100.000%	     0.000	        5
+	                                     ADD	       23	     0.000	     0.000%	   100.000%	     0.000	       23
+
+Timings (microseconds): count=1000 first=133 curr=127 min=119 max=253 avg=132.111 std=9
+Memory (bytes): count=0
+111 nodes observed
+
+
+
