@@ -1,0 +1,13 @@
+{
+  "purpose": "Per-operator timing of the WISDM TFLite models (cause analysis, experiment 3).",
+  "tool": "TFLite benchmark_model, official nightly build linux_aarch64_benchmark_model",
+  "tool_url": "https://storage.googleapis.com/tensorflow-nightly-public/prod/tensorflow/release/lite/tools/nightly/latest/linux_aarch64_benchmark_model",
+  "tool_sha256": "7d6f9b6138ec1db2b39f9a1e99fcf684447d05d6450f5c25cd474032346eb1a6",
+  "downloaded": "2026-11-28",
+  "environment": "Podman Linux VM (libkrun, 4 vCPU, 2 GiB) on the same Apple M1 Pro Mac; container debian:bookworm-slim 12.15; kernel 7.1.10-200.fc44.aarch64",
+  "command": "benchmark_model --graph=<model> --num_threads=1 --warmup_runs=50 --num_runs=1000 --min_secs=0 --enable_op_profiling=true --use_xnnpack=<true|false>",
+  "models": "Same files as results/2026-11-10-macos-wisdm-quantization and results/2026-11-28-macos-wisdm-int8-float-io (SHA-256 checked by the Mac scripts).",
+  "input": "benchmark_model default random input; timing only, no accuracy.",
+  "files": {"<model>-xnnpack_<true|false>.txt": "full tool output", "summary.csv": "average time per run (microseconds)", "node-types.csv": "per node type average time from the regular benchmark runs"},
+  "limits": "Linux VM, not macOS or Windows; profiler reports ms with 3 decimals; single session of 1,000 runs; profiling adds overhead so per-op sums differ from avg_us."
+}

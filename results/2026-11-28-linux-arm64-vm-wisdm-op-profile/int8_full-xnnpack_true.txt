@@ -1,0 +1,154 @@
+INFO: STARTING!
+INFO: Log parameter values verbosely: [0]
+INFO: Min num runs: [1000]
+INFO: Min runs duration (seconds): [0]
+INFO: Num threads: [1]
+INFO: Min warmup runs: [50]
+INFO: Graph: [/w/models/wisdm_transformer_int8_full.tflite]
+INFO: Signature to run: []
+INFO: Enable op profiling: [1]
+INFO: #threads used for CPU inference: [1]
+INFO: Use xnnpack: [1]
+INFO: Loaded model /w/models/wisdm_transformer_int8_full.tflite
+INFO: XNNPACK delegate created.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Explicitly applied XNNPACK delegate, and the model graph will be partially executed by the delegate w/ 17 delegate kernels.
+INFO: The input model file size (MB): 0.12052
+INFO: Initialized session in 6.091ms.
+INFO: Running benchmark for at least 50 iterations and at least 0.5 seconds but terminate if exceeding 150 seconds.
+INFO: count=7819 first=458 curr=63 min=62 max=458 avg=63.7766 std=7 p5=62 median=62 p95=70
+
+INFO: Running benchmark for at least 1000 iterations and at least 0 seconds but terminate if exceeding 150 seconds.
+INFO: count=1000 first=78 curr=67 min=67 max=94 avg=68.834 std=3 p5=67 median=68 p95=76
+
+INFO: Inference timings in us: Init: 6091, First inference: 458, Warmup (avg): 63.7766, Inference (avg): 68.834
+INFO: Note: as the benchmark tool itself affects memory footprint, the following is only APPROXIMATE to the actual memory footprint of the model at runtime. Take the information at your discretion.
+INFO: Memory footprint delta from the start of the tool (MB): init=4.23438 overall=4.60938
+INFO: Profiling Info for Benchmark Initialization:
+============================== Run Order ==============================
+	                             [node type]	  [first]	 [avg ms]	     [%]	  [cdf%]	  [mem KB]	[times called]	[Name]
+	                 ModifyGraphWithDelegate	    0.968	    0.492	 88.889%	 88.889%	     0.000	        2	ModifyGraphWithDelegate/0
+	                         AllocateTensors	    0.123	    0.123	 11.111%	100.000%	   308.000	        1	AllocateTensors/0
+
+============================== Top by Computation Time ==============================
+	                             [node type]	  [first]	 [avg ms]	     [%]	  [cdf%]	  [mem KB]	[times called]	[Name]
+	                 ModifyGraphWithDelegate	    0.968	    0.492	 88.889%	 88.889%	     0.000	        2	ModifyGraphWithDelegate/0
+	                         AllocateTensors	    0.123	    0.123	 11.111%	100.000%	   308.000	        1	AllocateTensors/0
+
+Number of nodes executed: 2
+============================== Summary by node type ==============================
+	                             [Node type]	  [count]	  [avg ms]	    [avg %]	    [cdf %]	  [mem KB]	[times called]
+	                 ModifyGraphWithDelegate	        1	     0.984	    88.889%	    88.889%	     0.000	        2
+	                         AllocateTensors	        1	     0.123	    11.111%	   100.000%	   308.000	        1
+
+Timings (microseconds): count=1 curr=1107
+Memory (bytes): count=0
+2 nodes observed
+
+
+
+INFO: Operator-wise Profiling Info for Regular Benchmark Runs:
+============================== Run Order ==============================
+	                             [node type]	  [first]	 [avg ms]	     [%]	  [cdf%]	  [mem KB]	[times called]	[Name]
+	                                 SOFTMAX	    0.000	    0.000	  0.495%	  0.495%	     0.000	        1	[StatefulPartitionedCall_1:0]:108
+	    Fully Connected (NC, QS8, QC8W) GEMM	    0.000	    0.000	  0.000%	  0.495%	     0.000	        1	Delegate/Fully Connected (NC, QS8, QC8W) GEMM:6
+	                          Mean (ND) Mean	    0.000	    0.000	  0.000%	  0.495%	     0.000	        1	Delegate/Mean (ND) Mean:5
+	                                   RSQRT	    0.001	    0.001	  2.580%	  3.074%	     0.000	        1	[functional_1/layer_normalization_3_1/Rsqrt]:100
+	                                     ADD	    0.000	    0.000	  0.592%	  3.666%	     0.000	        1	[functional_1/layer_normalization_3_1/add]:99
+	                      SQUARED_DIFFERENCE	    0.005	    0.005	 13.605%	 17.271%	     0.000	        1	[functional_1/layer_normalization_3_1/moments/SquaredDifference]:97
+	                                    GELU	    0.001	    0.001	  2.020%	 19.291%	     0.000	        1	[functional_1/dense_2_1/Gelu/mul_2;;functional_1/dense_2_1/Gelu/mul;functional_1/dense_2_1/Gelu/Neg;functional_1/dense_2_1/Gelu/mul_1;functional_1/dense_2_1/Gelu/Erfc]:90
+	                                   RSQRT	    0.001	    0.001	  2.550%	 21.842%	     0.000	        1	[functional_1/layer_normalization_2_1/Rsqrt]:83
+	                                     ADD	    0.000	    0.000	  0.666%	 22.507%	     0.000	        1	[functional_1/layer_normalization_2_1/add]:82
+	                      SQUARED_DIFFERENCE	    0.004	    0.005	 13.702%	 36.209%	     0.000	        1	[functional_1/layer_normalization_2_1/moments/SquaredDifference]:80
+	                             EXPAND_DIMS	    0.001	    0.000	  0.294%	 36.504%	     0.000	        1	[functional_1/conv1d_1_1/convolution/ExpandDims]:0
+	           Convolution (NHWC, QC8) IGEMM	    0.000	    0.000	  0.018%	 36.522%	     0.000	        1	Delegate/Convolution (NHWC, QC8) IGEMM:0
+	                           Copy (NC, X8)	    0.000	    0.000	  0.000%	 36.522%	     0.000	        3	Delegate/Copy (NC, X8):1
+	                 Binary Elementwise (ND)	    0.000	    0.000	  0.000%	 36.522%	     0.000	        5	Delegate/Binary Elementwise (ND):2
+	    Fully Connected (NC, QS8, QC8W) GEMM	    0.000	    0.000	  0.021%	 36.542%	     0.000	        1	Delegate/Fully Connected (NC, QS8, QC8W) GEMM:3
+	                           Copy (NC, X8)	    0.000	    0.000	  0.000%	 36.542%	     0.000	        1	Delegate/Copy (NC, X8):4
+	    Fully Connected (NC, QS8, QC8W) GEMM	    0.000	    0.000	  0.533%	 37.075%	     0.000	        4	Delegate/Fully Connected (NC, QS8, QC8W) GEMM:5
+	                           Copy (NC, X8)	    0.000	    0.000	  0.000%	 37.075%	     0.000	        2	Delegate/Copy (NC, X8):6
+	                 Binary Elementwise (ND)	    0.000	    0.000	  0.029%	 37.105%	     0.000	        1	Delegate/Binary Elementwise (ND):7
+	                 Binary Elementwise (ND)	    0.000	    0.000	  0.000%	 37.105%	     0.000	        1	Delegate/Binary Elementwise (ND):8
+	            Transpose (ND, X8) Transpose	    0.000	    0.000	  0.000%	 37.105%	     0.000	        1	Delegate/Transpose (ND, X8) Transpose:9
+	    Fully Connected (NC, QS8, QC8W) GEMM	    0.000	    0.000	  0.035%	 37.140%	     0.000	        1	Delegate/Fully Connected (NC, QS8, QC8W) GEMM:10
+	                           Copy (NC, X8)	    0.000	    0.000	  0.000%	 37.140%	     0.000	        1	Delegate/Copy (NC, X8):11
+	                 Binary Elementwise (ND)	    0.000	    0.000	  0.000%	 37.140%	     0.000	        1	Delegate/Binary Elementwise (ND):12
+	            Transpose (ND, X8) Transpose	    0.000	    0.000	  0.000%	 37.140%	     0.000	        1	Delegate/Transpose (ND, X8) Transpose:13
+	                                     ADD	    0.001	    0.001	  1.546%	 38.686%	     0.000	        1	[functional_1/multi_head_attention_1/key_1/Add]:6
+	            Transpose (ND, X8) Transpose	    0.000	    0.000	  0.000%	 38.686%	     0.000	        6	Delegate/Transpose (ND, X8) Transpose:0
+	                            BATCH_MATMUL	    0.002	    0.002	  4.417%	 43.103%	     0.000	        1	[functional_1/multi_head_attention_1/MatMul]:13
+	                                 SOFTMAX	    0.001	    0.001	  3.557%	 46.661%	     0.000	        1	[functional_1/multi_head_attention_1/softmax_1/Softmax]:15
+	                            BATCH_MATMUL	    0.001	    0.001	  4.155%	 50.816%	     0.000	        1	[functional_1/multi_head_attention_1/MatMul_1]:20
+	    Fully Connected (NC, QS8, QC8W) GEMM	    0.000	    0.000	  0.021%	 50.836%	     0.000	        2	Delegate/Fully Connected (NC, QS8, QC8W) GEMM:2
+	                 Binary Elementwise (ND)	    0.000	    0.000	  0.071%	 50.907%	     0.000	        6	Delegate/Binary Elementwise (ND):3
+	                          Mean (ND) Mean	    0.000	    0.000	  0.000%	 50.907%	     0.000	        2	Delegate/Mean (ND) Mean:4
+	                  Unary Elementwise (NC)	    0.000	    0.000	  0.000%	 50.907%	     0.000	        4	Delegate/Unary Elementwise (NC):5
+	                  Unary Elementwise (NC)	    0.000	    0.000	  0.021%	 50.928%	     0.000	        2	Delegate/Unary Elementwise (NC):6
+	                  Unary Elementwise (NC)	    0.000	    0.000	  0.000%	 50.928%	     0.000	        2	Delegate/Unary Elementwise (NC):7
+	                      SQUARED_DIFFERENCE	    0.005	    0.005	 13.596%	 64.524%	     0.000	        1	[functional_1/layer_normalization_1/moments/SquaredDifference]:29
+	                          Mean (ND) Mean	    0.000	    0.000	  0.050%	 64.574%	     0.000	        4	Delegate/Mean (ND) Mean:0
+	                                     ADD	    0.000	    0.000	  0.645%	 65.219%	     0.000	        1	[functional_1/layer_normalization_1/add]:31
+	                                   RSQRT	    0.001	    0.001	  2.624%	 67.843%	     0.000	        1	[functional_1/layer_normalization_1/Rsqrt]:32
+	                 Binary Elementwise (ND)	    0.000	    0.000	  0.047%	 67.890%	     0.000	        4	Delegate/Binary Elementwise (ND):0
+	                 Binary Elementwise (ND)	    0.000	    0.000	  0.021%	 67.910%	     0.000	        6	Delegate/Binary Elementwise (ND):1
+	                 Binary Elementwise (ND)	    0.000	    0.000	  0.041%	 67.952%	     0.000	        4	Delegate/Binary Elementwise (ND):4
+	                                    GELU	    0.001	    0.001	  2.014%	 69.966%	     0.000	        1	[functional_1/dense_1/Gelu/mul_2;;functional_1/dense_1/Gelu/mul;functional_1/dense_1/Gelu/Neg;functional_1/dense_1/Gelu/mul_1;functional_1/dense_1/Gelu/Erfc]:39
+	    Fully Connected (NC, QS8, QC8W) GEMM	    0.000	    0.000	  0.074%	 70.039%	     0.000	        2	Delegate/Fully Connected (NC, QS8, QC8W) GEMM:0
+	                          Mean (ND) Mean	    0.000	    0.000	  0.021%	 70.060%	     0.000	        2	Delegate/Mean (ND) Mean:2
+	                  Unary Elementwise (NC)	    0.000	    0.000	  0.000%	 70.060%	     0.000	        2	Delegate/Unary Elementwise (NC):3
+	                  Unary Elementwise (NC)	    0.000	    0.000	  0.000%	 70.060%	     0.000	        2	Delegate/Unary Elementwise (NC):4
+	                      SQUARED_DIFFERENCE	    0.005	    0.005	 13.596%	 83.656%	     0.000	        1	[functional_1/layer_normalization_1_2/moments/SquaredDifference]:46
+	                                     ADD	    0.001	    0.000	  0.604%	 84.260%	     0.000	        1	[functional_1/layer_normalization_1_2/add]:48
+	                                   RSQRT	    0.001	    0.001	  2.550%	 86.810%	     0.000	        1	[functional_1/layer_normalization_1_2/Rsqrt]:49
+	                            BATCH_MATMUL	    0.002	    0.001	  4.176%	 90.986%	     0.000	        1	[functional_1/multi_head_attention_1_2/MatMul_1]:71
+	                                 SOFTMAX	    0.001	    0.001	  3.478%	 94.464%	     0.000	        1	[functional_1/multi_head_attention_1_2/softmax_1_1/Softmax]:66
+	                            BATCH_MATMUL	    0.002	    0.001	  4.099%	 98.563%	     0.000	        1	[functional_1/multi_head_attention_1_2/MatMul]:64
+	                                     ADD	    0.000	    0.000	  1.437%	100.000%	     0.000	        1	[functional_1/multi_head_attention_1_2/key_1/Add]:57
+	            Transpose (ND, X8) Transpose	    0.000	    0.000	  0.000%	100.000%	     0.000	        1	Delegate/Transpose (ND, X8) Transpose:15
+	    Fully Connected (NC, QS8, QC8W) GEMM	    0.000	    0.000	  0.000%	100.000%	     0.000	        1	Delegate/Fully Connected (NC, QS8, QC8W) GEMM:7
+	                           Copy (NC, X8)	    0.000	    0.000	  0.000%	100.000%	     0.000	        1	Delegate/Copy (NC, X8):8
+	                 Binary Elementwise (ND)	    0.000	    0.000	  0.000%	100.000%	     0.000	        1	Delegate/Binary Elementwise (ND):9
+	                 Binary Elementwise (ND)	    0.000	    0.000	  0.000%	100.000%	     0.000	        1	Delegate/Binary Elementwise (ND):10
+	            Transpose (ND, X8) Transpose	    0.000	    0.000	  0.000%	100.000%	     0.000	        1	Delegate/Transpose (ND, X8) Transpose:11
+	    Fully Connected (NC, QS8, QC8W) GEMM	    0.000	    0.000	  0.000%	100.000%	     0.000	        1	Delegate/Fully Connected (NC, QS8, QC8W) GEMM:12
+	                           Copy (NC, X8)	    0.000	    0.000	  0.000%	100.000%	     0.000	        1	Delegate/Copy (NC, X8):13
+	                 Binary Elementwise (ND)	    0.000	    0.000	  0.000%	100.000%	     0.000	        1	Delegate/Binary Elementwise (ND):14
+
+============================== Top by Computation Time ==============================
+	                             [node type]	  [first]	 [avg ms]	     [%]	  [cdf%]	  [mem KB]	[times called]	[Name]
+	                      SQUARED_DIFFERENCE	    0.004	    0.005	 13.702%	 13.702%	     0.000	        1	[functional_1/layer_normalization_2_1/moments/SquaredDifference]:80
+	                      SQUARED_DIFFERENCE	    0.005	    0.005	 13.605%	 27.307%	     0.000	        1	[functional_1/layer_normalization_3_1/moments/SquaredDifference]:97
+	                      SQUARED_DIFFERENCE	    0.005	    0.005	 13.596%	 40.903%	     0.000	        1	[functional_1/layer_normalization_1_2/moments/SquaredDifference]:46
+	                      SQUARED_DIFFERENCE	    0.005	    0.005	 13.596%	 54.500%	     0.000	        1	[functional_1/layer_normalization_1/moments/SquaredDifference]:29
+	                            BATCH_MATMUL	    0.002	    0.002	  4.417%	 58.917%	     0.000	        1	[functional_1/multi_head_attention_1/MatMul]:13
+	                            BATCH_MATMUL	    0.002	    0.001	  4.176%	 63.093%	     0.000	        1	[functional_1/multi_head_attention_1_2/MatMul_1]:71
+	                            BATCH_MATMUL	    0.001	    0.001	  4.155%	 67.248%	     0.000	        1	[functional_1/multi_head_attention_1/MatMul_1]:20
+	                            BATCH_MATMUL	    0.002	    0.001	  4.099%	 71.347%	     0.000	        1	[functional_1/multi_head_attention_1_2/MatMul]:64
+	                                 SOFTMAX	    0.001	    0.001	  3.557%	 74.904%	     0.000	        1	[functional_1/multi_head_attention_1/softmax_1/Softmax]:15
+	                                 SOFTMAX	    0.001	    0.001	  3.478%	 78.382%	     0.000	        1	[functional_1/multi_head_attention_1_2/softmax_1_1/Softmax]:66
+
+Number of nodes executed: 64
+============================== Summary by node type ==============================
+	                             [Node type]	  [count]	  [avg ms]	    [avg %]	    [cdf %]	  [mem KB]	[times called]
+	                      SQUARED_DIFFERENCE	        4	     0.016	    72.727%	    72.727%	     0.000	        4
+	                            BATCH_MATMUL	        4	     0.004	    18.182%	    90.909%	     0.000	        4
+	                                 SOFTMAX	        3	     0.002	     9.091%	   100.000%	     0.000	        3
+	                  Unary Elementwise (NC)	        5	     0.000	     0.000%	   100.000%	     0.000	       12
+	            Transpose (ND, X8) Transpose	        5	     0.000	     0.000%	   100.000%	     0.000	       10
+	                                   RSQRT	        4	     0.000	     0.000%	   100.000%	     0.000	        4
+	                          Mean (ND) Mean	        4	     0.000	     0.000%	   100.000%	     0.000	        9
+	                                    GELU	        2	     0.000	     0.000%	   100.000%	     0.000	        2
+	    Fully Connected (NC, QS8, QC8W) GEMM	        8	     0.000	     0.000%	   100.000%	     0.000	       13
+	                             EXPAND_DIMS	        1	     0.000	     0.000%	   100.000%	     0.000	        1
+	                           Copy (NC, X8)	        6	     0.000	     0.000%	   100.000%	     0.000	        9
+	           Convolution (NHWC, QC8) IGEMM	        1	     0.000	     0.000%	   100.000%	     0.000	        1
+	                 Binary Elementwise (ND)	       11	     0.000	     0.000%	   100.000%	     0.000	       31
+	                                     ADD	        6	     0.000	     0.000%	   100.000%	     0.000	        6
+
+Timings (microseconds): count=1000 first=37 curr=28 min=26 max=56 avg=33.958 std=4
+Memory (bytes): count=0
+64 nodes observed
+
+
+
