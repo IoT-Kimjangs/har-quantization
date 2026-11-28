@@ -1,0 +1,43 @@
+{
+  "variant": "fp32",
+  "resolver": "no_default_delegates",
+  "thread_mode": "1",
+  "run": 2,
+  "iterations": 1000,
+  "warmup": 50,
+  "batch_size": 1,
+  "input_convert_median_ms": 4.2e-05,
+  "set_invoke_median_ms": 0.083916,
+  "output_median_ms": 0.000583,
+  "total_median_ms": 0.084542,
+  "total_p95_ms": 0.08641905,
+  "input_dtype": "float32",
+  "output_dtype": "float32",
+  "delegate_partitions": 0,
+  "model_op_count": 101,
+  "op_counts_after_allocate": {
+    "ADD": 23,
+    "BATCH_MATMUL": 4,
+    "CONV_2D": 1,
+    "EXPAND_DIMS": 1,
+    "FULLY_CONNECTED": 13,
+    "GELU": 2,
+    "MEAN": 9,
+    "MUL": 14,
+    "NEG": 4,
+    "RESHAPE": 9,
+    "RSQRT": 4,
+    "SOFTMAX": 3,
+    "SQUARED_DIFFERENCE": 4,
+    "TRANSPOSE": 10
+  },
+  "interpreter_options": {
+    "num_threads": 1,
+    "op_resolver": "BUILTIN_WITHOUT_DEFAULT_DELEGATES"
+  },
+  "prediction_disagreements_with_full_evaluation": 0,
+  "model_sha256": "010b1a50eb3fb36d3efedcd7770d465f704841622de2220700fea2792d4a6a3f",
+  "raw_csv": "fp32-no_default_delegates-1-run2.csv",
+  "raw_csv_sha256": "19720cfaf9a341f60cf1e65ef55b4a01c91f779d621ce63efd5f7d43a2b984d6",
+  "xnnpack_log_observed": false
+}
