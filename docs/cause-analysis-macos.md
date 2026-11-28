@@ -1,4 +1,4 @@
-# WISDM 원인 분석 1차 결과 (Mac)
+# 원인 분석 1차 결과 (Mac)
 
 INT8 입출력 모델이 FP32보다 느린 이유를 좁히기 위한 1차 실험입니다. [확장 실험 계획](extension-plan.md)의 입출력 변환 비용 분리, 기본 CPU 가속 켜고 끄기, 연산별 시간 측정을 WISDM·Mac에서 먼저 실행했습니다. 원인이 가장 크게 나타난 Windows 실행 전의 소규모 검증이므로, 아래 해석은 Mac 범위에 한정합니다.
 
@@ -7,7 +7,7 @@ INT8 입출력 모델이 FP32보다 느린 이유를 좁히기 위한 1차 실�
 | 항목 | 내용 |
 | --- | --- |
 | 모델 | 기존 TFLite FP32·FP16·동적 INT8·INT8 입출력 + 새로 만든 **INT8 실수 입출력** |
-| 새 모델 | INT8 입출력과 같은 변환 설정·같은 보정 구간 300개로 변환하되, 입력과 출력만 float32로 둠 ([변환 스크립트](../scripts/quantize_wisdm_int8_float_io.py)) |
+| 새 모델 | INT8 입출력과 같은 변환 설정·같은 보정 구간 300개로 변환하되, 입력과 출력만 float32로 둠 ([변환 스크립트](../scripts/quantize_wisdm_int8_float_io.py), [측정 스크립트](../scripts/benchmark_cause.py)) |
 | 시간 나누기 | 호출마다 ① 입력 정수 변환 ② `set_tensor`+`invoke` ③ 출력 읽기·실수 복원을 따로 기록 |
 | 가속 | 기본 설정(XNNPACK 사용)과 `BUILTIN_WITHOUT_DEFAULT_DELEGATES`(기본 가속 끔) |
 | 조건 | 5개 모델 × 가속 2 × 스레드 2(1·기본) × **반복 3회** = 60회, 회마다 새 프로세스 |
@@ -96,10 +96,25 @@ TFLite 공식 측정 도구(`benchmark_model --enable_op_profiling`)는 Mac·Win
 - 즉 **INT8 입출력이 빨라질지 느려질지는 "INT8로 크게 줄어드는 행렬 계산"과 "INT8에서 느려지는 LayerNormalization 계산"의 비중에 달려 있습니다.** 계산량이 작은 WISDM 모델에서는 느려지는 쪽이 이겼습니다.
 - Python으로 잰 기존 Mac 결과(PAMAP2 INT8 입출력 1.03배)와 방향이 다른 것은 Python 입력 변환 비용(입력이 WISDM의 약 16배 크기)과 운영체제 차이 때문일 수 있으며, 아직 나눠 확인하지 않았습니다.
 
+### 6. PAMAP2 Python 측정: 느려 보인 이유는 입출력 변환
+
+`benchmark_cause.py --dataset pamap2`로 PAMAP2 모델 4개를 같은 방식(가속 2 × 스레드 2 × 반복 3 = 48회)으로 측정했습니다. 입력은 기존 Mac PAMAP2 측정과 같은 평가 구간 494개 순환입니다. ([요약](../results/2026-11-29-macos-pamap2-cause/summary.csv))
+
+| 모델 (기본 설정) | 입력 변환 | 실행 (set+invoke) | 출력 복원 | 합계 (ms) | FP32 대비 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| TFLite FP32 | 0.00004 | 0.2542 | 0.0006 | 0.2549 | 1.00배 |
+| 동적 INT8 | 0.00004 | 0.1175 | 0.0006 | 0.1181 | 0.46배 |
+| INT8 입출력 | 0.0135 | 0.2463 | 0.0031 | 0.2633 | 1.03배 |
+
+- 모델 실행만 보면 INT8 입출력(0.2463 ms)이 FP32(0.2542 ms)보다 약간 빠릅니다. 합계가 1.03배로 느려진 것은 **Python 입력 변환(0.0135 ms)과 출력 복원** 때문입니다. PAMAP2 입력(200×19)이 WISDM보다 약 16배 커서 이 비용이 WISDM보다 큽니다.
+- 기존 48개 조건의 Mac PAMAP2 값(FP32 0.2556 ms, INT8 입출력 0.2629 ms)과 같은 수준으로 재현됐습니다.
+- 가속을 끄면 INT8 입출력이 FP32보다 1.37배 느려지고, 가속 구간은 23개로 나뉩니다. 연산별 시간(5번)과 같은 경향입니다.
+- 연산별 시간 도구(리눅스 VM)에서는 INT8 입출력이 FP32보다 27% 빨랐지만, macOS Python 실행에서는 3% 빠른 데 그쳤습니다. 운영체제와 LiteRT 빌드가 달라 행렬 계산의 INT8 이득 크기가 다를 수 있으며, 이 차이는 따로 나누지 않았습니다.
+
 ## 지금까지의 해석 (Mac)
 
 - INT8 입출력이 FP32보다 느린 주된 이유는 **Transformer의 LayerNormalization·어텐션 일부 연산이 (WISDM·PAMAP2 모두) INT8에서 CPU 가속(XNNPACK)을 받지 못하고 느린 기본 커널로 실행되기 때문**으로 보입니다. 특히 LayerNormalization의 `SQUARED_DIFFERENCE`가 가장 큽니다.
-- Python 측정에서 보인 입출력 변환 비용(차이의 약 3분의 1)은 Python으로 변환한 구현 비용입니다. 실제 기기에서 입력을 정수로 바로 받으면 이 부분은 거의 없어질 수 있습니다.
+- Python 측정에서 보인 입출력 변환 비용(WISDM 차이의 약 3분의 1, PAMAP2 차이의 전부)은 Python으로 변환한 구현 비용입니다. 실제 기기에서 입력을 정수로 바로 받으면 이 부분은 거의 없어질 수 있습니다.
 - 가속을 끄면 모든 모델이 비슷하게 느려지므로 "가속을 못 받는다"만으로는 부족하고, **INT8 기본 커널이 이 연산들에서 FP32보다 느린 것**이 함께 작용합니다.
 - 한계: 연산별 시간은 Mac이 아닌 리눅스 VM 결과이고 도구 표시 단위가 1 µs라 작은 연산은 0으로 보입니다. Mac 차이(1.54배)는 Windows(3.94배)보다 작으므로 Windows에서 같은 연산이 더 느린지 확인해야 합니다.
 
@@ -107,7 +122,6 @@ TFLite 공식 측정 도구(`benchmark_model --enable_op_profiling`)는 Mac·Win
 
 1. **Windows 실행 (장은성):** 같은 두 스크립트를 Windows 모델·기록으로 실행합니다. 3.94배 차이와 FP16 스레드 역전이 입출력 변환·가속 켜고 끄기로 어떻게 나뉘는지가 핵심입니다.
 2. **Windows 연산별 시간:** 공식 Windows 도구가 없으므로, Windows에서 WSL2(리눅스 x86-64)로 `linux_x86-64_benchmark_model`을 실행하는 방법을 검토합니다.
-3. **PAMAP2 Python 측정:** 연산별 시간에서는 PAMAP2 INT8 입출력이 FP32보다 빨랐으므로, 기존 Python 측정(1.03배)과의 차이가 입력 변환 비용 때문인지 `benchmark_wisdm_cause.py`와 같은 방식으로 나눠 확인합니다.
 
 ### Windows 실행 명령
 
@@ -115,10 +129,11 @@ Windows 변환·양자화 결과 폴더를 `--quant-result`로 지정합니다. 
 
 ```powershell
 .venv\Scripts\python.exe scripts/quantize_wisdm_int8_float_io.py --output results/<날짜>-windows-wisdm-int8-float-io --quant-result results/2026-11-10-windows-wisdm-quantization
-.venv\Scripts\python.exe scripts/benchmark_wisdm_cause.py --output results/<날짜>-windows-wisdm-cause --quant-result results/2026-11-10-windows-wisdm-quantization --float-io-result results/<날짜>-windows-wisdm-int8-float-io
+.venv\Scripts\python.exe scripts/benchmark_cause.py --dataset wisdm --output results/<날짜>-windows-wisdm-cause --quant-result results/2026-11-10-windows-wisdm-quantization --float-io-result results/<날짜>-windows-wisdm-int8-float-io
+.venv\Scripts\python.exe scripts/benchmark_cause.py --dataset pamap2 --output results/<날짜>-windows-pamap2-cause --quant-result results/2026-11-10-windows-pamap2-quantization
 ```
 
-Windows에서는 아직 실행해 보지 않았습니다. 첫 실행에서 오류가 나면 해당 `.log`와 함께 알려주세요.
+PAMAP2는 Windows에서도 Mac과 같은 평가 구간 494개 순환으로 측정합니다. 기존 Windows PAMAP2 측정(복원추출, 고유 420개)과 입력 구성이 다르므로 원인 분석 결과끼리만 비교합니다. Windows에서는 아직 실행해 보지 않았습니다. 첫 실행에서 오류가 나면 해당 `.log`와 함께 알려주세요.
 
 ## 실행 환경
 

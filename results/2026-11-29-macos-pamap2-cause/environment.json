@@ -1,0 +1,304 @@
+{
+  "dataset": "pamap2",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "architecture": "arm64",
+  "python": "3.12.14",
+  "logical_cpu_count": 8,
+  "packages": {
+    "ai-edge-litert": "2.3.0",
+    "numpy": "2.5.4"
+  },
+  "plan": [
+    {
+      "variant": "int8_dynamic",
+      "resolver": "no_default_delegates",
+      "thread_mode": "default",
+      "run": 2
+    },
+    {
+      "variant": "int8_dynamic",
+      "resolver": "default",
+      "thread_mode": "1",
+      "run": 3
+    },
+    {
+      "variant": "int8_dynamic",
+      "resolver": "no_default_delegates",
+      "thread_mode": "1",
+      "run": 2
+    },
+    {
+      "variant": "int8_dynamic",
+      "resolver": "no_default_delegates",
+      "thread_mode": "default",
+      "run": 3
+    },
+    {
+      "variant": "int8_dynamic",
+      "resolver": "default",
+      "thread_mode": "1",
+      "run": 2
+    },
+    {
+      "variant": "fp16",
+      "resolver": "default",
+      "thread_mode": "default",
+      "run": 3
+    },
+    {
+      "variant": "int8_full",
+      "resolver": "default",
+      "thread_mode": "1",
+      "run": 1
+    },
+    {
+      "variant": "fp32",
+      "resolver": "no_default_delegates",
+      "thread_mode": "default",
+      "run": 2
+    },
+    {
+      "variant": "fp16",
+      "resolver": "default",
+      "thread_mode": "1",
+      "run": 1
+    },
+    {
+      "variant": "int8_dynamic",
+      "resolver": "default",
+      "thread_mode": "default",
+      "run": 2
+    },
+    {
+      "variant": "int8_dynamic",
+      "resolver": "default",
+      "thread_mode": "1",
+      "run": 1
+    },
+    {
+      "variant": "fp32",
+      "resolver": "no_default_delegates",
+      "thread_mode": "default",
+      "run": 1
+    },
+    {
+      "variant": "fp16",
+      "resolver": "no_default_delegates",
+      "thread_mode": "1",
+      "run": 1
+    },
+    {
+      "variant": "fp16",
+      "resolver": "no_default_delegates",
+      "thread_mode": "default",
+      "run": 3
+    },
+    {
+      "variant": "fp32",
+      "resolver": "default",
+      "thread_mode": "default",
+      "run": 3
+    },
+    {
+      "variant": "int8_full",
+      "resolver": "default",
+      "thread_mode": "default",
+      "run": 1
+    },
+    {
+      "variant": "fp32",
+      "resolver": "default",
+      "thread_mode": "default",
+      "run": 2
+    },
+    {
+      "variant": "int8_full",
+      "resolver": "default",
+      "thread_mode": "default",
+      "run": 3
+    },
+    {
+      "variant": "int8_full",
+      "resolver": "no_default_delegates",
+      "thread_mode": "default",
+      "run": 1
+    },
+    {
+      "variant": "int8_dynamic",
+      "resolver": "default",
+      "thread_mode": "default",
+      "run": 1
+    },
+    {
+      "variant": "fp32",
+      "resolver": "default",
+      "thread_mode": "1",
+      "run": 2
+    },
+    {
+      "variant": "int8_full",
+      "resolver": "default",
+      "thread_mode": "default",
+      "run": 2
+    },
+    {
+      "variant": "fp32",
+      "resolver": "default",
+      "thread_mode": "1",
+      "run": 3
+    },
+    {
+      "variant": "int8_full",
+      "resolver": "no_default_delegates",
+      "thread_mode": "1",
+      "run": 3
+    },
+    {
+      "variant": "fp32",
+      "resolver": "default",
+      "thread_mode": "1",
+      "run": 1
+    },
+    {
+      "variant": "int8_full",
+      "resolver": "no_default_delegates",
+      "thread_mode": "default",
+      "run": 2
+    },
+    {
+      "variant": "int8_full",
+      "resolver": "no_default_delegates",
+      "thread_mode": "1",
+      "run": 2
+    },
+    {
+      "variant": "fp16",
+      "resolver": "default",
+      "thread_mode": "default",
+      "run": 1
+    },
+    {
+      "variant": "int8_dynamic",
+      "resolver": "no_default_delegates",
+      "thread_mode": "default",
+      "run": 1
+    },
+    {
+      "variant": "fp32",
+      "resolver": "no_default_delegates",
+      "thread_mode": "1",
+      "run": 3
+    },
+    {
+      "variant": "fp32",
+      "resolver": "default",
+      "thread_mode": "default",
+      "run": 1
+    },
+    {
+      "variant": "int8_full",
+      "resolver": "default",
+      "thread_mode": "1",
+      "run": 3
+    },
+    {
+      "variant": "fp16",
+      "resolver": "default",
+      "thread_mode": "default",
+      "run": 2
+    },
+    {
+      "variant": "fp32",
+      "resolver": "no_default_delegates",
+      "thread_mode": "1",
+      "run": 1
+    },
+    {
+      "variant": "fp16",
+      "resolver": "default",
+      "thread_mode": "1",
+      "run": 3
+    },
+    {
+      "variant": "fp32",
+      "resolver": "no_default_delegates",
+      "thread_mode": "default",
+      "run": 3
+    },
+    {
+      "variant": "fp16",
+      "resolver": "no_default_delegates",
+      "thread_mode": "default",
+      "run": 2
+    },
+    {
+      "variant": "int8_dynamic",
+      "resolver": "default",
+      "thread_mode": "default",
+      "run": 3
+    },
+    {
+      "variant": "int8_dynamic",
+      "resolver": "no_default_delegates",
+      "thread_mode": "1",
+      "run": 1
+    },
+    {
+      "variant": "fp16",
+      "resolver": "no_default_delegates",
+      "thread_mode": "1",
+      "run": 2
+    },
+    {
+      "variant": "fp32",
+      "resolver": "no_default_delegates",
+      "thread_mode": "1",
+      "run": 2
+    },
+    {
+      "variant": "int8_full",
+      "resolver": "no_default_delegates",
+      "thread_mode": "default",
+      "run": 3
+    },
+    {
+      "variant": "fp16",
+      "resolver": "default",
+      "thread_mode": "1",
+      "run": 2
+    },
+    {
+      "variant": "fp16",
+      "resolver": "no_default_delegates",
+      "thread_mode": "default",
+      "run": 1
+    },
+    {
+      "variant": "int8_dynamic",
+      "resolver": "no_default_delegates",
+      "thread_mode": "1",
+      "run": 3
+    },
+    {
+      "variant": "int8_full",
+      "resolver": "no_default_delegates",
+      "thread_mode": "1",
+      "run": 1
+    },
+    {
+      "variant": "int8_full",
+      "resolver": "default",
+      "thread_mode": "1",
+      "run": 2
+    },
+    {
+      "variant": "fp16",
+      "resolver": "no_default_delegates",
+      "thread_mode": "1",
+      "run": 3
+    }
+  ],
+  "quant_result": "results/2026-11-10-macos-pamap2-models",
+  "float_io_result": null,
+  "note": "Background applications and CPU frequency were not controlled. Disabling default delegates is a diagnostic condition, not a recommended setting."
+}
